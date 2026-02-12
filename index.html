@@ -1169,6 +1169,11 @@ h1, h2, h3, h4 {
         <button class="dash-chip" data-vote="C" onclick="vote('room','C')">C</button>
         <button class="dash-chip" data-vote="Other" onclick="vote('room','Other')" style="border-style:dashed;">Other</button>
       </div>
+      <div class="other-input-wrap" id="other-room">
+        <input class="other-input" type="text" placeholder="What are you thinking?" oninput="saveNote('room-other', this.value)" id="input-room-other">
+      </div>
+      <textarea class="notes-textarea" id="notes-room" placeholder="Questions or thoughts about room setup..." oninput="saveNote('room', this.value)" style="margin-top:0.5rem;min-height:40px;font-size:0.8rem;"></textarea>
+      <div class="notes-saved" id="notes-saved-room" style="font-size:0.7rem;"></div>
     </div>
 
     <div class="dashboard-row">
@@ -1185,6 +1190,11 @@ h1, h2, h3, h4 {
         <button class="dash-chip" data-vote="230pm" onclick="vote('flight-there','230pm')">2:30pm</button>
         <button class="dash-chip" data-vote="Other" onclick="vote('flight-there','Other')" style="border-style:dashed;">Other</button>
       </div>
+      <div class="other-input-wrap" id="other-flight-there">
+        <input class="other-input" type="text" placeholder="Different time in mind?" oninput="saveNote('flight-there-other', this.value)" id="input-flight-there-other">
+      </div>
+      <textarea class="notes-textarea" id="notes-flight-there" placeholder="Questions or thoughts about departure..." oninput="saveNote('flight-there', this.value)" style="margin-top:0.5rem;min-height:40px;font-size:0.8rem;"></textarea>
+      <div class="notes-saved" id="notes-saved-flight-there" style="font-size:0.7rem;"></div>
     </div>
 
     <div class="dashboard-row">
@@ -1201,6 +1211,11 @@ h1, h2, h3, h4 {
         <button class="dash-chip" data-vote="640pm" onclick="vote('flight-back','640pm')">6:40pm</button>
         <button class="dash-chip" data-vote="Other" onclick="vote('flight-back','Other')" style="border-style:dashed;">Other</button>
       </div>
+      <div class="other-input-wrap" id="other-flight-back">
+        <input class="other-input" type="text" placeholder="Different time in mind?" oninput="saveNote('flight-back-other', this.value)" id="input-flight-back-other">
+      </div>
+      <textarea class="notes-textarea" id="notes-flight-back" placeholder="Questions or thoughts about return..." oninput="saveNote('flight-back', this.value)" style="margin-top:0.5rem;min-height:40px;font-size:0.8rem;"></textarea>
+      <div class="notes-saved" id="notes-saved-flight-back" style="font-size:0.7rem;"></div>
     </div>
 
     <div class="dashboard-progress">
@@ -1430,23 +1445,6 @@ h1, h2, h3, h4 {
       </div>
     </div>
 
-    <p class="vote-prompt">Which room setup works best?</p>
-    <div class="vote-row" id="vote-room">
-      <button class="vote-btn" data-vote="A" onclick="vote('room','A')">Option A</button>
-      <button class="vote-btn" data-vote="B" onclick="vote('room','B')">Option B</button>
-      <button class="vote-btn" data-vote="C" onclick="vote('room','C')">Option C</button>
-      <button class="vote-btn other-btn" data-vote="Other" onclick="vote('room','Other')">Other</button>
-    </div>
-    <div class="other-input-wrap" id="other-room">
-      <input class="other-input" type="text" placeholder="What are you thinking?" oninput="saveNote('room-other', this.value)" id="input-room-other">
-    </div>
-    <div class="vote-confirmation" id="confirm-room"></div>
-
-    <div class="notes-area">
-      <div class="notes-label">Questions or thoughts?</div>
-      <textarea class="notes-textarea" id="notes-room" placeholder="Anything you want to ask or flag before deciding..." oninput="saveNote('room', this.value)"></textarea>
-      <div class="notes-saved" id="notes-saved-room"></div>
-    </div>
     </div>
     </div>
   </div>
@@ -1487,25 +1485,6 @@ h1, h2, h3, h4 {
       </div>
     </div>
 
-    <p class="vote-prompt">Which departure works for us?</p>
-    <div class="flight-vote-row" id="vote-flight-there">
-      <button class="flight-vote-btn" data-vote="6am" onclick="vote('flight-there','6am')">~6:00am</button>
-      <button class="flight-vote-btn" data-vote="8am" onclick="vote('flight-there','8am')">~8:00am</button>
-      <button class="flight-vote-btn" data-vote="930am" onclick="vote('flight-there','930am')">~9:30am</button>
-      <button class="flight-vote-btn" data-vote="1225pm" onclick="vote('flight-there','1225pm')">~12:25pm</button>
-      <button class="flight-vote-btn" data-vote="230pm" onclick="vote('flight-there','230pm')">~2:30pm</button>
-      <button class="flight-vote-btn other-btn" data-vote="Other" onclick="vote('flight-there','Other')">Other</button>
-    </div>
-    <div class="other-input-wrap" id="other-flight-there">
-      <input class="other-input" type="text" placeholder="Different time in mind?" oninput="saveNote('flight-there-other', this.value)" id="input-flight-there-other">
-    </div>
-    <div class="vote-confirmation" id="confirm-flight-there"></div>
-
-    <div class="notes-area">
-      <div class="notes-label">Questions or thoughts?</div>
-      <textarea class="notes-textarea" id="notes-flight-there" placeholder="Anything about the departure..." oninput="saveNote('flight-there', this.value)"></textarea>
-      <div class="notes-saved" id="notes-saved-flight-there"></div>
-    </div>
     </div>
     </div>
   </div>
@@ -1550,25 +1529,6 @@ h1, h2, h3, h4 {
       <a href="https://www.google.com/travel/flights?q=FLL+to+PUJ+Feb+25" target="_blank" style="font-size:0.85rem;color:var(--teal);text-decoration:none;font-weight:500;">Search flights on Google Flights &rarr;</a>
     </p>
 
-    <p class="vote-prompt">Which return flight works?</p>
-    <div class="flight-vote-row" id="vote-flight-back">
-      <button class="flight-vote-btn" data-vote="11am" onclick="vote('flight-back','11am')">~11:00am</button>
-      <button class="flight-vote-btn" data-vote="130pm" onclick="vote('flight-back','130pm')">~1:30pm</button>
-      <button class="flight-vote-btn" data-vote="3pm" onclick="vote('flight-back','3pm')">~3:00pm</button>
-      <button class="flight-vote-btn" data-vote="515pm" onclick="vote('flight-back','515pm')">~5:15pm</button>
-      <button class="flight-vote-btn" data-vote="640pm" onclick="vote('flight-back','640pm')">~6:40pm</button>
-      <button class="flight-vote-btn other-btn" data-vote="Other" onclick="vote('flight-back','Other')">Other</button>
-    </div>
-    <div class="other-input-wrap" id="other-flight-back">
-      <input class="other-input" type="text" placeholder="Different time in mind?" oninput="saveNote('flight-back-other', this.value)" id="input-flight-back-other">
-    </div>
-    <div class="vote-confirmation" id="confirm-flight-back"></div>
-
-    <div class="notes-area">
-      <div class="notes-label">Questions or thoughts?</div>
-      <textarea class="notes-textarea" id="notes-flight-back" placeholder="Anything about the return..." oninput="saveNote('flight-back', this.value)"></textarea>
-      <div class="notes-saved" id="notes-saved-flight-back"></div>
-    </div>
     </div>
     </div>
   </div>
@@ -1748,26 +1708,17 @@ var noteTimers = {};
 
 function vote(category, value) {
   // Toggle: if same value clicked again, deselect
-  var currentBtns = document.querySelectorAll('#vote-' + category + ' .selected, #dash-vote-' + category + ' .selected');
-  var currentVal = null;
-  if (currentBtns.length > 0) currentVal = currentBtns[0].dataset.vote;
+  var dashContainer = document.getElementById('dash-vote-' + category);
+  var currentBtn = dashContainer ? dashContainer.querySelector('.selected') : null;
+  var currentVal = currentBtn ? currentBtn.dataset.vote : null;
   var newVal = (currentVal === value) ? null : value;
 
-  // Save to Firebase
+  // Save to Firebase (null removes the key)
   var update = {};
   update[category] = newVal;
   votesRef.update(update);
 
-  // Update vote buttons (in decision section)
-  var container = document.getElementById('vote-' + category);
-  if (container) {
-    container.querySelectorAll('button').forEach(function(btn) {
-      btn.classList.toggle('selected', btn.dataset.vote === newVal);
-    });
-  }
-
   // Update dashboard chips
-  var dashContainer = document.getElementById('dash-vote-' + category);
   if (dashContainer) {
     dashContainer.querySelectorAll('button').forEach(function(btn) {
       btn.classList.toggle('selected', btn.dataset.vote === newVal);
@@ -1782,12 +1733,6 @@ function vote(category, value) {
       var inp = otherWrap.querySelector('input');
       if (inp) setTimeout(function() { inp.focus(); }, 100);
     }
-  }
-
-  var confirm = document.getElementById('confirm-' + category);
-  if (confirm) {
-    confirm.textContent = newVal ? 'Saved!' : 'Cleared';
-    setTimeout(function() { confirm.textContent = ''; }, 2000);
   }
 }
 
@@ -1812,24 +1757,15 @@ function saveNote(key, value) {
 votesRef.on('value', function(snapshot) {
   var votes = snapshot.val() || {};
 
-  // Update vote buttons + dashboard chips
+  // Update dashboard chips
   ['room', 'flight-there', 'flight-back'].forEach(function(category) {
     var value = votes[category];
-    // Decision section buttons
-    var container = document.getElementById('vote-' + category);
-    if (container) {
-      container.querySelectorAll('button').forEach(function(btn) {
-        btn.classList.toggle('selected', btn.dataset.vote === value);
-      });
-    }
-    // Dashboard chips
     var dashContainer = document.getElementById('dash-vote-' + category);
     if (dashContainer) {
       dashContainer.querySelectorAll('button').forEach(function(btn) {
         btn.classList.toggle('selected', btn.dataset.vote === value);
       });
     }
-    // Show "Other" input if that was selected
     var otherWrap = document.getElementById('other-' + category);
     if (otherWrap) {
       otherWrap.classList.toggle('visible', value === 'Other');
