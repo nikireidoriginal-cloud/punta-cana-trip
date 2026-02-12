@@ -1152,7 +1152,7 @@ h1, h2, h3, h4 {
   line-height: 1.4;
 }
 
-/* ── INFO CARDS (replaces decision-wrapper) ── */
+/* ── INFO CARDS (collapsible) ── */
 .info-card {
   border: 2px solid var(--border);
   border-radius: 16px;
@@ -1160,6 +1160,12 @@ h1, h2, h3, h4 {
   margin-bottom: 1.5rem;
   background: var(--card);
   box-shadow: var(--shadow);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.info-card.open {
+  border-color: var(--teal);
+  box-shadow: 0 4px 24px rgba(91, 138, 138, 0.12);
 }
 
 .info-card-header {
@@ -1167,13 +1173,24 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 0.8rem;
   padding: 1.2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(245,240,232,0.4) 0%, rgba(254,253,248,0.8) 100%);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.info-card.open .info-card-header {
   background: linear-gradient(135deg, rgba(91,138,138,0.06) 0%, rgba(254,253,248,0.8) 100%);
   border-bottom: 1px solid var(--border);
+}
+
+.info-card-header:hover {
+  background: rgba(245,240,232,0.6);
 }
 
 .info-card-header h2 {
   font-size: 1.2rem;
   margin: 0;
+  flex: 1;
 }
 
 .info-badge {
@@ -1189,7 +1206,29 @@ h1, h2, h3, h4 {
   white-space: nowrap;
 }
 
+.info-chevron {
+  color: var(--muted);
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.info-card.open .info-chevron {
+  transform: rotate(180deg);
+  color: var(--teal);
+}
+
 .info-card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.info-card.open .info-card-body {
+  max-height: 5000px;
+}
+
+.info-card-body-inner {
   padding: 1.2rem 1.5rem;
 }
 
@@ -1418,12 +1457,13 @@ h1, h2, h3, h4 {
 <div class="section">
 
   <!-- ═══ OUR ROOMS ═══ -->
-  <div class="info-card">
-    <div class="info-card-header">
+  <div class="info-card open" id="card-rooms">
+    <div class="info-card-header" onclick="toggleCard('rooms')">
       <span class="info-badge">Confirmed</span>
       <h2>Our Rooms</h2>
+      <span class="info-chevron">&#9662;</span>
     </div>
-    <div class="info-card-body">
+    <div class="info-card-body"><div class="info-card-body-inner">
       <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Nickelodeon Swim-Up Suite for all of us + Live Aqua Swim-Up Suite as Ferrell&rsquo;s reset space. Check-in Feb 25, check-out Mar 1.</p>
 
     <!-- ═══ BOOKING 1: NICKELODEON ═══ -->
@@ -1456,16 +1496,17 @@ h1, h2, h3, h4 {
       <a href="https://www.aquapuntacana.com/aqua-junior-suite-swim-up.asp" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
     </div>
 
-    </div>
+    </div></div>
   </div>
 
   <!-- ═══ OUR FLIGHTS ═══ -->
-  <div class="info-card">
-    <div class="info-card-header">
+  <div class="info-card open" id="card-flights">
+    <div class="info-card-header" onclick="toggleCard('flights')">
       <span class="info-badge">Confirmed</span>
       <h2>Our Flights</h2>
+      <span class="info-chevron">&#9662;</span>
     </div>
-    <div class="info-card-body">
+    <div class="info-card-body"><div class="info-card-body-inner">
       <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">JetBlue nonstop from Fort Lauderdale. EvenMore seating. Confirmation: <strong style="color:var(--slate);">KBBTTQ</strong></p>
 
       <!-- FLIGHT THERE -->
@@ -1518,20 +1559,23 @@ h1, h2, h3, h4 {
         </div>
       </div>
 
-    </div>
+    </div></div>
   </div>
 
 </div>
 
 <!-- ═══ THINGS TO DO ═══ -->
-<div class="activities-section">
-  <div class="section-header">
-    <h2>Things to Do</h2>
-    <p>Between two all-inclusive resorts, there&rsquo;s plenty to explore</p>
-  </div>
-  <div class="activities-grid">
+<div class="section" style="padding-top:0;">
+  <div class="info-card open" id="card-activities">
+    <div class="info-card-header" onclick="toggleCard('activities')">
+      <h2>Things to Do</h2>
+      <span class="info-chevron">&#9662;</span>
+    </div>
+    <div class="info-card-body"><div class="info-card-body-inner">
+      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Between two all-inclusive resorts, there&rsquo;s plenty to explore</p>
+      <div class="activities-grid">
     <div class="activity-card">
-      <img src="https://admin.karismahotels.com/sites/default/files/styles/hero_desktop/public/2023-04/aquanick_waterpark_nick_puntacana.jpg" alt="Aqua Nick Waterpark" class="activity-img">
+      <img src="https://admin.karismahotels.com/sites/default/files/styles/hero_desktop/public/2024-05/Aqua%20Nick%20Architecture%20Nick%20Punta%20Cana%203.jpg" alt="Aqua Nick Waterpark" class="activity-img">
       <div class="activity-body">
         <h3>Aqua Nick Waterpark</h3>
         <p>Massive waterpark right at the resort &mdash; lazy river, water slides, splash pads, and a FlowRider surf simulator. Opens at 10am, closes at 5pm.</p>
@@ -1593,43 +1637,49 @@ h1, h2, h3, h4 {
         <a href="https://www.viator.com/Punta-Cana-tours/Fishing-Charters-and-Tours/d4561-g23-c53" target="_blank">Fishing Charters &rarr;</a>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- ═══ QUICK TIPS ═══ -->
-<div class="tips-section">
-  <div class="section-header">
-    <h2>Quick Tips</h2>
+      </div>
+    </div></div>
   </div>
 
-  <div class="tip-card">
-    <h4>Waterpark</h4>
-    <p>Aqua Nick closes at 5pm. Plan it for mornings.</p>
-  </div>
+  <!-- ═══ QUICK TIPS ═══ -->
+  <div class="info-card open" id="card-tips">
+    <div class="info-card-header" onclick="toggleCard('tips')">
+      <h2>Quick Tips</h2>
+      <span class="info-chevron">&#9662;</span>
+    </div>
+    <div class="info-card-body"><div class="info-card-body-inner">
 
-  <div class="tip-card">
-    <h4>Restaurants</h4>
-    <p>Book &agrave; la carte reservations the moment you arrive &mdash; they fill up fast.</p>
-  </div>
+      <div class="tip-card">
+        <h4>Waterpark</h4>
+        <p>Aqua Nick closes at 5pm. Plan it for mornings.</p>
+      </div>
 
-  <div class="tip-card">
-    <h4>Beach</h4>
-    <p>Strong currents at Uvero Alto &mdash; pools are the move. Swimmable beach is ~2km south.</p>
-  </div>
+      <div class="tip-card">
+        <h4>Restaurants</h4>
+        <p>Book &agrave; la carte reservations the moment you arrive &mdash; they fill up fast.</p>
+      </div>
 
-  <div class="tip-card">
-    <h4>Getting There</h4>
-    <p>40-min drive from PUJ airport. I&rsquo;ll book all private transport.</p>
-  </div>
+      <div class="tip-card">
+        <h4>Beach</h4>
+        <p>Strong currents at Uvero Alto &mdash; pools are the move. Swimmable beach is ~2km south.</p>
+      </div>
 
-  <div class="tip-card">
-    <h4>Health</h4>
-    <p>Bring hand sanitizer and wipes. Wipe down high chairs.</p>
-  </div>
+      <div class="tip-card">
+        <h4>Getting There</h4>
+        <p>40-min drive from PUJ airport. I&rsquo;ll book all private transport.</p>
+      </div>
 
-  <div class="heart-section">
-    <h4>Let&rsquo;s Make a Plan</h4>
-    <p>Now that everything&rsquo;s booked, let&rsquo;s map out the days &mdash; waterpark mornings, pool time, a couple of nice dinners, spa, and plenty of relaxing time built in.</p>
+      <div class="tip-card">
+        <h4>Health</h4>
+        <p>Bring hand sanitizer and wipes. Wipe down high chairs.</p>
+      </div>
+
+      <div class="heart-section">
+        <h4>Let&rsquo;s Make a Plan</h4>
+        <p>Now that everything&rsquo;s booked, let&rsquo;s map out the days &mdash; waterpark mornings, pool time, a couple of nice dinners, spa, and plenty of relaxing time built in.</p>
+      </div>
+
+    </div></div>
   </div>
 </div>
 
@@ -1669,6 +1719,12 @@ h1, h2, h3, h4 {
 
   autoAdvance();
 })();
+
+// Toggle info cards open/closed
+function toggleCard(id) {
+  var card = document.getElementById('card-' + id);
+  card.classList.toggle('open');
+}
 </script>
 </body>
 </html>
