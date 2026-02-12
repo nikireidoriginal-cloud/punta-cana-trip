@@ -772,6 +772,270 @@ h1, h2, h3, h4 {
   padding: 2rem 1rem 3rem;
 }
 
+
+/* ── SELECTIONS DASHBOARD ── */
+.dashboard {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1rem 0.5rem;
+}
+
+.dashboard-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.dashboard-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem;
+  color: var(--slate);
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.dashboard-subtitle {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.dashboard-row {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #f0ebe3;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 6px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.dashboard-row:hover {
+  background: var(--sand);
+}
+
+.dashboard-row:last-child {
+  border-bottom: none;
+}
+
+.dashboard-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+  min-width: 110px;
+  flex-shrink: 0;
+}
+
+.dashboard-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--slate);
+  flex: 1;
+}
+
+.dashboard-value.pending {
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.dashboard-arrow {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.dashboard-progress {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.3s;
+}
+
+.progress-dot.done {
+  background: var(--teal);
+}
+
+/* ── COLLAPSIBLE DECISIONS ── */
+.decision-wrapper {
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.decision-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.decision-toggle:hover {
+  background: rgba(245,240,232,0.3);
+}
+
+.decision-toggle h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.decision-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.decision-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  text-transform: uppercase;
+  background: rgba(196,149,106,0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.decision-badge.done {
+  color: var(--teal);
+  background: rgba(91,138,138,0.1);
+}
+
+.decision-chevron {
+  color: var(--muted);
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.decision-wrapper.open .decision-chevron {
+  transform: rotate(180deg);
+}
+
+.decision-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.decision-wrapper.open .decision-body {
+  max-height: 5000px;
+}
+
+/* ── NOTES / QUESTIONS ── */
+.notes-area {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.notes-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--slate);
+  background: var(--cream);
+  resize: vertical;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+
+.notes-textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+.notes-textarea::placeholder {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.notes-saved {
+  font-size: 0.72rem;
+  color: var(--teal);
+  font-weight: 500;
+  margin-top: 0.3rem;
+  min-height: 1em;
+  transition: opacity 0.3s;
+}
+
+/* ── OTHER VOTE BTN ── */
+.vote-btn.other-btn,
+.flight-vote-btn.other-btn {
+  border-style: dashed;
+  color: var(--muted);
+}
+
+.vote-btn.other-btn.selected,
+.flight-vote-btn.other-btn.selected {
+  border-style: solid;
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #fff;
+}
+
+.other-input-wrap {
+  text-align: center;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+.other-input-wrap.visible {
+  display: block;
+}
+
+.other-input {
+  padding: 0.5rem 0.8rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: var(--slate);
+  background: var(--cream);
+  width: 260px;
+  max-width: 100%;
+  transition: border-color 0.2s;
+}
+
+.other-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 500px) {
   .hero { height: 40vh; min-height: 280px; }
@@ -819,16 +1083,52 @@ h1, h2, h3, h4 {
   </div>
 </div>
 
+<!-- ═══ SELECTIONS DASHBOARD ═══ -->
+<div class="dashboard">
+  <div class="dashboard-card">
+    <h2 class="dashboard-title">Three Decisions</h2>
+    <p class="dashboard-subtitle">Tap any row to see options and vote</p>
+
+    <div class="dashboard-row" onclick="openDecision('room')">
+      <span class="dashboard-label">Room Setup</span>
+      <span class="dashboard-value pending" id="dash-room">Not yet chosen</span>
+      <span class="dashboard-arrow">&#9662;</span>
+    </div>
+
+    <div class="dashboard-row" onclick="openDecision('flight-there')">
+      <span class="dashboard-label">Flight There</span>
+      <span class="dashboard-value pending" id="dash-flight-there">Not yet chosen</span>
+      <span class="dashboard-arrow">&#9662;</span>
+    </div>
+
+    <div class="dashboard-row" onclick="openDecision('flight-back')">
+      <span class="dashboard-label">Flight Back</span>
+      <span class="dashboard-value pending" id="dash-flight-back">Not yet chosen</span>
+      <span class="dashboard-arrow">&#9662;</span>
+    </div>
+
+    <div class="dashboard-progress">
+      <div class="progress-dot" id="prog-room"></div>
+      <div class="progress-dot" id="prog-flight-there"></div>
+      <div class="progress-dot" id="prog-flight-back"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ MAIN CONTENT ═══ -->
 <div class="section">
 
   <!-- ═══ DECISION 1: ROOM SETUP ═══ -->
-  <div id="decision-room">
-    <div class="decision-number">Decision 1 of 3</div>
-    <div class="section-header">
-      <h2>Room Setup</h2>
-      <p>She is always welcome in the main room &mdash; it&rsquo;s a king bed + pull-out sofa and she&rsquo;s never not welcome there. The reset space is just an <em>option</em> for when she wants her own room to decompress. Tap a column to see details.</p>
+  <div class="decision-wrapper open" id="decision-room">
+    <div class="decision-toggle" onclick="toggleDecision('room')">
+      <div class="decision-toggle-left">
+        <span class="decision-badge" id="badge-room">1 of 3</span>
+        <h2>Room Setup</h2>
+      </div>
+      <span class="decision-chevron">&#9662;</span>
     </div>
+    <div class="decision-body">
+      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">She is always welcome in the main room &mdash; it&rsquo;s a king bed + pull-out sofa and she&rsquo;s never not welcome there. The reset space is just an <em>option</em> for when she wants her own room to decompress. Tap a column to see details.</p>
 
     <!-- AT A GLANCE (SUMMARY TABLE) -->
     <div class="comparison-card" style="margin-top:0;margin-bottom:2rem;">
@@ -1035,18 +1335,32 @@ h1, h2, h3, h4 {
       <button class="vote-btn" data-vote="A" onclick="vote('room','A')">Option A</button>
       <button class="vote-btn" data-vote="B" onclick="vote('room','B')">Option B</button>
       <button class="vote-btn" data-vote="C" onclick="vote('room','C')">Option C</button>
+      <button class="vote-btn other-btn" data-vote="Other" onclick="vote('room','Other')">Other</button>
+    </div>
+    <div class="other-input-wrap" id="other-room">
+      <input class="other-input" type="text" placeholder="What are you thinking?" oninput="saveNote('room-other', this.value)" id="input-room-other">
     </div>
     <div class="vote-confirmation" id="confirm-room"></div>
 
+    <div class="notes-area">
+      <div class="notes-label">Questions or thoughts?</div>
+      <textarea class="notes-textarea" id="notes-room" placeholder="Anything you want to ask or flag before deciding..." oninput="saveNote('room', this.value)"></textarea>
+      <div class="notes-saved" id="notes-saved-room"></div>
+    </div>
+    </div>
   </div>
 
   <!-- ═══ DECISION 2: FLIGHT THERE ═══ -->
-  <div id="decision-flight-there" style="border-top: 1px solid var(--border);">
-    <div class="decision-number" style="padding-top:2rem;">Decision 2 of 3</div>
-    <div class="section-header">
-      <h2>Flight There</h2>
-      <p>All nonstop from Fort Lauderdale (FLL). ~2.5 hours.</p>
+  <div class="decision-wrapper" id="decision-flight-there">
+    <div class="decision-toggle" onclick="toggleDecision('flight-there')">
+      <div class="decision-toggle-left">
+        <span class="decision-badge" id="badge-flight-there">2 of 3</span>
+        <h2>Flight There</h2>
+      </div>
+      <span class="decision-chevron">&#9662;</span>
     </div>
+    <div class="decision-body">
+      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">All nonstop from Fort Lauderdale (FLL). ~2.5 hours.</p>
 
     <!-- TO DR -->
     <div class="comparison-card" style="margin-bottom:1.5rem;">
@@ -1078,18 +1392,32 @@ h1, h2, h3, h4 {
       <button class="flight-vote-btn" data-vote="930am" onclick="vote('flight-there','930am')">~9:30am</button>
       <button class="flight-vote-btn" data-vote="1225pm" onclick="vote('flight-there','1225pm')">~12:25pm</button>
       <button class="flight-vote-btn" data-vote="230pm" onclick="vote('flight-there','230pm')">~2:30pm</button>
+      <button class="flight-vote-btn other-btn" data-vote="Other" onclick="vote('flight-there','Other')">Other</button>
+    </div>
+    <div class="other-input-wrap" id="other-flight-there">
+      <input class="other-input" type="text" placeholder="Different time in mind?" oninput="saveNote('flight-there-other', this.value)" id="input-flight-there-other">
     </div>
     <div class="vote-confirmation" id="confirm-flight-there"></div>
 
+    <div class="notes-area">
+      <div class="notes-label">Questions or thoughts?</div>
+      <textarea class="notes-textarea" id="notes-flight-there" placeholder="Anything about the departure..." oninput="saveNote('flight-there', this.value)"></textarea>
+      <div class="notes-saved" id="notes-saved-flight-there"></div>
+    </div>
+    </div>
   </div>
 
   <!-- ═══ DECISION 3: FLIGHT BACK ═══ -->
-  <div id="decision-flight-back" style="border-top: 1px solid var(--border);">
-    <div class="decision-number" style="padding-top:2rem;">Decision 3 of 3</div>
-    <div class="section-header">
-      <h2>Flight Back</h2>
-      <p>Nonstop to Fort Lauderdale (FLL). ~2.5 hours.</p>
+  <div class="decision-wrapper" id="decision-flight-back">
+    <div class="decision-toggle" onclick="toggleDecision('flight-back')">
+      <div class="decision-toggle-left">
+        <span class="decision-badge" id="badge-flight-back">3 of 3</span>
+        <h2>Flight Back</h2>
+      </div>
+      <span class="decision-chevron">&#9662;</span>
     </div>
+    <div class="decision-body">
+      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Nonstop to Fort Lauderdale (FLL). ~2.5 hours.</p>
 
     <div class="comparison-card" style="margin-bottom:1.5rem;">
       <h3 style="font-size:1rem;margin-bottom:0.8rem;">Back to Fort Lauderdale &mdash; Sun Mar 1</h3>
@@ -1125,9 +1453,19 @@ h1, h2, h3, h4 {
       <button class="flight-vote-btn" data-vote="3pm" onclick="vote('flight-back','3pm')">~3:00pm</button>
       <button class="flight-vote-btn" data-vote="515pm" onclick="vote('flight-back','515pm')">~5:15pm</button>
       <button class="flight-vote-btn" data-vote="640pm" onclick="vote('flight-back','640pm')">~6:40pm</button>
+      <button class="flight-vote-btn other-btn" data-vote="Other" onclick="vote('flight-back','Other')">Other</button>
+    </div>
+    <div class="other-input-wrap" id="other-flight-back">
+      <input class="other-input" type="text" placeholder="Different time in mind?" oninput="saveNote('flight-back-other', this.value)" id="input-flight-back-other">
     </div>
     <div class="vote-confirmation" id="confirm-flight-back"></div>
 
+    <div class="notes-area">
+      <div class="notes-label">Questions or thoughts?</div>
+      <textarea class="notes-textarea" id="notes-flight-back" placeholder="Anything about the return..." oninput="saveNote('flight-back', this.value)"></textarea>
+      <div class="notes-saved" id="notes-saved-flight-back"></div>
+    </div>
+    </div>
   </div>
 
 </div>
@@ -1245,19 +1583,79 @@ function toggleAccordion(id) {
   });
 })();
 
+// Decision toggle
+function toggleDecision(id) {
+  var wrapper = document.getElementById('decision-' + id);
+  wrapper.classList.toggle('open');
+}
+
+function openDecision(id) {
+  // Close all, open this one
+  document.querySelectorAll('.decision-wrapper').forEach(function(w) {
+    w.classList.remove('open');
+  });
+  var wrapper = document.getElementById('decision-' + id);
+  wrapper.classList.add('open');
+  setTimeout(function() {
+    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// Display labels for dashboard
+var displayLabels = {
+  'room': { 'A': 'Option A — Swim-Up + Live Aqua', 'B': 'Option B — Swim-Up + Secondary Suite', 'C': 'Option C — 2BR Pool Villa', 'Other': 'Other (see notes)' },
+  'flight-there': { '6am': 'Depart ~6:00am', '8am': 'Depart ~8:00am', '930am': 'Depart ~9:30am', '1225pm': 'Depart ~12:25pm', '230pm': 'Depart ~2:30pm', 'Other': 'Other (see notes)' },
+  'flight-back': { '11am': 'Depart ~11:00am', '130pm': 'Depart ~1:30pm', '3pm': 'Depart ~3:00pm', '515pm': 'Depart ~5:15pm', '640pm': 'Depart ~6:40pm', 'Other': 'Other (see notes)' }
+};
+
+function updateDashboard(votes) {
+  ['room', 'flight-there', 'flight-back'].forEach(function(cat) {
+    var dashEl = document.getElementById('dash-' + cat);
+    var progEl = document.getElementById('prog-' + cat);
+    var badgeEl = document.getElementById('badge-' + cat);
+    var val = votes[cat];
+    if (val) {
+      var label = (displayLabels[cat] && displayLabels[cat][val]) || val;
+      dashEl.textContent = label;
+      dashEl.classList.remove('pending');
+      progEl.classList.add('done');
+      if (badgeEl) {
+        badgeEl.classList.add('done');
+        badgeEl.textContent = '\u2713';
+      }
+    } else {
+      dashEl.textContent = 'Not yet chosen';
+      dashEl.classList.add('pending');
+      progEl.classList.remove('done');
+    }
+  });
+}
+
 // Voting
+var notesRef = db.ref('punta-cana/notes');
+var noteTimers = {};
+
 function vote(category, value) {
-  // Update Firebase
   var update = {};
   update[category] = value;
   votesRef.update(update);
 
-  // Update UI
+  // Update vote buttons
   var container = document.getElementById('vote-' + category);
   if (container) {
     container.querySelectorAll('button').forEach(function(btn) {
       btn.classList.toggle('selected', btn.dataset.vote === value);
     });
+  }
+
+  // Show/hide "Other" text input
+  var otherWrap = document.getElementById('other-' + category);
+  if (otherWrap) {
+    otherWrap.classList.toggle('visible', value === 'Other');
+    if (value === 'Other') {
+      var inp = otherWrap.querySelector('input');
+      if (inp) setTimeout(function() { inp.focus(); }, 100);
+    }
   }
 
   var confirm = document.getElementById('confirm-' + category);
@@ -1267,16 +1665,67 @@ function vote(category, value) {
   }
 }
 
+function saveNote(key, value) {
+  clearTimeout(noteTimers[key]);
+  noteTimers[key] = setTimeout(function() {
+    var update = {};
+    update[key] = value;
+    notesRef.update(update);
+
+    // Show saved indicator
+    var cat = key.replace('-other', '');
+    var savedEl = document.getElementById('notes-saved-' + cat);
+    if (savedEl) {
+      savedEl.textContent = 'Saved';
+      setTimeout(function() { savedEl.textContent = ''; }, 1500);
+    }
+  }, 600);
+}
+
 // Load saved votes from Firebase
 votesRef.on('value', function(snapshot) {
   var votes = snapshot.val() || {};
-  Object.keys(votes).forEach(function(category) {
+
+  // Update vote buttons
+  ['room', 'flight-there', 'flight-back'].forEach(function(category) {
     var value = votes[category];
     var container = document.getElementById('vote-' + category);
     if (container) {
       container.querySelectorAll('button').forEach(function(btn) {
         btn.classList.toggle('selected', btn.dataset.vote === value);
       });
+    }
+    // Show "Other" input if that was selected
+    var otherWrap = document.getElementById('other-' + category);
+    if (otherWrap) {
+      otherWrap.classList.toggle('visible', value === 'Other');
+    }
+  });
+
+  // Update dashboard
+  updateDashboard(votes);
+});
+
+// Load saved notes from Firebase
+notesRef.on('value', function(snapshot) {
+  var notes = snapshot.val() || {};
+  Object.keys(notes).forEach(function(key) {
+    // Notes textareas
+    var textarea = document.getElementById('notes-' + key);
+    if (textarea && textarea !== document.activeElement) {
+      textarea.value = notes[key] || '';
+    }
+    // Other inputs
+    var otherInput = document.getElementById('input-' + key + '-other');
+    if (otherInput && otherInput !== document.activeElement) {
+      otherInput.value = notes[key + '-other'] || '';
+    }
+  });
+  // Also load -other keys directly
+  ['room-other', 'flight-there-other', 'flight-back-other'].forEach(function(key) {
+    var input = document.getElementById('input-' + key);
+    if (input && input !== document.activeElement && notes[key]) {
+      input.value = notes[key];
     }
   });
 });
