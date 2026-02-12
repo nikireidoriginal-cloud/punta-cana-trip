@@ -1154,26 +1154,15 @@ h1, h2, h3, h4 {
 <!-- ═══ SELECTIONS DASHBOARD ═══ -->
 <div class="dashboard">
   <div class="dashboard-card">
-    <h2 class="dashboard-title">Three Decisions</h2>
-    <p class="dashboard-subtitle">Tap any row to see options and vote</p>
+    <h2 class="dashboard-title">Trip Status</h2>
+    <p class="dashboard-subtitle">Room is booked &mdash; 2 flight decisions left</p>
 
-    <div class="dashboard-row">
-      <div class="dashboard-row-top" onclick="openDecision('room')">
+    <div class="dashboard-row" style="background:rgba(91,138,138,0.04);border-radius:8px;">
+      <div class="dashboard-row-top" onclick="openDecision('room')" style="margin-bottom:0;">
         <span class="dashboard-label">Room Setup</span>
-        <span class="dashboard-value pending" id="dash-room">Not yet chosen</span>
+        <span class="dashboard-value" style="color:var(--teal);font-weight:600;">Booked &#10003;</span>
         <span class="dashboard-arrow">&#9656;</span>
       </div>
-      <div class="dash-chips" id="dash-vote-room">
-        <button class="dash-chip" data-vote="A" onclick="vote('room','A')">A</button>
-        <button class="dash-chip" data-vote="B" onclick="vote('room','B')">B</button>
-        <button class="dash-chip" data-vote="C" onclick="vote('room','C')">C</button>
-        <button class="dash-chip" data-vote="Other" onclick="vote('room','Other')" style="border-style:dashed;">Other</button>
-      </div>
-      <div class="other-input-wrap" id="other-room">
-        <input class="other-input" type="text" placeholder="What are you thinking?" oninput="saveNote('room-other', this.value)" id="input-room-other">
-      </div>
-      <textarea class="notes-textarea" id="notes-room" placeholder="Questions or thoughts about room setup..." oninput="saveNote('room', this.value)" style="margin-top:0.5rem;min-height:40px;font-size:0.8rem;"></textarea>
-      <div class="notes-saved" id="notes-saved-room" style="font-size:0.7rem;"></div>
     </div>
 
     <div class="dashboard-row">
@@ -1219,7 +1208,7 @@ h1, h2, h3, h4 {
     </div>
 
     <div class="dashboard-progress">
-      <div class="progress-dot" id="prog-room"></div>
+      <div class="progress-dot done" id="prog-room"></div>
       <div class="progress-dot" id="prog-flight-there"></div>
       <div class="progress-dot" id="prog-flight-back"></div>
     </div>
@@ -1229,220 +1218,55 @@ h1, h2, h3, h4 {
 <!-- ═══ MAIN CONTENT ═══ -->
 <div class="section">
 
-  <!-- ═══ DECISION 1: ROOM SETUP ═══ -->
-  <div class="decision-wrapper open" id="decision-room">
+  <!-- ═══ ROOMS: BOOKED ═══ -->
+  <div class="decision-wrapper" id="decision-room">
     <div class="decision-toggle" onclick="toggleDecision('room')">
       <div class="decision-toggle-left">
-        <span class="decision-badge" id="badge-room">1 of 3</span>
-        <h2>Room Setup</h2>
+        <span class="decision-badge done">Booked</span>
+        <h2>Our Rooms</h2>
       </div>
       <span class="decision-chevron">&#9662;</span>
     </div>
     <div class="decision-body">
       <div style="padding:1.2rem 1.5rem;">
-      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">The primary space is obviously all of ours and has room for all of us to sleep. The 2nd space solves for a reset room for Ferrell &mdash; not meant to imply anything about her use or time at the primary space. Tap a column to see details.</p>
+      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Option A is booked &mdash; Nickelodeon Swim-Up Suite for all of us + Live Aqua Swim-Up Suite as Ferrell&rsquo;s reset space. Check-in Feb 25, check-out Mar 1.</p>
 
-    <!-- AT A GLANCE (SUMMARY TABLE) -->
-    <div class="comparison-card" style="margin-top:0;margin-bottom:2rem;">
-      <table class="comparison-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th class="col-link" data-option="a">A</th>
-            <th class="col-link" data-option="b">B</th>
-            <th class="col-link" data-option="c">C</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Primary Space</td><td>Nickelodeon Swim-Up Suite</td><td>Nickelodeon Swim-Up Suite</td><td>Nickelodeon 2BR Villa</td></tr>
-          <tr><td>Reset Space</td><td><a href="https://www.aquapuntacana.com/aqua-junior-suite-swim-up.asp" target="_blank" style="color:var(--teal);text-decoration:none;font-weight:500;">Live Aqua</a> <span style="font-size:0.7rem;color:var(--muted);">(adults-only)</span></td><td>Nickelodeon Flat Suite &mdash; King bed</td><td>Loft in Nickelodeon villa</td></tr>
-          <tr><td>Total Cost</td><td>~$6.2&ndash;6.9K</td><td>~$6,346</td><td>$13,362</td></tr>
-          <tr><td>All-Inclusive</td><td>Split resorts</td><td>Both at Nickelodeon</td><td>All at Nickelodeon</td></tr>
-          <tr><td>Distance</td><td>7 min walk</td><td>0 min</td><td>0 min</td></tr>
-          <tr><td>Nervous System</td><td><span class="stars">&#9679;&#9679;&#9679;&#9679;&#9679;</span></td><td><span class="stars">&#9679;&#9679;&#9679;</span></td><td><span class="stars">&#9679;&#9679;&#9679;</span></td></tr>
-          <tr><td>Luxury Level</td><td><span class="stars">&#9679;&#9679;&#9679;&#9679;&#9679;</span></td><td><span class="stars">&#9679;&#9679;&#9679;</span></td><td><span class="stars">&#9679;&#9679;&#9679;&#9679;&#9679;</span></td></tr>
-        </tbody>
-      </table>
+    <!-- ═══ BOOKING 1: NICKELODEON ═══ -->
+    <div class="room-block" style="margin-bottom:1.2rem;">
+      <div class="room-label">Family Room &mdash; Our Main Space</div>
+      <img src="https://admin.karismahotels.com/sites/default/files/styles/hero_desktop/public/2024-04/swank_wraparound_swim_up_suite_rooms_nick_punta_cana.jpg" alt="Swank Plunge Pool Suite" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:0.8rem;">
+      <div class="room-name">Nickelodeon &mdash; Swank Plunge Pool Suite</div>
+      <div class="room-details">Private master bedroom with king bed, 42&rdquo; smart TV, marble bath with rain shower, double sinks &amp; freestanding tub. Living room with 48&rdquo; smart TV, pull-out sofa, dining table for four. Private wraparound terrace with plunge pool, round daybed. 517 sqft room + 247 sqft terrace.</div>
+      <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--slate-light);line-height:1.7;">
+        <strong style="color:var(--slate);">Confirmation #820607</strong><br>
+        Guest 1: Niki Reid<br>
+        4 nights &middot; Feb 25 &ndash; Mar 1, 2026 &middot; Check-in 3:00 PM &middot; Check-out 12:00 PM<br>
+        <strong style="color:var(--teal);">$3,855.60</strong> &middot; Karisma Insider &middot; Pre-paid
+      </div>
+      <a href="https://www.karismahotels.com/nickelodeon-hotels-resorts/punta-cana/accommodations/swank-wraparound-swim-suite" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
     </div>
 
-    <!-- OPTION A (accordion) -->
-    <div class="accordion-card" id="option-a">
-      <div class="accordion-header" onclick="toggleAccordion('option-a')">
-        <div>
-          <div class="option-label">Option A</div>
-          <h3>Nickelodeon Swim-Up + Adults-Only Escape</h3>
-        </div>
-        <div style="display:flex;align-items:center;">
-          <span class="acc-price">~$6.2&ndash;6.9K</span>
-          <span class="accordion-chevron">&#9662;</span>
-        </div>
+    <!-- ═══ BOOKING 2: LIVE AQUA ═══ -->
+    <div class="room-block secondary" style="margin-bottom:1.2rem;">
+      <div class="room-label">Reset Space &mdash; Ferrell&rsquo;s Room</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.8rem;">
+        <img src="aqua-live.jpg" alt="Live Aqua Beach Resort — Pool" style="width:100%;height:130px;object-fit:cover;border-radius:8px;">
+        <img src="swim-up-suite-aqua.jpg" alt="Live Aqua Swim-Up Suite" style="width:100%;height:130px;object-fit:cover;border-radius:8px;">
       </div>
-      <div class="accordion-body">
-        <div class="accordion-inner">
-          <p class="option-tagline">Family at Nickelodeon + a 5-star adults-only retreat just 0.3 miles away whenever she wants space.</p>
-
-          <div class="room-block">
-            <div class="room-label">Family Room</div>
-            <img src="https://admin.karismahotels.com/sites/default/files/styles/hero_desktop/public/2024-04/swank_wraparound_swim_up_suite_rooms_nick_punta_cana.jpg" alt="Swank Wraparound Swim-Up Suite" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:0.8rem;">
-            <div class="room-name">Nickelodeon &mdash; Swank Wraparound Swim-Up Suite</div>
-            <div class="room-details">King bed, wraparound terrace, direct pool access, pull-out sofa, 764 sqft.</div>
-            <div class="room-price">$3,948</div>
-            <div class="room-meta">4 nights &middot; 2 adults + 1 child &middot; Karisma Insider rate</div>
-            <a href="https://www.karismahotels.com/nickelodeon-hotels-resorts/punta-cana/accommodations/swank-wraparound-swim-suite" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
-          </div>
-
-          <div class="room-block secondary">
-            <div class="room-label">Reset Space &mdash; Her Own Room to Sleep &amp; Recharge</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.8rem;">
-              <img src="aqua-live.jpg" alt="Live Aqua Beach Resort — Pool" style="width:100%;height:130px;object-fit:cover;border-radius:8px;">
-              <img src="swim-up-suite-aqua.jpg" alt="Live Aqua Swim-Up Suite" style="width:100%;height:130px;object-fit:cover;border-radius:8px;">
-            </div>
-            <div class="room-name">Live Aqua Beach Resort &mdash; Swim-Up Suite</div>
-            <div class="room-details">5-star adults-only all-inclusive spa resort. Swim-up suite with pool view, butler service, Aqua Club Lounge, rain shower. Her own room to sleep in and recharge &mdash; use it as much or as little as she wants.</div>
-            <div class="room-price">$2,273 <span style="font-size:0.8rem;font-weight:400;color:var(--muted)">(3 nights)</span> or $2,970 <span style="font-size:0.8rem;font-weight:400;color:var(--muted)">(4 nights)</span></div>
-            <div class="room-meta">We need to pick 3 or 4 nights &middot; Swim-up suite &middot; Sale pricing</div>
-            <a href="https://www.aquapuntacana.com/aqua-junior-suite-swim-up.asp" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
-          </div>
-
-          <div class="option-notes">
-            <div class="note-col pros">
-              <h4>What&rsquo;s Great</h4>
-              <ul>
-                <li>Real adults-only space to recharge &mdash; spa, quiet pools, zen gardens</li>
-                <li>She can use it whenever she wants &mdash; it&rsquo;s there when she needs it</li>
-                <li>Both resorts are all-inclusive &mdash; no surprise costs</li>
-                <li>Only 0.3 miles apart &mdash; easy to go back and forth</li>
-                <li>Best value of all three options</li>
-              </ul>
-            </div>
-            <div class="note-col cons">
-              <h4>To Consider</h4>
-              <ul>
-                <li>Two separate bookings to manage</li>
-                <li>Separate all-inclusive plans &mdash; can&rsquo;t eat at each other&rsquo;s resort</li>
-                <li>Kid can&rsquo;t visit Live Aqua (adults only)</li>
-                <li>7-minute walk between resorts</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="map-embed">
-            <iframe src="https://maps.google.com/maps?saddr=Nickelodeon+Hotels+%26+Resorts+Punta+Cana,+Uvero+Alto&daddr=Live+Aqua+Beach+Resort+Punta+Cana,+Uvero+Alto&dirflg=w&output=embed" allowfullscreen loading="lazy"></iframe>
-          </div>
-          <p class="map-caption"><a href="https://www.google.com/maps/dir/Nickelodeon+Hotels+%26+Resorts+Punta+Cana/Live+Aqua+Beach+Resort+Punta+Cana" target="_blank">Open in Google Maps &rarr;</a></p>
-        </div>
+      <div class="room-name">Live Aqua Beach Resort &mdash; Aqua Junior Suite Swim-Up</div>
+      <div class="room-details">5-star adults-only all-inclusive. Plush king bed, rain shower, Molton Brown amenities. Private terrace with pool access. Includes welcome sparkling wine &amp; chocolate strawberries, spa discounts, romantic dinner under the stars, in-suite breakfast.</div>
+      <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--slate-light);line-height:1.7;">
+        <strong style="color:var(--slate);">Confirmation #1047776576</strong> &middot; Ferrell Shatto<br>
+        4 nights &middot; Feb 25 &ndash; Mar 1, 2026 &middot; 1 room &middot; 2 adults<br>
+        <strong style="color:var(--gold);">$2,970.00</strong>
       </div>
+      <a href="https://www.aquapuntacana.com/aqua-junior-suite-swim-up.asp" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
     </div>
 
-    <!-- OPTION B (accordion) -->
-    <div class="accordion-card" id="option-b">
-      <div class="accordion-header" onclick="toggleAccordion('option-b')">
-        <div>
-          <div class="option-label">Option B</div>
-          <h3>Nickelodeon Swim-Up + Flat Suite</h3>
-        </div>
-        <div style="display:flex;align-items:center;">
-          <span class="acc-price">$6,346</span>
-          <span class="accordion-chevron">&#9662;</span>
-        </div>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-inner">
-          <p class="option-tagline">A separate Flat Suite with king bed at Nickelodeon &mdash; same resort, same all-inclusive, just her own 721-sqft space to retreat to.</p>
-
-          <div class="room-block">
-            <div class="room-label">Family Room</div>
-            <img src="https://admin.karismahotels.com/sites/default/files/styles/hero_desktop/public/2024-04/swank_wraparound_swim_up_suite_rooms_nick_punta_cana.jpg" alt="Swank Wraparound Swim-Up Suite" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:0.8rem;">
-            <div class="room-name">Nickelodeon &mdash; Swank Wraparound Swim-Up Suite</div>
-            <div class="room-details">King bed, wraparound terrace, direct pool access, pull-out sofa, 764 sqft.</div>
-            <div class="room-price">$3,948</div>
-            <div class="room-meta">4 nights &middot; 2 adults + 1 child &middot; Karisma Insider rate</div>
-            <a href="https://www.karismahotels.com/nickelodeon-hotels-resorts/punta-cana/accommodations/swank-wraparound-swim-suite" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
-          </div>
-
-          <div class="room-block secondary">
-            <div class="room-label">Reset Space &mdash; Secondary Suite at the Same Resort</div>
-            <img src="flat-suite.jpg" alt="Nickelodeon Flat Suite" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:0.8rem;">
-            <div class="room-name">Nickelodeon &mdash; Flat Suite (King Bed)</div>
-            <div class="room-details">721 sqft. Private master bedroom with king bed, marble bath with rain shower, freestanding tub &amp; double sinks. Living room with pull-out sofa, dining area, smart TV.</div>
-            <div class="room-price">$2,398</div>
-            <div class="room-meta">4 nights &middot; Karisma Insider rate</div>
-            <a href="https://www.karismahotels.com/nickelodeon-hotels-resorts/punta-cana/accommodations/flat-suite" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
-          </div>
-
-          <div class="option-notes">
-            <div class="note-col pros">
-              <h4>What&rsquo;s Great</h4>
-              <ul>
-                <li>Everyone at the same resort &mdash; zero logistics</li>
-                <li>Both rooms get full all-inclusive</li>
-                <li>She can retreat to her own room whenever</li>
-                <li>Kid can go between rooms easily</li>
-                <li>Aqua Nick waterpark included for all</li>
-              </ul>
-            </div>
-            <div class="note-col cons">
-              <h4>To Consider</h4>
-              <ul>
-                <li>Her room is still at a kids resort &mdash; not a zen escape</li>
-                <li>Most expensive of the two-room options</li>
-                <li>No adult-only pool or beach at Nickelodeon</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- OPTION C (accordion) -->
-    <div class="accordion-card" id="option-c">
-      <div class="accordion-header" onclick="toggleAccordion('option-c')">
-        <div>
-          <div class="option-label">Option C</div>
-          <h3>Nickelodeon 2-Bedroom Pool Villa</h3>
-        </div>
-        <div style="display:flex;align-items:center;">
-          <span class="acc-price">$13,362</span>
-          <span class="accordion-chevron">&#9662;</span>
-        </div>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-inner">
-          <p class="option-tagline">A private 2-bedroom villa at Nickelodeon &mdash; 3 baths, your own pool + butler. Everyone under one roof.</p>
-
-          <div class="room-block">
-            <div class="room-label">Private Villa</div>
-            <img src="https://admin.karismahotels.com/sites/default/files/styles/hero_desktop/public/2024-03/Pool%20Super%20Villa%20Rooms%20Nick%20Punta%20Cana.jpg?itok=1Ed7ILC7" alt="Nickelodeon Super Pool Villa" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:0.8rem;">
-            <div class="room-name">Nickelodeon &mdash; Super Pool Villa (2BR / 3BA)</div>
-            <div class="room-details">1,300 sqft on 2 levels. Master king suite downstairs with marble bath, outdoor shower &amp; freestanding tub. 2 twin beds in loft upstairs with private bath. Pull-out sofa. Private infinity pool, lush gardens, patio, butler service.</div>
-            <div class="room-price">$13,362</div>
-            <div class="room-meta">4 nights &middot; 2 adults + 1 child &middot; Karisma Insider rate</div>
-            <a href="https://www.karismahotels.com/nickelodeon-hotels-resorts/punta-cana/accommodations/super-pool-villa" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View villa details &rarr;</a>
-          </div>
-
-          <div class="option-notes">
-            <div class="note-col pros">
-              <h4>What&rsquo;s Great</h4>
-              <ul>
-                <li>True 2-bedroom with 3 full bathrooms &mdash; real separation</li>
-                <li>Private infinity pool + private gardens</li>
-                <li>Butler service included</li>
-                <li>No logistics &mdash; one booking, one location</li>
-                <li>Most luxurious option by far</li>
-              </ul>
-            </div>
-            <div class="note-col cons">
-              <h4>To Consider</h4>
-              <ul>
-                <li>2x the cost of other options</li>
-                <li>2nd bedroom is a loft open to living room below (not fully enclosed)</li>
-                <li>Still at Nickelodeon &mdash; no adults-only escape</li>
-                <li>Limited availability &mdash; may sell out</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- TOTAL -->
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0.8rem 0;border-top:1px solid var(--border);margin-top:0.5rem;">
+      <span style="font-size:0.75rem;font-weight:600;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;">Total Rooms</span>
+      <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--slate);">$6,825.60</span>
     </div>
 
     </div>
