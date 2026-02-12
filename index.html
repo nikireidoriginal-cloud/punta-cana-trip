@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Punta Cana — Feb 25 – Mar 1, 2026</title>
 <meta property="og:title" content="Punta Cana — Feb 25 – Mar 1, 2026">
-<meta property="og:description" content="Three decisions to make for our trip to Punta Cana">
+<meta property="og:description" content="Our trip to Punta Cana &mdash; Feb 25 to Mar 1, 2026">
 <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -1111,6 +1111,172 @@ h1, h2, h3, h4 {
   .option-card { padding: 1.3rem; }
   .section { padding: 2rem 0.8rem; }
 }
+
+/* ── TRIP SUMMARY ROWS ── */
+.summary-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #f0ebe3;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.summary-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+
+.summary-detail {
+  font-size: 0.88rem;
+  color: var(--slate);
+  line-height: 1.4;
+}
+
+/* ── INFO CARDS (replaces decision-wrapper) ── */
+.info-card {
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.info-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(91,138,138,0.06) 0%, rgba(254,253,248,0.8) 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.info-card-header h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.info-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-transform: uppercase;
+  background: var(--teal);
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.info-card-body {
+  padding: 1.2rem 1.5rem;
+}
+
+/* ── FLIGHT CARDS ── */
+.flight-card {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+.flight-card:last-child {
+  margin-bottom: 0;
+}
+
+.flight-card-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.flight-card-route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.flight-endpoint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.flight-time {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--slate);
+}
+
+.flight-airport {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--slate);
+  letter-spacing: 0.04em;
+}
+
+.flight-city {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.flight-arrow {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 0;
+}
+
+.flight-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.flight-plane {
+  font-size: 1rem;
+  color: var(--teal);
+  margin: 0 0.3rem;
+}
+
+.flight-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+}
+
 </style>
 </head>
 <body>
@@ -1151,66 +1317,34 @@ h1, h2, h3, h4 {
   </div>
 </div>
 
-<!-- ═══ SELECTIONS DASHBOARD ═══ -->
+<!-- ═══ TRIP SUMMARY ═══ -->
 <div class="dashboard">
   <div class="dashboard-card">
-    <h2 class="dashboard-title">Trip Status</h2>
-    <p class="dashboard-subtitle">Room is booked &mdash; 2 flight decisions left</p>
+    <h2 class="dashboard-title">Everything&rsquo;s Booked</h2>
+    <p class="dashboard-subtitle">Rooms, flights, and all-inclusive &mdash; we&rsquo;re all set</p>
 
-    <div class="dashboard-row" style="background:rgba(91,138,138,0.04);border-radius:8px;">
-      <div class="dashboard-row-top" onclick="openDecision('room')" style="margin-bottom:0;">
-        <span class="dashboard-label">Room Setup</span>
-        <span class="dashboard-value" style="color:var(--teal);font-weight:600;">Booked &#10003;</span>
-        <span class="dashboard-arrow">&#9656;</span>
+    <div class="summary-row">
+      <span class="summary-icon" style="color:var(--teal);">&#10003;</span>
+      <div class="summary-info">
+        <span class="summary-label">Rooms</span>
+        <span class="summary-detail">Nickelodeon Swim-Up Suite + Live Aqua Swim-Up Suite</span>
       </div>
     </div>
 
-    <div class="dashboard-row">
-      <div class="dashboard-row-top" onclick="openDecision('flight-there')">
-        <span class="dashboard-label">Flight There</span>
-        <span class="dashboard-value pending" id="dash-flight-there">Not yet chosen</span>
-        <span class="dashboard-arrow">&#9656;</span>
+    <div class="summary-row">
+      <span class="summary-icon" style="color:var(--teal);">&#10003;</span>
+      <div class="summary-info">
+        <span class="summary-label">Flight There</span>
+        <span class="summary-detail">JetBlue B6 173 &middot; Wed Feb 25 &middot; FLL 11:45am &rarr; PUJ 3:11pm</span>
       </div>
-      <div class="dash-chips" id="dash-vote-flight-there">
-        <button class="dash-chip" data-vote="6am" onclick="vote('flight-there','6am')">6am</button>
-        <button class="dash-chip" data-vote="8am" onclick="vote('flight-there','8am')">8am</button>
-        <button class="dash-chip" data-vote="930am" onclick="vote('flight-there','930am')">9:30am</button>
-        <button class="dash-chip" data-vote="1225pm" onclick="vote('flight-there','1225pm')">12:25pm</button>
-        <button class="dash-chip" data-vote="230pm" onclick="vote('flight-there','230pm')">2:30pm</button>
-        <button class="dash-chip" data-vote="Other" onclick="vote('flight-there','Other')" style="border-style:dashed;">Other</button>
-      </div>
-      <div class="other-input-wrap" id="other-flight-there">
-        <input class="other-input" type="text" placeholder="Different time in mind?" oninput="saveNote('flight-there-other', this.value)" id="input-flight-there-other">
-      </div>
-      <textarea class="notes-textarea" id="notes-flight-there" placeholder="Questions or thoughts about departure..." oninput="saveNote('flight-there', this.value)" style="margin-top:0.5rem;min-height:40px;font-size:0.8rem;"></textarea>
-      <div class="notes-saved" id="notes-saved-flight-there" style="font-size:0.7rem;"></div>
     </div>
 
-    <div class="dashboard-row">
-      <div class="dashboard-row-top" onclick="openDecision('flight-back')">
-        <span class="dashboard-label">Flight Back</span>
-        <span class="dashboard-value pending" id="dash-flight-back">Not yet chosen</span>
-        <span class="dashboard-arrow">&#9656;</span>
+    <div class="summary-row">
+      <span class="summary-icon" style="color:var(--teal);">&#10003;</span>
+      <div class="summary-info">
+        <span class="summary-label">Flight Back</span>
+        <span class="summary-detail">JetBlue B6 1074 &middot; Sun Mar 1 &middot; PUJ 11:21am &rarr; FLL 12:57pm</span>
       </div>
-      <div class="dash-chips" id="dash-vote-flight-back">
-        <button class="dash-chip" data-vote="11am" onclick="vote('flight-back','11am')">11am</button>
-        <button class="dash-chip" data-vote="130pm" onclick="vote('flight-back','130pm')">1:30pm</button>
-        <button class="dash-chip" data-vote="3pm" onclick="vote('flight-back','3pm')">3pm</button>
-        <button class="dash-chip" data-vote="515pm" onclick="vote('flight-back','515pm')">5:15pm</button>
-        <button class="dash-chip" data-vote="640pm" onclick="vote('flight-back','640pm')">6:40pm</button>
-        <button class="dash-chip" data-vote="Other" onclick="vote('flight-back','Other')" style="border-style:dashed;">Other</button>
-      </div>
-      <div class="other-input-wrap" id="other-flight-back">
-        <input class="other-input" type="text" placeholder="Different time in mind?" oninput="saveNote('flight-back-other', this.value)" id="input-flight-back-other">
-      </div>
-      <textarea class="notes-textarea" id="notes-flight-back" placeholder="Questions or thoughts about return..." oninput="saveNote('flight-back', this.value)" style="margin-top:0.5rem;min-height:40px;font-size:0.8rem;"></textarea>
-      <div class="notes-saved" id="notes-saved-flight-back" style="font-size:0.7rem;"></div>
-    </div>
-
-    <div class="dashboard-progress">
-      <div class="progress-dot done" id="prog-room"></div>
-      <div class="progress-dot" id="prog-flight-there"></div>
-      <div class="progress-dot" id="prog-flight-back"></div>
     </div>
   </div>
 </div>
@@ -1218,18 +1352,14 @@ h1, h2, h3, h4 {
 <!-- ═══ MAIN CONTENT ═══ -->
 <div class="section">
 
-  <!-- ═══ ROOMS: BOOKED ═══ -->
-  <div class="decision-wrapper" id="decision-room">
-    <div class="decision-toggle" onclick="toggleDecision('room')">
-      <div class="decision-toggle-left">
-        <span class="decision-badge done">Booked</span>
-        <h2>Our Rooms</h2>
-      </div>
-      <span class="decision-chevron">&#9662;</span>
+  <!-- ═══ OUR ROOMS ═══ -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <span class="info-badge">Confirmed</span>
+      <h2>Our Rooms</h2>
     </div>
-    <div class="decision-body">
-      <div style="padding:1.2rem 1.5rem;">
-      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Option A is booked &mdash; Nickelodeon Swim-Up Suite for all of us + Live Aqua Swim-Up Suite as Ferrell&rsquo;s reset space. Check-in Feb 25, check-out Mar 1.</p>
+    <div class="info-card-body">
+      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Nickelodeon Swim-Up Suite for all of us + Live Aqua Swim-Up Suite as Ferrell&rsquo;s reset space. Check-in Feb 25, check-out Mar 1.</p>
 
     <!-- ═══ BOOKING 1: NICKELODEON ═══ -->
     <div class="room-block" style="margin-bottom:1.2rem;">
@@ -1256,7 +1386,7 @@ h1, h2, h3, h4 {
       <div class="room-details">5-star adults-only all-inclusive. Plush king bed, rain shower, Molton Brown amenities. Private terrace with pool access. Includes welcome sparkling wine &amp; chocolate strawberries, spa discounts, romantic dinner under the stars, in-suite breakfast.</div>
       <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--slate-light);line-height:1.7;">
         <strong style="color:var(--slate);">Confirmation #1047776576</strong> &middot; Ferrell Shatto<br>
-        4 nights &middot; Feb 25 &ndash; Mar 1, 2026 &middot; 1 room &middot; 2 adults<br>
+        2 guests &middot; 4 nights &middot; Feb 25 &ndash; Mar 1, 2026<br>
         <strong style="color:var(--gold);">$2,970.00</strong>
       </div>
       <a href="https://www.aquapuntacana.com/aqua-junior-suite-swim-up.asp" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
@@ -1267,92 +1397,68 @@ h1, h2, h3, h4 {
       <span style="font-size:0.75rem;font-weight:600;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;">Total Rooms</span>
       <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--slate);">$6,825.60</span>
     </div>
-
-    </div>
     </div>
   </div>
 
-  <!-- ═══ DECISION 2: FLIGHT THERE ═══ -->
-  <div class="decision-wrapper" id="decision-flight-there">
-    <div class="decision-toggle" onclick="toggleDecision('flight-there')">
-      <div class="decision-toggle-left">
-        <span class="decision-badge" id="badge-flight-there">2 of 3</span>
-        <h2>Flight There</h2>
+  <!-- ═══ OUR FLIGHTS ═══ -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <span class="info-badge">Confirmed</span>
+      <h2>Our Flights</h2>
+    </div>
+    <div class="info-card-body">
+      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">JetBlue nonstop from Fort Lauderdale. EvenMore seating. Confirmation: <strong style="color:var(--slate);">KBBTTQ</strong></p>
+
+      <!-- FLIGHT THERE -->
+      <div class="flight-card">
+        <div class="flight-card-label" style="color:var(--teal);">Outbound &mdash; Wed Feb 25</div>
+        <div class="flight-card-route">
+          <div class="flight-endpoint">
+            <span class="flight-time">11:45 AM</span>
+            <span class="flight-airport">FLL</span>
+            <span class="flight-city">Fort Lauderdale</span>
+          </div>
+          <div class="flight-arrow">
+            <span class="flight-line"></span>
+            <span class="flight-plane">&#9992;</span>
+            <span class="flight-line"></span>
+          </div>
+          <div class="flight-endpoint">
+            <span class="flight-time">3:11 PM</span>
+            <span class="flight-airport">PUJ</span>
+            <span class="flight-city">Punta Cana</span>
+          </div>
+        </div>
+        <div class="flight-meta">
+          JetBlue B6 173 &middot; A320 &middot; 2h 26m &middot; Nonstop &middot; EvenMore
+        </div>
       </div>
-      <span class="decision-chevron">&#9662;</span>
-    </div>
-    <div class="decision-body">
-      <div style="padding:1.2rem 1.5rem;">
-      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">All nonstop from Fort Lauderdale (FLL). ~2.5 hours.</p>
 
-    <!-- TO DR -->
-    <div class="comparison-card" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1rem;margin-bottom:0.8rem;">To Punta Cana &mdash; Wed Feb 25</h3>
-      <div style="overflow-x:auto;">
-        <table class="comparison-table" style="min-width:340px;">
-          <thead>
-            <tr>
-              <th style="text-align:left;">Departs FLL</th>
-              <th style="text-align:left;">Arrives PUJ</th>
-              <th style="text-align:left;">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td style="text-align:left;font-weight:600;">~6:00am</td><td style="text-align:left;">~10:25am</td><td style="text-align:left;color:var(--muted);">Earliest option &mdash; arrive by lunch</td></tr>
-            <tr><td style="text-align:left;font-weight:600;">~8:00am</td><td style="text-align:left;">~12:30pm</td><td style="text-align:left;color:var(--muted);">Good morning option</td></tr>
-            <tr><td style="text-align:left;font-weight:600;">~9:30am</td><td style="text-align:left;">~1:55pm</td><td style="text-align:left;color:var(--muted);">Mid-morning departure</td></tr>
-            <tr><td style="text-align:left;font-weight:600;">~12:25pm</td><td style="text-align:left;">~4:45pm</td><td style="text-align:left;color:var(--muted);">Afternoon arrival</td></tr>
-            <tr><td style="text-align:left;font-weight:600;">~2:30pm</td><td style="text-align:left;">~7:00pm</td><td style="text-align:left;color:var(--muted);">Latest nonstop &mdash; evening arrival</td></tr>
-          </tbody>
-        </table>
+      <!-- FLIGHT BACK -->
+      <div class="flight-card">
+        <div class="flight-card-label" style="color:var(--gold);">Return &mdash; Sun Mar 1</div>
+        <div class="flight-card-route">
+          <div class="flight-endpoint">
+            <span class="flight-time">11:21 AM</span>
+            <span class="flight-airport">PUJ</span>
+            <span class="flight-city">Punta Cana</span>
+          </div>
+          <div class="flight-arrow">
+            <span class="flight-line"></span>
+            <span class="flight-plane">&#9992;</span>
+            <span class="flight-line"></span>
+          </div>
+          <div class="flight-endpoint">
+            <span class="flight-time">12:57 PM</span>
+            <span class="flight-airport">FLL</span>
+            <span class="flight-city">Fort Lauderdale</span>
+          </div>
+        </div>
+        <div class="flight-meta">
+          JetBlue B6 1074 &middot; A320 &middot; 2h 36m &middot; Nonstop &middot; EvenMore
+        </div>
       </div>
-    </div>
 
-    </div>
-    </div>
-  </div>
-
-  <!-- ═══ DECISION 3: FLIGHT BACK ═══ -->
-  <div class="decision-wrapper" id="decision-flight-back">
-    <div class="decision-toggle" onclick="toggleDecision('flight-back')">
-      <div class="decision-toggle-left">
-        <span class="decision-badge" id="badge-flight-back">3 of 3</span>
-        <h2>Flight Back</h2>
-      </div>
-      <span class="decision-chevron">&#9662;</span>
-    </div>
-    <div class="decision-body">
-      <div style="padding:1.2rem 1.5rem;">
-      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Nonstop to Fort Lauderdale (FLL). ~2.5 hours.</p>
-
-    <div class="comparison-card" style="margin-bottom:1.5rem;">
-      <h3 style="font-size:1rem;margin-bottom:0.8rem;">Back to Fort Lauderdale &mdash; Sun Mar 1</h3>
-      <div style="overflow-x:auto;">
-        <table class="comparison-table" style="min-width:340px;">
-          <thead>
-            <tr>
-              <th style="text-align:left;">Departs PUJ</th>
-              <th style="text-align:left;">Arrives FLL</th>
-              <th style="text-align:left;">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td style="text-align:left;font-weight:600;">~11:00am</td><td style="text-align:left;">~1:25pm</td><td style="text-align:left;color:var(--muted);">Earliest return &mdash; home by afternoon</td></tr>
-            <tr><td style="text-align:left;font-weight:600;">~1:30pm</td><td style="text-align:left;">~3:55pm</td><td style="text-align:left;color:var(--muted);">Mid-day departure</td></tr>
-            <tr><td style="text-align:left;font-weight:600;">~3:00pm</td><td style="text-align:left;">~5:25pm</td><td style="text-align:left;color:var(--muted);">Most popular return time</td></tr>
-            <tr><td style="text-align:left;font-weight:600;">~5:15pm</td><td style="text-align:left;">~7:40pm</td><td style="text-align:left;color:var(--muted);">Last morning at the resort</td></tr>
-            <tr><td style="text-align:left;font-weight:600;">~6:40pm</td><td style="text-align:left;">~9:05pm</td><td style="text-align:left;color:var(--muted);">Latest nonstop &mdash; full last day</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-bottom:0.5rem;">Times are approximate and vary by day. All times local (PUJ is 1 hour ahead of FLL).</p>
-    <p style="text-align:center;">
-      <a href="https://www.google.com/travel/flights?q=FLL+to+PUJ+Feb+25" target="_blank" style="font-size:0.85rem;color:var(--teal);text-decoration:none;font-weight:500;">Search flights on Google Flights &rarr;</a>
-    </p>
-
-    </div>
     </div>
   </div>
 
@@ -1390,8 +1496,8 @@ h1, h2, h3, h4 {
   </div>
 
   <div class="heart-section">
-    <h4>Let&rsquo;s Plan It Out</h4>
-    <p>Once we pick a room setup, let&rsquo;s pre-schedule what we want to do each day &mdash; waterpark mornings, pool time, a couple of nice dinners, spa, and lots of relaxing time built in.</p>
+    <h4>Let&rsquo;s Make a Plan</h4>
+    <p>Now that everything&rsquo;s booked, let&rsquo;s map out the days &mdash; waterpark mornings, pool time, a couple of nice dinners, spa, and plenty of relaxing time built in.</p>
   </div>
 </div>
 
@@ -1401,22 +1507,7 @@ h1, h2, h3, h4 {
 </footer>
 
 <!-- ═══ SCRIPTS ═══ -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
-// Firebase
-firebase.initializeApp({
-  apiKey: "AIzaSyCXJwnUgmiXuEmW3R4TDgUtglKpiDsK0FQ",
-  authDomain: "trish-40th-bday.firebaseapp.com",
-  databaseURL: "https://trish-40th-bday-default-rtdb.firebaseio.com",
-  projectId: "trish-40th-bday",
-  storageBucket: "trish-40th-bday.firebasestorage.app",
-  messagingSenderId: "471829984132",
-  appId: "1:471829984132:web:6f51b7fcaa38c0b9a9e3d1"
-});
-var db = firebase.database();
-var votesRef = db.ref('punta-cana/votes');
-
 // Carousel
 (function() {
   var imgs = document.querySelectorAll('.carousel-img');
@@ -1446,182 +1537,6 @@ var votesRef = db.ref('punta-cana/votes');
 
   autoAdvance();
 })();
-
-// Accordion toggle
-function toggleAccordion(id) {
-  var card = document.getElementById(id);
-  card.classList.toggle('open');
-}
-
-// Column header clicks -> open corresponding accordion
-(function() {
-  var colMap = { a: 'option-a', b: 'option-b', c: 'option-c' };
-  document.querySelectorAll('.col-link').forEach(function(th) {
-    th.addEventListener('click', function() {
-      var id = colMap[th.dataset.option];
-      var card = document.getElementById(id);
-      document.querySelectorAll('.accordion-card').forEach(function(c) {
-        if (c.id !== id) c.classList.remove('open');
-      });
-      card.classList.add('open');
-      setTimeout(function() {
-        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
-    });
-  });
-})();
-
-// Decision toggle
-function toggleDecision(id) {
-  var wrapper = document.getElementById('decision-' + id);
-  wrapper.classList.toggle('open');
-}
-
-function openDecision(id) {
-  // Close all, open this one
-  document.querySelectorAll('.decision-wrapper').forEach(function(w) {
-    w.classList.remove('open');
-  });
-  var wrapper = document.getElementById('decision-' + id);
-  wrapper.classList.add('open');
-  setTimeout(function() {
-    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 100);
-}
-
-// Display labels for dashboard
-var displayLabels = {
-  'room': { 'A': 'Option A — Swim-Up + Live Aqua', 'B': 'Option B — Swim-Up + Flat Suite', 'C': 'Option C — 2BR Pool Villa', 'Other': 'Other (see notes)' },
-  'flight-there': { '6am': 'Depart ~6:00am', '8am': 'Depart ~8:00am', '930am': 'Depart ~9:30am', '1225pm': 'Depart ~12:25pm', '230pm': 'Depart ~2:30pm', 'Other': 'Other (see notes)' },
-  'flight-back': { '11am': 'Depart ~11:00am', '130pm': 'Depart ~1:30pm', '3pm': 'Depart ~3:00pm', '515pm': 'Depart ~5:15pm', '640pm': 'Depart ~6:40pm', 'Other': 'Other (see notes)' }
-};
-
-function updateDashboard(votes) {
-  ['room', 'flight-there', 'flight-back'].forEach(function(cat) {
-    var dashEl = document.getElementById('dash-' + cat);
-    var progEl = document.getElementById('prog-' + cat);
-    var badgeEl = document.getElementById('badge-' + cat);
-    var val = votes[cat];
-    var badgeLabels = { 'room': '1 of 3', 'flight-there': '2 of 3', 'flight-back': '3 of 3' };
-    if (val) {
-      dashEl.textContent = 'Decided';
-      dashEl.classList.remove('pending');
-      dashEl.style.color = 'var(--teal)';
-      progEl.classList.add('done');
-      if (badgeEl) {
-        badgeEl.classList.add('done');
-        badgeEl.textContent = '\u2713';
-      }
-    } else {
-      dashEl.textContent = 'Not yet chosen';
-      dashEl.classList.add('pending');
-      dashEl.style.color = '';
-      progEl.classList.remove('done');
-      if (badgeEl) {
-        badgeEl.classList.remove('done');
-        badgeEl.textContent = badgeLabels[cat] || '';
-      }
-    }
-  });
-}
-
-// Voting
-var notesRef = db.ref('punta-cana/notes');
-var noteTimers = {};
-
-function vote(category, value) {
-  // Toggle: if same value clicked again, deselect
-  var dashContainer = document.getElementById('dash-vote-' + category);
-  var currentBtn = dashContainer ? dashContainer.querySelector('.selected') : null;
-  var currentVal = currentBtn ? currentBtn.dataset.vote : null;
-  var newVal = (currentVal === value) ? null : value;
-
-  // Save to Firebase (null removes the key)
-  var update = {};
-  update[category] = newVal;
-  votesRef.update(update);
-
-  // Update dashboard chips
-  if (dashContainer) {
-    dashContainer.querySelectorAll('button').forEach(function(btn) {
-      btn.classList.toggle('selected', btn.dataset.vote === newVal);
-    });
-  }
-
-  // Show/hide "Other" text input
-  var otherWrap = document.getElementById('other-' + category);
-  if (otherWrap) {
-    otherWrap.classList.toggle('visible', newVal === 'Other');
-    if (newVal === 'Other') {
-      var inp = otherWrap.querySelector('input');
-      if (inp) setTimeout(function() { inp.focus(); }, 100);
-    }
-  }
-}
-
-function saveNote(key, value) {
-  clearTimeout(noteTimers[key]);
-  noteTimers[key] = setTimeout(function() {
-    var update = {};
-    update[key] = value;
-    notesRef.update(update);
-
-    // Show saved indicator
-    var cat = key.replace('-other', '');
-    var savedEl = document.getElementById('notes-saved-' + cat);
-    if (savedEl) {
-      savedEl.textContent = 'Saved';
-      setTimeout(function() { savedEl.textContent = ''; }, 1500);
-    }
-  }, 600);
-}
-
-// Load saved votes from Firebase
-votesRef.on('value', function(snapshot) {
-  var votes = snapshot.val() || {};
-
-  // Update dashboard chips
-  ['room', 'flight-there', 'flight-back'].forEach(function(category) {
-    var value = votes[category];
-    var dashContainer = document.getElementById('dash-vote-' + category);
-    if (dashContainer) {
-      dashContainer.querySelectorAll('button').forEach(function(btn) {
-        btn.classList.toggle('selected', btn.dataset.vote === value);
-      });
-    }
-    var otherWrap = document.getElementById('other-' + category);
-    if (otherWrap) {
-      otherWrap.classList.toggle('visible', value === 'Other');
-    }
-  });
-
-  // Update dashboard
-  updateDashboard(votes);
-});
-
-// Load saved notes from Firebase
-notesRef.on('value', function(snapshot) {
-  var notes = snapshot.val() || {};
-  Object.keys(notes).forEach(function(key) {
-    // Notes textareas
-    var textarea = document.getElementById('notes-' + key);
-    if (textarea && textarea !== document.activeElement) {
-      textarea.value = notes[key] || '';
-    }
-    // Other inputs
-    var otherInput = document.getElementById('input-' + key + '-other');
-    if (otherInput && otherInput !== document.activeElement) {
-      otherInput.value = notes[key + '-other'] || '';
-    }
-  });
-  // Also load -other keys directly
-  ['room-other', 'flight-there-other', 'flight-back-other'].forEach(function(key) {
-    var input = document.getElementById('input-' + key);
-    if (input && input !== document.activeElement && notes[key]) {
-      input.value = notes[key];
-    }
-  });
-});
 </script>
 </body>
 </html>
