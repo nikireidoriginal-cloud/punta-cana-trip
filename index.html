@@ -1719,10 +1719,11 @@ function updateDashboard(votes) {
     var progEl = document.getElementById('prog-' + cat);
     var badgeEl = document.getElementById('badge-' + cat);
     var val = votes[cat];
+    var badgeLabels = { 'room': '1 of 3', 'flight-there': '2 of 3', 'flight-back': '3 of 3' };
     if (val) {
-      var label = (displayLabels[cat] && displayLabels[cat][val]) || val;
-      dashEl.textContent = label;
+      dashEl.textContent = 'Decision made';
       dashEl.classList.remove('pending');
+      dashEl.style.color = 'var(--teal)';
       progEl.classList.add('done');
       if (badgeEl) {
         badgeEl.classList.add('done');
@@ -1731,7 +1732,12 @@ function updateDashboard(votes) {
     } else {
       dashEl.textContent = 'Not yet chosen';
       dashEl.classList.add('pending');
+      dashEl.style.color = '';
       progEl.classList.remove('done');
+      if (badgeEl) {
+        badgeEl.classList.remove('done');
+        badgeEl.textContent = badgeLabels[cat] || '';
+      }
     }
   });
 }
@@ -1741,15 +1747,22 @@ var notesRef = db.ref('punta-cana/notes');
 var noteTimers = {};
 
 function vote(category, value) {
+  // Toggle: if same value clicked again, deselect
+  var currentBtns = document.querySelectorAll('#vote-' + category + ' .selected, #dash-vote-' + category + ' .selected');
+  var currentVal = null;
+  if (currentBtns.length > 0) currentVal = currentBtns[0].dataset.vote;
+  var newVal = (currentVal === value) ? null : value;
+
+  // Save to Firebase
   var update = {};
-  update[category] = value;
+  update[category] = newVal;
   votesRef.update(update);
 
   // Update vote buttons (in decision section)
   var container = document.getElementById('vote-' + category);
   if (container) {
     container.querySelectorAll('button').forEach(function(btn) {
-      btn.classList.toggle('selected', btn.dataset.vote === value);
+      btn.classList.toggle('selected', btn.dataset.vote === newVal);
     });
   }
 
@@ -1757,15 +1770,15 @@ function vote(category, value) {
   var dashContainer = document.getElementById('dash-vote-' + category);
   if (dashContainer) {
     dashContainer.querySelectorAll('button').forEach(function(btn) {
-      btn.classList.toggle('selected', btn.dataset.vote === value);
+      btn.classList.toggle('selected', btn.dataset.vote === newVal);
     });
   }
 
   // Show/hide "Other" text input
   var otherWrap = document.getElementById('other-' + category);
   if (otherWrap) {
-    otherWrap.classList.toggle('visible', value === 'Other');
-    if (value === 'Other') {
+    otherWrap.classList.toggle('visible', newVal === 'Other');
+    if (newVal === 'Other') {
       var inp = otherWrap.querySelector('input');
       if (inp) setTimeout(function() { inp.focus(); }, 100);
     }
@@ -1773,7 +1786,7 @@ function vote(category, value) {
 
   var confirm = document.getElementById('confirm-' + category);
   if (confirm) {
-    confirm.textContent = 'Saved!';
+    confirm.textContent = newVal ? 'Saved!' : 'Cleared';
     setTimeout(function() { confirm.textContent = ''; }, 2000);
   }
 }
