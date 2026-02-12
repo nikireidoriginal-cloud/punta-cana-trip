@@ -805,22 +805,26 @@ h1, h2, h3, h4 {
 
 .dashboard-row {
   display: flex;
-  align-items: center;
-  padding: 0.7rem 0;
+  flex-direction: column;
+  padding: 1rem 0.8rem;
   border-bottom: 1px solid #f0ebe3;
-  cursor: pointer;
+  border-radius: 8px;
   transition: background 0.15s;
-  border-radius: 6px;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.dashboard-row:hover {
-  background: var(--sand);
 }
 
 .dashboard-row:last-child {
   border-bottom: none;
+}
+
+.dashboard-row-top {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-row-top:hover {
+  opacity: 0.8;
 }
 
 .dashboard-label {
@@ -850,9 +854,46 @@ h1, h2, h3, h4 {
 
 .dashboard-arrow {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   margin-left: 0.5rem;
   flex-shrink: 0;
+}
+
+.dash-chips {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  padding-left: 110px;
+}
+
+@media (max-width: 500px) {
+  .dash-chips { padding-left: 0; }
+}
+
+.dash-chip {
+  padding: 0.3rem 0.7rem;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--card);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--slate-light);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.dash-chip:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.dash-chip.selected {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: #fff;
+  font-weight: 600;
 }
 
 .dashboard-progress {
@@ -876,21 +917,37 @@ h1, h2, h3, h4 {
 
 /* ── COLLAPSIBLE DECISIONS ── */
 .decision-wrapper {
-  border-top: 1px solid var(--border);
+  border: 2px solid var(--border);
+  border-radius: 16px;
   overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.decision-wrapper.open {
+  border-color: var(--teal);
+  box-shadow: 0 4px 24px rgba(91, 138, 138, 0.12);
 }
 
 .decision-toggle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 0;
+  padding: 1.2rem 1.5rem;
   cursor: pointer;
   transition: background 0.15s;
+  background: linear-gradient(135deg, rgba(245,240,232,0.4) 0%, rgba(254,253,248,0.8) 100%);
+}
+
+.decision-wrapper.open .decision-toggle {
+  background: linear-gradient(135deg, rgba(91,138,138,0.06) 0%, rgba(254,253,248,0.8) 100%);
+  border-bottom: 1px solid var(--border);
 }
 
 .decision-toggle:hover {
-  background: rgba(245,240,232,0.3);
+  background: rgba(245,240,232,0.6);
 }
 
 .decision-toggle h2 {
@@ -909,17 +966,17 @@ h1, h2, h3, h4 {
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--gold);
+  color: #fff;
   text-transform: uppercase;
-  background: rgba(196,149,106,0.1);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+  background: var(--gold);
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
   white-space: nowrap;
 }
 
 .decision-badge.done {
-  color: var(--teal);
-  background: rgba(91,138,138,0.1);
+  color: #fff;
+  background: var(--teal);
 }
 
 .decision-chevron {
@@ -931,6 +988,7 @@ h1, h2, h3, h4 {
 
 .decision-wrapper.open .decision-chevron {
   transform: rotate(180deg);
+  color: var(--teal);
 }
 
 .decision-body {
@@ -941,6 +999,10 @@ h1, h2, h3, h4 {
 
 .decision-wrapper.open .decision-body {
   max-height: 5000px;
+}
+
+.decision-body-inner {
+  padding: 1.5rem;
 }
 
 /* ── NOTES / QUESTIONS ── */
@@ -1089,22 +1151,50 @@ h1, h2, h3, h4 {
     <h2 class="dashboard-title">Three Decisions</h2>
     <p class="dashboard-subtitle">Tap any row to see options and vote</p>
 
-    <div class="dashboard-row" onclick="openDecision('room')">
-      <span class="dashboard-label">Room Setup</span>
-      <span class="dashboard-value pending" id="dash-room">Not yet chosen</span>
-      <span class="dashboard-arrow">&#9662;</span>
+    <div class="dashboard-row">
+      <div class="dashboard-row-top" onclick="openDecision('room')">
+        <span class="dashboard-label">Room Setup</span>
+        <span class="dashboard-value pending" id="dash-room">Not yet chosen</span>
+        <span class="dashboard-arrow">&#9656;</span>
+      </div>
+      <div class="dash-chips" id="dash-vote-room">
+        <button class="dash-chip" data-vote="A" onclick="vote('room','A')">A</button>
+        <button class="dash-chip" data-vote="B" onclick="vote('room','B')">B</button>
+        <button class="dash-chip" data-vote="C" onclick="vote('room','C')">C</button>
+        <button class="dash-chip" data-vote="Other" onclick="vote('room','Other')" style="border-style:dashed;">Other</button>
+      </div>
     </div>
 
-    <div class="dashboard-row" onclick="openDecision('flight-there')">
-      <span class="dashboard-label">Flight There</span>
-      <span class="dashboard-value pending" id="dash-flight-there">Not yet chosen</span>
-      <span class="dashboard-arrow">&#9662;</span>
+    <div class="dashboard-row">
+      <div class="dashboard-row-top" onclick="openDecision('flight-there')">
+        <span class="dashboard-label">Flight There</span>
+        <span class="dashboard-value pending" id="dash-flight-there">Not yet chosen</span>
+        <span class="dashboard-arrow">&#9656;</span>
+      </div>
+      <div class="dash-chips" id="dash-vote-flight-there">
+        <button class="dash-chip" data-vote="6am" onclick="vote('flight-there','6am')">6am</button>
+        <button class="dash-chip" data-vote="8am" onclick="vote('flight-there','8am')">8am</button>
+        <button class="dash-chip" data-vote="930am" onclick="vote('flight-there','930am')">9:30am</button>
+        <button class="dash-chip" data-vote="1225pm" onclick="vote('flight-there','1225pm')">12:25pm</button>
+        <button class="dash-chip" data-vote="230pm" onclick="vote('flight-there','230pm')">2:30pm</button>
+        <button class="dash-chip" data-vote="Other" onclick="vote('flight-there','Other')" style="border-style:dashed;">Other</button>
+      </div>
     </div>
 
-    <div class="dashboard-row" onclick="openDecision('flight-back')">
-      <span class="dashboard-label">Flight Back</span>
-      <span class="dashboard-value pending" id="dash-flight-back">Not yet chosen</span>
-      <span class="dashboard-arrow">&#9662;</span>
+    <div class="dashboard-row">
+      <div class="dashboard-row-top" onclick="openDecision('flight-back')">
+        <span class="dashboard-label">Flight Back</span>
+        <span class="dashboard-value pending" id="dash-flight-back">Not yet chosen</span>
+        <span class="dashboard-arrow">&#9656;</span>
+      </div>
+      <div class="dash-chips" id="dash-vote-flight-back">
+        <button class="dash-chip" data-vote="11am" onclick="vote('flight-back','11am')">11am</button>
+        <button class="dash-chip" data-vote="130pm" onclick="vote('flight-back','130pm')">1:30pm</button>
+        <button class="dash-chip" data-vote="3pm" onclick="vote('flight-back','3pm')">3pm</button>
+        <button class="dash-chip" data-vote="515pm" onclick="vote('flight-back','515pm')">5:15pm</button>
+        <button class="dash-chip" data-vote="640pm" onclick="vote('flight-back','640pm')">6:40pm</button>
+        <button class="dash-chip" data-vote="Other" onclick="vote('flight-back','Other')" style="border-style:dashed;">Other</button>
+      </div>
     </div>
 
     <div class="dashboard-progress">
@@ -1128,6 +1218,7 @@ h1, h2, h3, h4 {
       <span class="decision-chevron">&#9662;</span>
     </div>
     <div class="decision-body">
+      <div style="padding:1.2rem 1.5rem;">
       <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">The primary space is obviously all of ours and has room for all of us to sleep. The 2nd space solves for a reset room for Ferrell &mdash; not meant to imply anything about her use or time at the primary space. Tap a column to see details.</p>
 
     <!-- AT A GLANCE (SUMMARY TABLE) -->
@@ -1348,6 +1439,7 @@ h1, h2, h3, h4 {
       <div class="notes-saved" id="notes-saved-room"></div>
     </div>
     </div>
+    </div>
   </div>
 
   <!-- ═══ DECISION 2: FLIGHT THERE ═══ -->
@@ -1360,6 +1452,7 @@ h1, h2, h3, h4 {
       <span class="decision-chevron">&#9662;</span>
     </div>
     <div class="decision-body">
+      <div style="padding:1.2rem 1.5rem;">
       <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">All nonstop from Fort Lauderdale (FLL). ~2.5 hours.</p>
 
     <!-- TO DR -->
@@ -1405,6 +1498,7 @@ h1, h2, h3, h4 {
       <div class="notes-saved" id="notes-saved-flight-there"></div>
     </div>
     </div>
+    </div>
   </div>
 
   <!-- ═══ DECISION 3: FLIGHT BACK ═══ -->
@@ -1417,6 +1511,7 @@ h1, h2, h3, h4 {
       <span class="decision-chevron">&#9662;</span>
     </div>
     <div class="decision-body">
+      <div style="padding:1.2rem 1.5rem;">
       <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Nonstop to Fort Lauderdale (FLL). ~2.5 hours.</p>
 
     <div class="comparison-card" style="margin-bottom:1.5rem;">
@@ -1464,6 +1559,7 @@ h1, h2, h3, h4 {
       <div class="notes-label">Questions or thoughts?</div>
       <textarea class="notes-textarea" id="notes-flight-back" placeholder="Anything about the return..." oninput="saveNote('flight-back', this.value)"></textarea>
       <div class="notes-saved" id="notes-saved-flight-back"></div>
+    </div>
     </div>
     </div>
   </div>
@@ -1640,10 +1736,18 @@ function vote(category, value) {
   update[category] = value;
   votesRef.update(update);
 
-  // Update vote buttons
+  // Update vote buttons (in decision section)
   var container = document.getElementById('vote-' + category);
   if (container) {
     container.querySelectorAll('button').forEach(function(btn) {
+      btn.classList.toggle('selected', btn.dataset.vote === value);
+    });
+  }
+
+  // Update dashboard chips
+  var dashContainer = document.getElementById('dash-vote-' + category);
+  if (dashContainer) {
+    dashContainer.querySelectorAll('button').forEach(function(btn) {
       btn.classList.toggle('selected', btn.dataset.vote === value);
     });
   }
@@ -1686,12 +1790,20 @@ function saveNote(key, value) {
 votesRef.on('value', function(snapshot) {
   var votes = snapshot.val() || {};
 
-  // Update vote buttons
+  // Update vote buttons + dashboard chips
   ['room', 'flight-there', 'flight-back'].forEach(function(category) {
     var value = votes[category];
+    // Decision section buttons
     var container = document.getElementById('vote-' + category);
     if (container) {
       container.querySelectorAll('button').forEach(function(btn) {
+        btn.classList.toggle('selected', btn.dataset.vote === value);
+      });
+    }
+    // Dashboard chips
+    var dashContainer = document.getElementById('dash-vote-' + category);
+    if (dashContainer) {
+      dashContainer.querySelectorAll('button').forEach(function(btn) {
         btn.classList.toggle('selected', btn.dataset.vote === value);
       });
     }
