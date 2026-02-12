@@ -1681,7 +1681,7 @@ function updateDashboard(votes) {
     var val = votes[cat];
     var badgeLabels = { 'room': '1 of 3', 'flight-there': '2 of 3', 'flight-back': '3 of 3' };
     if (val) {
-      dashEl.textContent = 'Decision made';
+      dashEl.textContent = 'Decided';
       dashEl.classList.remove('pending');
       dashEl.style.color = 'var(--teal)';
       progEl.classList.add('done');
