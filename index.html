@@ -1277,6 +1277,71 @@ h1, h2, h3, h4 {
   border-top: 1px solid var(--border);
 }
 
+/* ── ACTIVITIES ── */
+.activities-section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+@media (max-width: 500px) {
+  .activities-grid { grid-template-columns: 1fr; }
+}
+
+.activity-card {
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: transform 0.3s;
+}
+
+.activity-card:hover {
+  transform: translateY(-3px);
+}
+
+.activity-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.activity-body {
+  padding: 1.2rem;
+}
+
+.activity-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: var(--slate);
+}
+
+.activity-body p {
+  font-size: 0.82rem;
+  color: var(--slate-light);
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+
+.activity-body a {
+  color: var(--teal);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+.activity-body a:hover {
+  color: var(--teal-light);
+}
+
 </style>
 </head>
 <body>
@@ -1370,7 +1435,7 @@ h1, h2, h3, h4 {
       <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--slate-light);line-height:1.7;">
         <strong style="color:var(--slate);">Confirmation #820607</strong><br>
         3 guests &middot; 4 nights &middot; Feb 25 &ndash; Mar 1, 2026 &middot; Check-in 3:00 PM &middot; Check-out 12:00 PM<br>
-        <strong style="color:var(--teal);">$3,855.60</strong> &middot; Karisma Insider &middot; Pre-paid
+        Karisma Insider &middot; Pre-paid
       </div>
       <a href="https://www.karismahotels.com/nickelodeon-hotels-resorts/punta-cana/accommodations/swank-wraparound-swim-suite" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
     </div>
@@ -1386,17 +1451,11 @@ h1, h2, h3, h4 {
       <div class="room-details">5-star adults-only all-inclusive. Plush king bed, rain shower, Molton Brown amenities. Private terrace with pool access. Includes welcome sparkling wine &amp; chocolate strawberries, spa discounts, romantic dinner under the stars, in-suite breakfast.</div>
       <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--slate-light);line-height:1.7;">
         <strong style="color:var(--slate);">Confirmation #1047776576</strong> &middot; Ferrell Shatto<br>
-        2 guests &middot; 4 nights &middot; Feb 25 &ndash; Mar 1, 2026<br>
-        <strong style="color:var(--gold);">$2,970.00</strong>
+        2 guests &middot; 4 nights &middot; Feb 25 &ndash; Mar 1, 2026
       </div>
       <a href="https://www.aquapuntacana.com/aqua-junior-suite-swim-up.asp" target="_blank" style="display:inline-block;font-size:0.8rem;color:var(--teal);text-decoration:none;font-weight:500;margin-top:0.5rem;">View suite details &rarr;</a>
     </div>
 
-    <!-- TOTAL -->
-    <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0.8rem 0;border-top:1px solid var(--border);margin-top:0.5rem;">
-      <span style="font-size:0.75rem;font-weight:600;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;">Total Rooms</span>
-      <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--slate);">$6,825.60</span>
-    </div>
     </div>
   </div>
 
@@ -1462,6 +1521,79 @@ h1, h2, h3, h4 {
     </div>
   </div>
 
+</div>
+
+<!-- ═══ THINGS TO DO ═══ -->
+<div class="activities-section">
+  <div class="section-header">
+    <h2>Things to Do</h2>
+    <p>Between two all-inclusive resorts, there&rsquo;s plenty to explore</p>
+  </div>
+  <div class="activities-grid">
+    <div class="activity-card">
+      <img src="https://admin.karismahotels.com/sites/default/files/styles/hero_desktop/public/2023-04/aquanick_waterpark_nick_puntacana.jpg" alt="Aqua Nick Waterpark" class="activity-img">
+      <div class="activity-body">
+        <h3>Aqua Nick Waterpark</h3>
+        <p>Massive waterpark right at the resort &mdash; lazy river, water slides, splash pads, and a FlowRider surf simulator. Opens at 10am, closes at 5pm.</p>
+        <a href="https://www.karismahotels.com/nickelodeon-hotels-resorts/punta-cana/aqua-nick" target="_blank">Waterpark Details &rarr;</a>
+      </div>
+    </div>
+    <div class="activity-card">
+      <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80" alt="Live Aqua Spa" class="activity-img">
+      <div class="activity-body">
+        <h3>Spa &amp; Wellness</h3>
+        <p>Live Aqua has an incredible spa included with the room &mdash; hydrotherapy circuits, couples massages, and oceanfront relaxation areas.</p>
+        <a href="https://www.aquapuntacana.com/spa-and-wellness.asp" target="_blank">Spa Details &rarr;</a>
+      </div>
+    </div>
+    <div class="activity-card">
+      <img src="https://images.unsplash.com/photo-1530053969600-caed2596d242?w=600&q=80" alt="Catamaran Tour" class="activity-img">
+      <div class="activity-body">
+        <h3>Catamaran &amp; Snorkeling</h3>
+        <p>Half-day catamaran cruise with snorkeling stops, open bar, and a visit to a natural pool sandbar. One of the most popular excursions in Punta Cana.</p>
+        <a href="https://www.viator.com/Punta-Cana-tours/Catamaran-Cruises/d4561-g6-c49" target="_blank">Browse Tours &rarr;</a>
+      </div>
+    </div>
+    <div class="activity-card">
+      <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?w=600&q=80" alt="Scape Park" class="activity-img">
+      <div class="activity-body">
+        <h3>Scape Park &amp; Hoyo Azul</h3>
+        <p>Adventure park with zip lines, cenotes, cave exploration, and the stunning Hoyo Azul &mdash; a natural sinkhole with crystal-blue water. About 30 min away.</p>
+        <a href="https://scapepark.com/" target="_blank">Scape Park &rarr;</a>
+      </div>
+    </div>
+    <div class="activity-card">
+      <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80" alt="Saona Island" class="activity-img">
+      <div class="activity-body">
+        <h3>Saona Island Day Trip</h3>
+        <p>A stunning island off the southeast coast &mdash; white sand beaches, turquoise water, starfish everywhere. Full-day excursion by speedboat and catamaran.</p>
+        <a href="https://www.viator.com/Punta-Cana-tours/Saona-Island/d4561-a14485" target="_blank">Book Saona Trip &rarr;</a>
+      </div>
+    </div>
+    <div class="activity-card">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Resort Dining" class="activity-img">
+      <div class="activity-body">
+        <h3>Resort Dining</h3>
+        <p>Both resorts are all-inclusive with &agrave; la carte restaurants &mdash; Japanese, Italian, steakhouse, and more. Book reservations right when we arrive.</p>
+        <a href="https://www.karismahotels.com/nickelodeon-hotels-resorts/punta-cana/dining" target="_blank">Nick Dining &rarr;</a>
+      </div>
+    </div>
+    <div class="activity-card">
+      <img src="https://images.unsplash.com/photo-1534766555764-ce878a5e3a2b?w=600&q=80" alt="Pool & Beach" class="activity-img">
+      <div class="activity-body">
+        <h3>Pool &amp; Beach Days</h3>
+        <p>Our suite has its own plunge pool. The resort has multiple infinity pools. Live Aqua has swim-up suites. Honestly, we may never leave the resorts.</p>
+      </div>
+    </div>
+    <div class="activity-card">
+      <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80" alt="Deep Sea Fishing" class="activity-img">
+      <div class="activity-body">
+        <h3>Deep Sea Fishing</h3>
+        <p>Punta Cana is one of the best spots in the Caribbean for marlin, mahi-mahi, and wahoo. Half-day and full-day charters available from the marina.</p>
+        <a href="https://www.viator.com/Punta-Cana-tours/Fishing-Charters-and-Tours/d4561-g23-c53" target="_blank">Fishing Charters &rarr;</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ QUICK TIPS ═══ -->
