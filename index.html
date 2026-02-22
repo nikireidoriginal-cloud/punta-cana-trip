@@ -191,9 +191,10 @@ h1, h2, h3, h4 {
 }
 
 .glance-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
+  display: grid;
+  grid-template-columns: 20px 70px 1fr auto auto;
+  gap: 0 0.6rem;
+  align-items: baseline;
   padding: 0.55rem 0;
   border-bottom: 1px solid #f0ebe3;
 }
@@ -204,10 +205,8 @@ h1, h2, h3, h4 {
 
 .glance-icon {
   font-size: 0.9rem;
-  flex-shrink: 0;
   width: 20px;
   text-align: center;
-  margin-top: 0.1rem;
 }
 
 .glance-label {
@@ -216,29 +215,25 @@ h1, h2, h3, h4 {
   letter-spacing: 0.08em;
   color: var(--muted);
   text-transform: uppercase;
-  min-width: 70px;
-  flex-shrink: 0;
-  padding-top: 0.15rem;
 }
 
 .glance-value {
   font-size: 0.85rem;
   color: var(--slate);
   line-height: 1.4;
-  flex: 1;
 }
 
-.glance-footer {
-  margin-top: 0.8rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.75rem;
+.glance-conf, .glance-contact {
+  font-size: 0.68rem;
+  font-family: 'Inter', monospace;
   color: var(--muted);
-  text-align: center;
+  white-space: nowrap;
 }
 
-.glance-footer strong {
+.glance-conf strong, .glance-contact strong {
   color: var(--slate);
+  font-weight: 600;
+  font-size: 0.72rem;
 }
 
 /* ── SCHEDULE ── */
@@ -701,6 +696,181 @@ h1, h2, h3, h4 {
   border-top: 1px solid var(--border);
 }
 
+/* ── SPA MENU ── */
+.spa-intro {
+  font-size: 0.85rem;
+  color: var(--slate-light);
+  margin-bottom: 0.3rem;
+}
+
+.spa-note {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.spa-category {
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.spa-cat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  background: var(--cream);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.spa-cat-header:hover {
+  background: rgba(245,240,232,0.8);
+}
+
+.spa-cat-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--slate);
+  letter-spacing: 0.02em;
+}
+
+.spa-cat-count {
+  font-size: 0.65rem;
+  color: #fff;
+  background: var(--gold);
+  border-radius: 10px;
+  padding: 1px 7px;
+  margin-left: 8px;
+}
+
+.spa-cat-chevron {
+  color: var(--muted);
+  font-size: 0.9rem;
+  transition: transform 0.3s;
+}
+
+.spa-category.open .spa-cat-chevron {
+  transform: rotate(180deg);
+}
+
+.spa-cat-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.spa-category.open .spa-cat-body {
+  max-height: 3000px;
+}
+
+.spa-service {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.8rem;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid #f5f0ea;
+  transition: background 0.15s;
+}
+
+.spa-service:hover {
+  background: rgba(196,149,106,0.04);
+}
+
+.spa-service.selected {
+  background: rgba(91,138,138,0.06);
+}
+
+.spa-service label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.spa-service input[type="checkbox"] {
+  accent-color: var(--teal);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.spa-svc-name {
+  font-size: 0.82rem;
+  color: var(--slate);
+  flex: 1;
+  min-width: 0;
+}
+
+.spa-svc-info {
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.spa-notes {
+  display: none;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: var(--slate);
+  background: var(--cream);
+  resize: none;
+  min-height: 32px;
+  line-height: 1.4;
+}
+
+.spa-service.selected .spa-notes {
+  display: block;
+}
+
+.spa-save-status {
+  text-align: center;
+  font-size: 0.68rem;
+  color: var(--teal);
+  padding: 0.6rem 0 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.spa-save-status.visible {
+  opacity: 1;
+}
+
+/* Night tag */
+.night-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+
+.night-tag.niki-night {
+  color: #7B68EE;
+  background: rgba(123,104,238,0.1);
+}
+
+.night-tag.ferrell-night {
+  color: #4ECDC4;
+  background: rgba(78,205,196,0.1);
+}
+
 /* ── FOOTER ── */
 .footer {
   text-align: center;
@@ -717,7 +887,8 @@ h1, h2, h3, h4 {
   .hero { height: 40vh; min-height: 280px; }
   .carousel-wrap img { aspect-ratio: 4 / 3; }
   .section { padding: 1.5rem 0.8rem; }
-  .glance-label { min-width: 60px; }
+  .glance-row { grid-template-columns: 20px 55px 1fr auto auto; gap: 0 0.4rem; }
+  .glance-conf, .glance-contact { font-size: 0.6rem; }
   .day-tab { padding: 0.6rem 0.3rem; }
   .day-tab-date { font-size: 0.65rem; }
   .tl-time { min-width: 48px; font-size: 0.65rem; }
@@ -767,30 +938,51 @@ h1, h2, h3, h4 {
     <div class="glance-row">
       <span class="glance-icon" style="color:var(--teal);">&#9992;</span>
       <span class="glance-label">Fly there</span>
-      <span class="glance-value">Wed Feb 25 &middot; B6 173 &middot; FLL 11:45am &rarr; PUJ 3:11pm</span>
+      <span class="glance-value">Wed 25 &middot; B6 173 &middot; FLL 11:45a &rarr; PUJ 3:11p</span>
+      <span class="glance-conf"><strong>KBBTTQ</strong></span>
+      <span class="glance-contact"></span>
     </div>
     <div class="glance-row">
       <span class="glance-icon" style="color:var(--gold);">&#9992;</span>
       <span class="glance-label">Fly home</span>
-      <span class="glance-value">Sun Mar 1 &middot; B6 1074 &middot; PUJ 11:21am &rarr; FLL 12:57pm</span>
+      <span class="glance-value">Sun 1 &middot; B6 1074 &middot; PUJ 11:21a &rarr; FLL 12:57p</span>
+      <span class="glance-conf"><strong>KBBTTQ</strong></span>
+      <span class="glance-contact"></span>
     </div>
     <div class="glance-row">
       <span class="glance-icon">&#127960;</span>
-      <span class="glance-label">Stay</span>
-      <span class="glance-value">Nick Swank Plunge Pool Suite + Live Aqua Swim-Up Suite</span>
+      <span class="glance-label">Nick room</span>
+      <span class="glance-value">Swank Plunge Pool Suite</span>
+      <span class="glance-conf"><strong>#820607</strong></span>
+      <span class="glance-contact"></span>
+    </div>
+    <div class="glance-row">
+      <span class="glance-icon">&#127960;</span>
+      <span class="glance-label">Aqua room</span>
+      <span class="glance-value">Swim-Up Suite</span>
+      <span class="glance-conf"><strong>#1047776576</strong></span>
+      <span class="glance-contact"></span>
     </div>
     <div class="glance-row">
       <span class="glance-icon">&#128656;</span>
       <span class="glance-label">Transfer</span>
-      <span class="glance-value">Private Suburban both ways &middot; Look for DAT sign &middot; Child seat</span>
+      <span class="glance-value">Private Suburban &middot; DAT sign</span>
+      <span class="glance-conf"></span>
+      <span class="glance-contact"><strong>+1 (829) 423-1428</strong></span>
     </div>
     <div class="glance-row">
       <span class="glance-icon">&#127915;</span>
       <span class="glance-label">VIP out</span>
-      <span class="glance-value">Meet 9:21am at PUJ &middot; Fast-track departure</span>
+      <span class="glance-value">Meet 9:21am &middot; Fast-track</span>
+      <span class="glance-conf"><strong>#DC42287437</strong></span>
+      <span class="glance-contact"></span>
     </div>
-    <div class="glance-footer">
-      Conf: <strong>KBBTTQ</strong> &middot; WhatsApp: <strong>+1 (829) 423-1428</strong>
+    <div class="glance-row">
+      <span class="glance-icon">&#128134;</span>
+      <span class="glance-label">Spa</span>
+      <span class="glance-value">Feel Harmony &middot; $30/day</span>
+      <span class="glance-conf"></span>
+      <span class="glance-contact"><strong>ext. 9169</strong></span>
     </div>
   </div>
 </div>
@@ -832,8 +1024,8 @@ h1, h2, h3, h4 {
     <div class="schedule-body">
       <div class="sched-legend">
         <div class="sched-legend-item"><div class="sched-legend-dot" style="background:#FF6B35;"></div> Family</div>
-        <div class="sched-legend-item"><div class="sched-legend-dot" style="background:#7B68EE;"></div> Niki + Oliver</div>
-        <div class="sched-legend-item"><div class="sched-legend-dot" style="background:#4ECDC4;"></div> Ferrell + Oliver</div>
+        <div class="sched-legend-item"><div class="sched-legend-dot" style="background:#7B68EE;"></div> Niki + Oliver <span style="color:var(--muted);font-size:0.55rem;">(Ferrell resets)</span></div>
+        <div class="sched-legend-item"><div class="sched-legend-dot" style="background:#4ECDC4;"></div> Ferrell + Oliver <span style="color:var(--muted);font-size:0.55rem;">(Niki resets)</span></div>
         <div class="sched-legend-item"><div class="sched-legend-dot" style="background:#ccc;"></div> Logistics</div>
       </div>
 
@@ -846,7 +1038,7 @@ h1, h2, h3, h4 {
           </div>
           <div class="ov-row">
             <span class="ov-day">Thu 26</span>
-            <span class="ov-events">Pajama Jam <span class="tl-star">&#9733;</span> &rarr; Slime <span class="tl-star">&#9733;</span> &rarr; Verdello <span class="tl-diamond">&#9671;</span></span>
+            <span class="ov-events">Pajama Jam <span class="tl-star">&#9733;</span> &rarr; Slime <span class="tl-star">&#9733;</span> &rarr; Dinner <span class="tl-diamond">&#9671;</span> (pick one)</span>
           </div>
           <div class="ov-row">
             <span class="ov-day">Fri 27</span>
@@ -898,7 +1090,7 @@ h1, h2, h3, h4 {
         </div>
         <div class="tl-row tl-niki">
           <span class="tl-time">Morning</span>
-          <span class="tl-event">Beach + waterpark <span class="tl-aside">&middot; Ferrell &rarr; Aqua Live</span></span>
+          <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">2 PM</span>
@@ -906,11 +1098,11 @@ h1, h2, h3, h4 {
         </div>
         <div class="tl-row tl-ferrell">
           <span class="tl-time">Afternoon</span>
-          <span class="tl-event">Waterslides + character meets <span class="tl-aside">&middot; Niki &rarr; spa</span></span>
+          <span class="tl-event">Ferrell + Oliver Time <span class="tl-aside">&middot; Niki Reset Time</span></span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">Evening</span>
-          <span class="tl-event">Verdello Italian Dinner <span class="tl-diamond">&#9671;</span></span>
+          <span class="tl-event">Dinner <span class="tl-diamond">&#9671;</span> <span class="tl-aside">&middot; pick one &mdash; Fri is already Italian</span> <span class="night-tag niki-night">Niki&rsquo;s night</span></span>
         </div>
       </div>
 
@@ -919,19 +1111,19 @@ h1, h2, h3, h4 {
         <div class="day-panel-header">Friday, Feb 27 &mdash; Turtle Night</div>
         <div class="tl-row tl-ferrell">
           <span class="tl-time">Morning</span>
-          <span class="tl-event">Lazy river + splash pads <span class="tl-aside">&middot; Niki &rarr; Aqua Live yoga</span></span>
+          <span class="tl-event">Ferrell + Oliver Time <span class="tl-aside">&middot; Niki Reset Time</span></span>
         </div>
         <div class="tl-row tl-niki">
           <span class="tl-time">Midday</span>
-          <span class="tl-event">Lunch at Fresco + beach <span class="tl-aside">&middot; Ferrell &rarr; Aqua Live</span></span>
+          <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
         </div>
-        <div class="tl-row tl-ferrell">
+        <div class="tl-row tl-family">
           <span class="tl-time">Afternoon</span>
-          <span class="tl-event">Waterslides + character meets <span class="tl-aside">&middot; Niki solo time</span></span>
+          <span class="tl-event">Beach + Fresco lunch</span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">7:30 PM</span>
-          <span class="tl-event">Turtle Power Dinner <span class="tl-star">&#9733;</span> <span class="tl-aside">TMNT, Italian buffet</span></span>
+          <span class="tl-event">Turtle Power Dinner <span class="tl-star">&#9733;</span> <span class="tl-aside">TMNT, Italian buffet</span> <span class="night-tag ferrell-night">Ferrell&rsquo;s night</span></span>
         </div>
       </div>
 
@@ -940,11 +1132,11 @@ h1, h2, h3, h4 {
         <div class="day-panel-header">Saturday, Feb 28 &mdash; Beach Party Day</div>
         <div class="tl-row tl-niki">
           <span class="tl-time">Morning</span>
-          <span class="tl-event">Waterslides + waterpark <span class="tl-aside">&middot; Ferrell &rarr; Aqua Live final reset</span></span>
+          <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
         </div>
         <div class="tl-row tl-ferrell">
           <span class="tl-time">Late PM</span>
-          <span class="tl-event">White Beach Party <span class="tl-aside">&middot; wear white! &middot; Niki &rarr; last solo hour</span></span>
+          <span class="tl-event">White Beach Party <span class="tl-aside">&middot; wear white! &middot; Niki Reset Time</span></span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">Evening</span>
@@ -974,6 +1166,147 @@ h1, h2, h3, h4 {
       </div>
 
     </div>
+  </div>
+</div>
+
+<!-- ═══ SPA MENU ═══ -->
+<div class="section" style="padding-top:0;">
+  <div class="info-card" id="card-spa">
+    <div class="info-card-header" onclick="toggleCard('spa')">
+      <span class="info-badge" style="background:var(--gold);">Feel Harmony</span>
+      <h2>Spa Menu</h2>
+      <span class="info-chevron">&#9662;</span>
+    </div>
+    <div class="info-card-body"><div class="info-card-body-inner">
+      <p class="spa-intro">Pick services for your reset time slots. Selections auto-save.</p>
+      <p class="spa-note">Not included in all-inclusive &middot; $30/day facility admission &middot; Reservations: ext. 9169</p>
+
+      <!-- MASSAGES -->
+      <div class="spa-category" id="spa-cat-massages">
+        <div class="spa-cat-header" onclick="toggleSpaCat('massages')">
+          <span><span class="spa-cat-title">Renew Massages</span><span class="spa-cat-count" id="cnt-massages"></span></span>
+          <span class="spa-cat-chevron">&#9662;</span>
+        </div>
+        <div class="spa-cat-body">
+          <div class="spa-service" data-id="reflexology"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Reflexology</span><span class="spa-svc-info">25 min &middot; $70</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="swedish-25"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Swedish Massage</span><span class="spa-svc-info">25 min &middot; $70</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="swedish-50"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Swedish Massage</span><span class="spa-svc-info">50 min &middot; $150</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="aromatic-candles"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Aromatic Candles</span><span class="spa-svc-info">50 min &middot; $185</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="polynesia"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Soffio D&rsquo; Polynesia</span><span class="spa-svc-info">50 min &middot; $180</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="sensation-fusions"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Sensation Fusions</span><span class="spa-svc-info">50 min &middot; $180</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="four-hands"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Four Hands</span><span class="spa-svc-info">50 min &middot; $270</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="hot-stone"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Hot Stone</span><span class="spa-svc-info">50 min &middot; $235</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="deep-tissue-50"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Deep Tissue</span><span class="spa-svc-info">50 min &middot; $185</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="deep-tissue-80"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Deep Tissue</span><span class="spa-svc-info">80 min &middot; $230</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="feel-harmony"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Feel Harmony Massage</span><span class="spa-svc-info">80 min &middot; $210</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="sports"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Sports Massage</span><span class="spa-svc-info">50 min &middot; $205</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="lymphatic"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Lymphatic Drainage</span><span class="spa-svc-info">50 min &middot; $180</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="shiatsu"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Shiatsu</span><span class="spa-svc-info">50 min &middot; $195</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="detox-massage"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Detox Massage</span><span class="spa-svc-info">50 min &middot; $200</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+        </div>
+      </div>
+
+      <!-- FACIALS -->
+      <div class="spa-category" id="spa-cat-facials">
+        <div class="spa-cat-header" onclick="toggleSpaCat('facials')">
+          <span><span class="spa-cat-title">Rejuvenating Facials</span><span class="spa-cat-count" id="cnt-facials"></span></span>
+          <span class="spa-cat-chevron">&#9662;</span>
+        </div>
+        <div class="spa-cat-body">
+          <div class="spa-service" data-id="o2-relax"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">O2 Relax</span><span class="spa-svc-info">50 min &middot; $190</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="skin-comfort"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">The Skin Comfort</span><span class="spa-svc-info">50 min &middot; $190</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="citrus-essences"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">The Citrus Essences</span><span class="spa-svc-info">50 min &middot; $190</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="3d-collagen"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">3D Collagen Shock</span><span class="spa-svc-info">50 min &middot; $250</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="diamond"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Diamond Experience</span><span class="spa-svc-info">50 min &middot; $250</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+        </div>
+      </div>
+
+      <!-- BODY TREATMENTS -->
+      <div class="spa-category" id="spa-cat-body">
+        <div class="spa-cat-header" onclick="toggleSpaCat('body')">
+          <span><span class="spa-cat-title">Body Treatments</span><span class="spa-cat-count" id="cnt-body"></span></span>
+          <span class="spa-cat-chevron">&#9662;</span>
+        </div>
+        <div class="spa-cat-body">
+          <div class="spa-service" data-id="aromatic-scrub"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Aromatic Scrub</span><span class="spa-svc-info">25 min &middot; $80</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="citrus-polish"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Citrus Body Polish</span><span class="spa-svc-info">50 min &middot; $190</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="bamboo-scrub"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Bamboo Body Scrub</span><span class="spa-svc-info">50 min &middot; $190</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="o2-body"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">O2 Body Perfection</span><span class="spa-svc-info">50 min &middot; $230</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="detox-marine"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Detox Marine</span><span class="spa-svc-info">50 min &middot; $230</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="chardonnay-wrap"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Chardonnay Body Wrap</span><span class="spa-svc-info">50 min &middot; $180</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="sos-aloe"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">SOS Aloe (sunburn relief)</span><span class="spa-svc-info">50 min &middot; $170</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+        </div>
+      </div>
+
+      <!-- RITUALS -->
+      <div class="spa-category" id="spa-cat-rituals">
+        <div class="spa-cat-header" onclick="toggleSpaCat('rituals')">
+          <span><span class="spa-cat-title">Equilibrant Rituals</span><span class="spa-cat-count" id="cnt-rituals"></span></span>
+          <span class="spa-cat-chevron">&#9662;</span>
+        </div>
+        <div class="spa-cat-body">
+          <div class="spa-service" data-id="royal-oxygen"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Royal Oxygen Ritual</span><span class="spa-svc-info">80 min &middot; $290</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="royal-citrus"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Royal Citrus Ritual</span><span class="spa-svc-info">80 min &middot; $290</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+        </div>
+      </div>
+
+      <!-- BEAUTY CENTER -->
+      <div class="spa-category" id="spa-cat-beauty">
+        <div class="spa-cat-header" onclick="toggleSpaCat('beauty')">
+          <span><span class="spa-cat-title">Beauty Center</span><span class="spa-cat-count" id="cnt-beauty"></span></span>
+          <span class="spa-cat-chevron">&#9662;</span>
+        </div>
+        <div class="spa-cat-body">
+          <div class="spa-service" data-id="classic-mani"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Classic Manicure</span><span class="spa-svc-info">35 min &middot; $45</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="spa-mani"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Spa Manicure</span><span class="spa-svc-info">50 min &middot; $65</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="gel-mani"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Gel Manicure</span><span class="spa-svc-info">45 min &middot; $70</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="classic-pedi"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Classic Pedicure</span><span class="spa-svc-info">35 min &middot; $70</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="spa-pedi"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Spa Pedicure</span><span class="spa-svc-info">50 min &middot; $80</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="gel-pedi"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Gel Pedicure</span><span class="spa-svc-info">50 min &middot; $90</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="gel-remove"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Gel Removal</span><span class="spa-svc-info">25 min &middot; $30</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="paraffin"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Paraffin</span><span class="spa-svc-info">25 min &middot; $40</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="makeup"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Make-up</span><span class="spa-svc-info">50 min &middot; $80</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="full-lashes"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Full Eye Lashes</span><span class="spa-svc-info">30 min &middot; $40</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+        </div>
+      </div>
+
+      <!-- BRAIDS & HAIR -->
+      <div class="spa-category" id="spa-cat-hair">
+        <div class="spa-cat-header" onclick="toggleSpaCat('hair')">
+          <span><span class="spa-cat-title">Braids &amp; Hair</span><span class="spa-cat-count" id="cnt-hair"></span></span>
+          <span class="spa-cat-chevron">&#9662;</span>
+        </div>
+        <div class="spa-cat-body">
+          <div class="spa-service" data-id="braid-unit"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Braid (per unit)</span><span class="spa-svc-info">5 min &middot; $5</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="half-braid"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Half Head Braid</span><span class="spa-svc-info">30 min &middot; $65</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="full-braid-med"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Medium Full Hair Braid</span><span class="spa-svc-info">50 min &middot; $100</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="full-braid-long"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Long Full Hair Braid</span><span class="spa-svc-info">80 min &middot; $150</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="wash-dry-short"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Wash &amp; Dry (short)</span><span class="spa-svc-info">25 min &middot; $50</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="wash-dry-med"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Wash &amp; Dry (medium)</span><span class="spa-svc-info">50 min &middot; $60</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="wash-dry-long"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Wash &amp; Dry (long)</span><span class="spa-svc-info">40 min &middot; $80</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="hairstyle"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Hairstyle</span><span class="spa-svc-info">80 min &middot; $120</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+        </div>
+      </div>
+
+      <!-- WAX -->
+      <div class="spa-category" id="spa-cat-wax">
+        <div class="spa-cat-header" onclick="toggleSpaCat('wax')">
+          <span><span class="spa-cat-title">Wax</span><span class="spa-cat-count" id="cnt-wax"></span></span>
+          <span class="spa-cat-chevron">&#9662;</span>
+        </div>
+        <div class="spa-cat-body">
+          <div class="spa-service" data-id="wax-brows"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Eyebrows</span><span class="spa-svc-info">15 min &middot; $30</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="wax-lip"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Upper Lip</span><span class="spa-svc-info">15 min &middot; $25</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="wax-face"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Full Face</span><span class="spa-svc-info">45 min &middot; $60</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="wax-underarm"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Under Arm</span><span class="spa-svc-info">25 min &middot; $40</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="wax-half-legs"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Half Legs</span><span class="spa-svc-info">25 min &middot; $70</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+          <div class="spa-service" data-id="wax-full-legs"><label><input type="checkbox" onchange="toggleSpa(this)"><span class="spa-svc-name">Full Legs</span><span class="spa-svc-info">50 min &middot; $90</span></label><textarea class="spa-notes" placeholder="Notes..." oninput="saveSpa()"></textarea></div>
+        </div>
+      </div>
+
+      <div class="spa-save-status" id="spa-save-status">Saved</div>
+
+    </div></div>
   </div>
 </div>
 
@@ -1189,6 +1522,88 @@ function showDay(dayId) {
   document.getElementById('day-' + dayId).classList.add('active');
   document.querySelector('[data-day="' + dayId + '"]').classList.add('active');
 }
+
+// ── SPA STATE ──
+var SPA_KEY = 'punta-cana-spa-v1';
+var spaState = { selected: {}, notes: {} };
+
+function loadSpa() {
+  try {
+    var saved = localStorage.getItem(SPA_KEY);
+    if (saved) {
+      var parsed = JSON.parse(saved);
+      spaState.selected = parsed.selected || {};
+      spaState.notes = parsed.notes || {};
+    }
+  } catch(e) {}
+}
+
+function saveSpa() {
+  // Gather current state from DOM
+  document.querySelectorAll('.spa-service').forEach(function(el) {
+    var id = el.dataset.id;
+    var cb = el.querySelector('input[type="checkbox"]');
+    var ta = el.querySelector('.spa-notes');
+    spaState.selected[id] = cb.checked;
+    if (ta.value) spaState.notes[id] = ta.value;
+    else delete spaState.notes[id];
+    el.classList.toggle('selected', cb.checked);
+  });
+  try {
+    localStorage.setItem(SPA_KEY, JSON.stringify(spaState));
+  } catch(e) {}
+  updateSpaCounts();
+  flashSave();
+}
+
+function toggleSpa(cb) {
+  cb.closest('.spa-service').classList.toggle('selected', cb.checked);
+  saveSpa();
+}
+
+function toggleSpaCat(cat) {
+  document.getElementById('spa-cat-' + cat).classList.toggle('open');
+}
+
+function updateSpaCounts() {
+  var cats = ['massages', 'facials', 'body', 'rituals', 'beauty', 'hair', 'wax'];
+  cats.forEach(function(cat) {
+    var el = document.getElementById('spa-cat-' + cat);
+    if (!el) return;
+    var count = el.querySelectorAll('.spa-service.selected').length;
+    var badge = document.getElementById('cnt-' + cat);
+    if (badge) {
+      badge.textContent = count > 0 ? count : '';
+      badge.style.display = count > 0 ? 'inline' : 'none';
+    }
+  });
+}
+
+function flashSave() {
+  var el = document.getElementById('spa-save-status');
+  el.classList.add('visible');
+  clearTimeout(el._timer);
+  el._timer = setTimeout(function() { el.classList.remove('visible'); }, 1500);
+}
+
+function restoreSpa() {
+  document.querySelectorAll('.spa-service').forEach(function(el) {
+    var id = el.dataset.id;
+    var cb = el.querySelector('input[type="checkbox"]');
+    var ta = el.querySelector('.spa-notes');
+    if (spaState.selected[id]) {
+      cb.checked = true;
+      el.classList.add('selected');
+    }
+    if (spaState.notes[id]) {
+      ta.value = spaState.notes[id];
+    }
+  });
+  updateSpaCounts();
+}
+
+loadSpa();
+restoreSpa();
 </script>
 </body>
 </html>
