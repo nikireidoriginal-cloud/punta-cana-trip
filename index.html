@@ -989,6 +989,78 @@ h1, h2, h3, h4 {
   transition: color 0.3s;
 }
 
+/* ── AI EDIT ── */
+.ai-edit {
+  max-width: 680px;
+  margin: 0 auto 0.5rem;
+}
+.ai-edit-card {
+  background: linear-gradient(135deg, #f0f4ff 0%, var(--cream) 100%);
+  border: 1px solid rgba(91,138,138,0.3);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+.ai-edit-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--slate);
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.ai-edit-sub {
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.ai-edit-row {
+  display: flex;
+  gap: 0.5rem;
+}
+.ai-edit-input {
+  flex: 1;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--slate);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ai-edit-input:focus {
+  border-color: var(--teal);
+}
+.ai-edit-input::placeholder {
+  color: #b0b8c4;
+}
+.ai-edit-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--teal);
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.ai-edit-btn:hover { opacity: 0.85; }
+.ai-edit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.ai-edit-status {
+  font-size: 0.6rem;
+  margin-top: 0.4rem;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.ai-edit-status.error { color: #e53e3e; }
+.ai-edit-status.success { color: var(--teal); }
+
 /* ── FERRELL BANNER ── */
 .ferrell-banner {
   max-width: 680px;
@@ -1368,6 +1440,19 @@ h1, h2, h3, h4 {
     <div class="ferrell-comments-sub">Thoughts on the schedule? Drop them here. Saves automatically.</div>
     <textarea class="ferrell-comments-box" id="comments-box" placeholder="Type your notes here&hellip;" oninput="saveComments()"></textarea>
     <div class="ferrell-comments-status" id="comments-status"></div>
+  </div>
+</div>
+
+<!-- ═══ AI SCHEDULE EDITOR ═══ -->
+<div class="ai-edit">
+  <div class="ai-edit-card">
+    <div class="ai-edit-title">&#9998; Edit Schedule</div>
+    <div class="ai-edit-sub">Type a change in plain English and AI will update the schedule.</div>
+    <div class="ai-edit-row">
+      <input class="ai-edit-input" id="ai-edit-input" type="text" placeholder="e.g. Move Wednesday dinner to 6pm" onkeydown="if(event.key==='Enter')submitAiEdit()">
+      <button class="ai-edit-btn" id="ai-edit-btn" onclick="submitAiEdit()">Update</button>
+    </div>
+    <div class="ai-edit-status" id="ai-edit-status"></div>
   </div>
 </div>
 
@@ -1926,6 +2011,73 @@ function syncCommentsFromServer() {
 loadComments();
 syncCommentsFromServer();
 setInterval(syncCommentsFromServer, 30000);
+
+// ── AI SCHEDULE EDITOR ──
+var AI_EDIT_API = 'https://punta-cana-spa.nikireidoriginal.workers.dev/api/ai-edit';
+var SCHEDULE_API = 'https://punta-cana-spa.nikireidoriginal.workers.dev/api/schedule';
+
+function getScheduleHtml() {
+  var body = document.querySelector('.schedule-body');
+  return body ? body.innerHTML : '';
+}
+
+function submitAiEdit() {
+  var input = document.getElementById('ai-edit-input');
+  var btn = document.getElementById('ai-edit-btn');
+  var status = document.getElementById('ai-edit-status');
+  var instruction = input.value.trim();
+
+  if (!instruction) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Thinking...';
+  status.textContent = 'Sending to AI...';
+  status.className = 'ai-edit-status';
+
+  var currentHtml = getScheduleHtml();
+
+  fetch(AI_EDIT_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ instruction: instruction, currentHtml: currentHtml })
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.ok && data.html) {
+      var body = document.querySelector('.schedule-body');
+      if (body) body.innerHTML = data.html;
+      status.textContent = 'Updated! "' + instruction + '"';
+      status.className = 'ai-edit-status success';
+      input.value = '';
+    } else {
+      status.textContent = 'Error: ' + (data.error || 'Unknown error');
+      status.className = 'ai-edit-status error';
+    }
+  })
+  .catch(function(err) {
+    status.textContent = 'Failed to connect: ' + err.message;
+    status.className = 'ai-edit-status error';
+  })
+  .finally(function() {
+    btn.disabled = false;
+    btn.textContent = 'Update';
+  });
+}
+
+// Load any saved schedule override on page load
+function loadScheduleOverride() {
+  fetch(SCHEDULE_API)
+    .then(function(res) { return res.ok ? res.json() : null; })
+    .then(function(data) {
+      if (data && data.html) {
+        var body = document.querySelector('.schedule-body');
+        if (body) body.innerHTML = data.html;
+      }
+    })
+    .catch(function() {});
+}
+
+loadScheduleOverride();
 </script>
 </body>
 </html>
