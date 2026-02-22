@@ -1,0 +1,8 @@
+name = "punta-cana-spa"
+main = "worker.js"
+compatibility_date = "2024-12-01"
+account_id = "6826ed5e0f8c7f0290632b4f8e1570a0"
+
+[[kv_namespaces]]
+binding = "SPA_DATA"
+id = "b3906680f0e5427e962c727a2a7d5aa6"

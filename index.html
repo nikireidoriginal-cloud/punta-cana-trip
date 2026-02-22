@@ -190,51 +190,58 @@ h1, h2, h3, h4 {
   box-shadow: var(--shadow);
 }
 
-.glance-row {
-  display: grid;
-  grid-template-columns: 20px 70px 1fr auto auto;
-  gap: 0 0.6rem;
-  align-items: baseline;
-  padding: 0.55rem 0;
-  border-bottom: 1px solid #f0ebe3;
+.glance-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
 }
 
-.glance-row:last-child {
-  border-bottom: none;
-}
-
-.glance-icon {
-  font-size: 0.9rem;
-  width: 20px;
-  text-align: center;
-}
-
-.glance-label {
-  font-size: 0.65rem;
+.glance-table th {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--muted);
   text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  padding: 0 0.5rem 0.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.glance-value {
-  font-size: 0.85rem;
-  color: var(--slate);
+.glance-table th:first-child { padding-left: 0; }
+.glance-table th:last-child { text-align: right; padding-right: 0; }
+.glance-table th:nth-child(4) { text-align: right; }
+
+.glance-table td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid #f0ebe3;
+  vertical-align: baseline;
   line-height: 1.4;
 }
 
-.glance-conf, .glance-contact {
-  font-size: 0.68rem;
+.glance-table tr:last-child td { border-bottom: none; }
+.glance-table td:first-child { padding-left: 0; white-space: nowrap; }
+
+.gt-item {
+  font-weight: 500;
+  color: var(--slate);
+  white-space: nowrap;
+  font-size: 0.78rem;
+}
+
+.gt-detail { color: var(--slate-light); }
+
+.gt-conf, .gt-contact {
   font-family: 'Inter', monospace;
-  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--slate);
   white-space: nowrap;
 }
 
-.glance-conf strong, .glance-contact strong {
-  color: var(--slate);
-  font-weight: 600;
-  font-size: 0.72rem;
-}
+.gt-contact { text-align: right; }
+.gt-conf { text-align: right; }
+.gt-empty { color: var(--border); font-weight: 400; }
 
 /* ── SCHEDULE ── */
 .schedule-card {
@@ -849,6 +856,50 @@ h1, h2, h3, h4 {
   opacity: 1;
 }
 
+/* Duty roster */
+.duty-roster {
+  margin-bottom: 1rem;
+  padding: 0.7rem 0.8rem;
+  background: rgba(196,149,106,0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(196,149,106,0.15);
+}
+
+.duty-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.duty-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.duty-table th {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-align: left;
+  padding: 0.15rem 0.4rem;
+  border-bottom: 1px solid rgba(196,149,106,0.12);
+}
+
+.duty-table td {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.4rem;
+  color: var(--slate-light);
+}
+
+.duty-table .duty-niki { color: #7B68EE; font-weight: 500; }
+.duty-table .duty-ferrell { color: #4ECDC4; font-weight: 500; }
+.duty-table .duty-dim { color: var(--border); }
+
 /* Night tag */
 .night-tag {
   font-family: 'Inter', sans-serif;
@@ -887,8 +938,10 @@ h1, h2, h3, h4 {
   .hero { height: 40vh; min-height: 280px; }
   .carousel-wrap img { aspect-ratio: 4 / 3; }
   .section { padding: 1.5rem 0.8rem; }
-  .glance-row { grid-template-columns: 20px 55px 1fr auto auto; gap: 0 0.4rem; }
-  .glance-conf, .glance-contact { font-size: 0.6rem; }
+  .glance-table { font-size: 0.75rem; }
+  .glance-table th { font-size: 0.52rem; }
+  .glance-table td { padding: 0.35rem 0.3rem; }
+  .gt-conf, .gt-contact { font-size: 0.62rem; }
   .day-tab { padding: 0.6rem 0.3rem; }
   .day-tab-date { font-size: 0.65rem; }
   .tl-time { min-width: 48px; font-size: 0.65rem; }
@@ -935,55 +988,60 @@ h1, h2, h3, h4 {
 <!-- ═══ TRIP AT A GLANCE ═══ -->
 <div class="section">
   <div class="glance-card">
-    <div class="glance-row">
-      <span class="glance-icon" style="color:var(--teal);">&#9992;</span>
-      <span class="glance-label">Fly there</span>
-      <span class="glance-value">Wed 25 &middot; B6 173 &middot; FLL 11:45a &rarr; PUJ 3:11p</span>
-      <span class="glance-conf"><strong>KBBTTQ</strong></span>
-      <span class="glance-contact"></span>
-    </div>
-    <div class="glance-row">
-      <span class="glance-icon" style="color:var(--gold);">&#9992;</span>
-      <span class="glance-label">Fly home</span>
-      <span class="glance-value">Sun 1 &middot; B6 1074 &middot; PUJ 11:21a &rarr; FLL 12:57p</span>
-      <span class="glance-conf"><strong>KBBTTQ</strong></span>
-      <span class="glance-contact"></span>
-    </div>
-    <div class="glance-row">
-      <span class="glance-icon">&#127960;</span>
-      <span class="glance-label">Nick room</span>
-      <span class="glance-value">Swank Plunge Pool Suite</span>
-      <span class="glance-conf"><strong>#820607</strong></span>
-      <span class="glance-contact"></span>
-    </div>
-    <div class="glance-row">
-      <span class="glance-icon">&#127960;</span>
-      <span class="glance-label">Aqua room</span>
-      <span class="glance-value">Swim-Up Suite</span>
-      <span class="glance-conf"><strong>#1047776576</strong></span>
-      <span class="glance-contact"></span>
-    </div>
-    <div class="glance-row">
-      <span class="glance-icon">&#128656;</span>
-      <span class="glance-label">Transfer</span>
-      <span class="glance-value">Private Suburban &middot; DAT sign</span>
-      <span class="glance-conf"></span>
-      <span class="glance-contact"><strong>+1 (829) 423-1428</strong></span>
-    </div>
-    <div class="glance-row">
-      <span class="glance-icon">&#127915;</span>
-      <span class="glance-label">VIP out</span>
-      <span class="glance-value">Meet 9:21am &middot; Fast-track</span>
-      <span class="glance-conf"><strong>#DC42287437</strong></span>
-      <span class="glance-contact"></span>
-    </div>
-    <div class="glance-row">
-      <span class="glance-icon">&#128134;</span>
-      <span class="glance-label">Spa</span>
-      <span class="glance-value">Feel Harmony &middot; $30/day</span>
-      <span class="glance-conf"></span>
-      <span class="glance-contact"><strong>ext. 9169</strong></span>
-    </div>
+    <table class="glance-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Details</th>
+          <th>Conf #</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="gt-item">&#9992; Fly there</td>
+          <td class="gt-detail">Wed 25 &middot; B6 173 &middot; FLL 11:45a &rarr; PUJ 3:11p</td>
+          <td class="gt-conf">KBBTTQ</td>
+          <td class="gt-contact gt-empty">&mdash;</td>
+        </tr>
+        <tr>
+          <td class="gt-item">&#9992; Fly home</td>
+          <td class="gt-detail">Sun 1 &middot; B6 1074 &middot; PUJ 11:21a &rarr; FLL 12:57p</td>
+          <td class="gt-conf">KBBTTQ</td>
+          <td class="gt-contact gt-empty">&mdash;</td>
+        </tr>
+        <tr>
+          <td class="gt-item">&#127960; Nick room</td>
+          <td class="gt-detail">Swank Plunge Pool Suite</td>
+          <td class="gt-conf">820607</td>
+          <td class="gt-contact gt-empty">&mdash;</td>
+        </tr>
+        <tr>
+          <td class="gt-item">&#127960; Aqua room</td>
+          <td class="gt-detail">Swim-Up Suite</td>
+          <td class="gt-conf">1047776576</td>
+          <td class="gt-contact gt-empty">&mdash;</td>
+        </tr>
+        <tr>
+          <td class="gt-item">&#128656; Transfer</td>
+          <td class="gt-detail">Private Suburban &middot; DAT sign</td>
+          <td class="gt-conf gt-empty">&mdash;</td>
+          <td class="gt-contact">+1 (829) 423-1428</td>
+        </tr>
+        <tr>
+          <td class="gt-item">&#127915; VIP out</td>
+          <td class="gt-detail">Meet 9:21am &middot; Fast-track</td>
+          <td class="gt-conf">DC42287437</td>
+          <td class="gt-contact gt-empty">&mdash;</td>
+        </tr>
+        <tr>
+          <td class="gt-item">&#128134; Spa</td>
+          <td class="gt-detail">Feel Harmony &middot; $30/day</td>
+          <td class="gt-conf gt-empty">&mdash;</td>
+          <td class="gt-contact">ext. 9169</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -1029,16 +1087,30 @@ h1, h2, h3, h4 {
         <div class="sched-legend-item"><div class="sched-legend-dot" style="background:#ccc;"></div> Logistics</div>
       </div>
 
+      <div class="duty-roster">
+        <div class="duty-title">Who&rsquo;s On Point</div>
+        <table class="duty-table">
+          <thead><tr><th></th><th>&#127769; Bedtime</th><th>&#9728;&#65039; Wake-up</th></tr></thead>
+          <tbody>
+            <tr><td>Wed 25</td><td class="duty-niki">Niki</td><td class="duty-dim">&mdash;</td></tr>
+            <tr><td>Thu 26</td><td class="duty-ferrell">Ferrell</td><td class="duty-niki">Niki</td></tr>
+            <tr><td>Fri 27</td><td class="duty-niki">Niki</td><td class="duty-ferrell">Ferrell</td></tr>
+            <tr><td>Sat 28</td><td class="duty-ferrell">Ferrell</td><td class="duty-niki">Niki</td></tr>
+            <tr><td>Sun 1</td><td class="duty-dim">&mdash;</td><td class="duty-ferrell">Ferrell</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <!-- OVERVIEW -->
       <div class="day-panel active" id="day-overview">
         <div class="overview-grid">
           <div class="ov-row">
             <span class="ov-day">Wed 25</span>
-            <span class="ov-events">Arrive 3:11pm &rarr; resort &rarr; Aqua Nick &rarr; Explorer&rsquo;s buffet</span>
+            <span class="ov-events">Arrive 3:11pm &rarr; Ferrell &rarr; Aqua Live &rarr; Niki + Oliver &rarr; Aqua Nick &rarr; dinner</span>
           </div>
           <div class="ov-row">
             <span class="ov-day">Thu 26</span>
-            <span class="ov-events">Pajama Jam <span class="tl-star">&#9733;</span> &rarr; Slime <span class="tl-star">&#9733;</span> &rarr; Dinner <span class="tl-diamond">&#9671;</span> (pick one)</span>
+            <span class="ov-events">Pajama Jam <span class="tl-star">&#9733;</span> &rarr; Dinner <span class="tl-diamond">&#9671;</span> (pick one)</span>
           </div>
           <div class="ov-row">
             <span class="ov-day">Fri 27</span>
@@ -1046,7 +1118,7 @@ h1, h2, h3, h4 {
           </div>
           <div class="ov-row">
             <span class="ov-day">Sat 28</span>
-            <span class="ov-events">Waterpark &rarr; White Beach Party &rarr; Spacewalker <span class="tl-diamond">&#9671;</span></span>
+            <span class="ov-events">Slime <span class="tl-star">&#9733;</span> &rarr; White Beach Party &rarr; Spacewalker <span class="tl-diamond">&#9671;</span></span>
           </div>
           <div class="ov-row">
             <span class="ov-day">Sun 1</span>
@@ -1071,13 +1143,17 @@ h1, h2, h3, h4 {
           <span class="tl-time">ASAP</span>
           <span class="tl-event">Scan QR &rarr; book restaurants <span class="tl-diamond">&#9671;</span> <span class="tl-aside">Spacewalker, Verdello, Wok Wok, BRGRS.PH</span></span>
         </div>
-        <div class="tl-row tl-family">
+        <div class="tl-row tl-ferrell">
           <span class="tl-time">~5 PM</span>
-          <span class="tl-event">First look at Aqua Nick</span>
+          <span class="tl-event">Ferrell checks into Aqua Live <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
+        </div>
+        <div class="tl-row tl-niki">
+          <span class="tl-time">~5 PM</span>
+          <span class="tl-event">Niki + Oliver &rarr; Aqua Nick first look</span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">7 PM</span>
-          <span class="tl-event">Explorer&rsquo;s Table buffet dinner</span>
+          <span class="tl-event">Explorer&rsquo;s Table buffet dinner <span class="night-tag niki-night">Niki&rsquo;s night</span></span>
         </div>
       </div>
 
@@ -1092,17 +1168,13 @@ h1, h2, h3, h4 {
           <span class="tl-time">Morning</span>
           <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
         </div>
-        <div class="tl-row tl-family">
-          <span class="tl-time">2 PM</span>
-          <span class="tl-event">Private Slime Session <span class="tl-star">&#9733;</span></span>
-        </div>
         <div class="tl-row tl-ferrell">
           <span class="tl-time">Afternoon</span>
           <span class="tl-event">Ferrell + Oliver Time <span class="tl-aside">&middot; Niki Reset Time</span></span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">Evening</span>
-          <span class="tl-event">Dinner <span class="tl-diamond">&#9671;</span> <span class="tl-aside">&middot; pick one &mdash; Fri is already Italian</span> <span class="night-tag niki-night">Niki&rsquo;s night</span></span>
+          <span class="tl-event">Dinner <span class="tl-diamond">&#9671;</span> <span class="tl-aside">&middot; pick one &mdash; Fri is already Italian</span> <span class="night-tag ferrell-night">Ferrell&rsquo;s night</span></span>
         </div>
       </div>
 
@@ -1123,7 +1195,7 @@ h1, h2, h3, h4 {
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">7:30 PM</span>
-          <span class="tl-event">Turtle Power Dinner <span class="tl-star">&#9733;</span> <span class="tl-aside">TMNT, Italian buffet</span> <span class="night-tag ferrell-night">Ferrell&rsquo;s night</span></span>
+          <span class="tl-event">Turtle Power Dinner <span class="tl-star">&#9733;</span> <span class="tl-aside">TMNT, Italian buffet</span> <span class="night-tag niki-night">Niki&rsquo;s night</span></span>
         </div>
       </div>
 
@@ -1134,13 +1206,17 @@ h1, h2, h3, h4 {
           <span class="tl-time">Morning</span>
           <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
         </div>
+        <div class="tl-row tl-family">
+          <span class="tl-time">2 PM</span>
+          <span class="tl-event">Private Slime Session <span class="tl-star">&#9733;</span></span>
+        </div>
         <div class="tl-row tl-ferrell">
           <span class="tl-time">Late PM</span>
           <span class="tl-event">White Beach Party <span class="tl-aside">&middot; wear white! &middot; Niki Reset Time</span></span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">Evening</span>
-          <span class="tl-event">Spacewalker Dinner <span class="tl-diamond">&#9671;</span> <span class="tl-aside">space theme, VR headsets</span></span>
+          <span class="tl-event">Spacewalker Dinner <span class="tl-diamond">&#9671;</span> <span class="tl-aside">space theme, VR headsets</span> <span class="night-tag ferrell-night">Ferrell&rsquo;s night</span></span>
         </div>
       </div>
 
@@ -1178,7 +1254,7 @@ h1, h2, h3, h4 {
       <span class="info-chevron">&#9662;</span>
     </div>
     <div class="info-card-body"><div class="info-card-body-inner">
-      <p class="spa-intro">Pick services for your reset time slots. Selections auto-save.</p>
+      <p class="spa-intro">Ferrell &mdash; pick what you want for your reset time slots! Selections save automatically.</p>
       <p class="spa-note">Not included in all-inclusive &middot; $30/day facility admission &middot; Reservations: ext. 9169</p>
 
       <!-- MASSAGES -->
@@ -1304,7 +1380,10 @@ h1, h2, h3, h4 {
         </div>
       </div>
 
-      <div class="spa-save-status" id="spa-save-status">Saved</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:0.6rem;">
+        <span id="spa-sync-badge" style="font-size:0.65rem;font-weight:500;">Local only</span>
+        <span class="spa-save-status" id="spa-save-status">Saved</span>
+      </div>
 
     </div></div>
   </div>
@@ -1525,7 +1604,9 @@ function showDay(dayId) {
 
 // ── SPA STATE ──
 var SPA_KEY = 'punta-cana-spa-v1';
+var SPA_API = 'https://punta-cana-spa.nikireidoriginal.workers.dev/api/spa';
 var spaState = { selected: {}, notes: {} };
+var spaSyncStatus = 'local';
 
 function loadSpa() {
   try {
@@ -1538,8 +1619,11 @@ function loadSpa() {
   } catch(e) {}
 }
 
+function saveLocal() {
+  try { localStorage.setItem(SPA_KEY, JSON.stringify(spaState)); } catch(e) {}
+}
+
 function saveSpa() {
-  // Gather current state from DOM
   document.querySelectorAll('.spa-service').forEach(function(el) {
     var id = el.dataset.id;
     var cb = el.querySelector('input[type="checkbox"]');
@@ -1549,11 +1633,60 @@ function saveSpa() {
     else delete spaState.notes[id];
     el.classList.toggle('selected', cb.checked);
   });
-  try {
-    localStorage.setItem(SPA_KEY, JSON.stringify(spaState));
-  } catch(e) {}
+  saveLocal();
+  syncToServer();
   updateSpaCounts();
   flashSave();
+}
+
+function syncToServer() {
+  spaSyncStatus = 'syncing';
+  updateSyncBadge();
+  fetch(SPA_API, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(spaState)
+  }).then(function(res) {
+    spaSyncStatus = res.ok ? 'synced' : 'error';
+    updateSyncBadge();
+  }).catch(function() {
+    spaSyncStatus = 'error';
+    updateSyncBadge();
+  });
+}
+
+function syncFromServer() {
+  fetch(SPA_API).then(function(res) {
+    return res.ok ? res.json() : null;
+  }).then(function(data) {
+    if (!data || (!data.selected && !data.notes)) return;
+    if (data.selected) {
+      Object.keys(data.selected).forEach(function(k) {
+        if (data.selected[k]) spaState.selected[k] = true;
+      });
+    }
+    if (data.notes) {
+      Object.keys(data.notes).forEach(function(k) {
+        if (data.notes[k] && !spaState.notes[k]) spaState.notes[k] = data.notes[k];
+      });
+    }
+    saveLocal();
+    restoreSpa();
+    spaSyncStatus = 'synced';
+    updateSyncBadge();
+  }).catch(function() {
+    spaSyncStatus = 'local';
+    updateSyncBadge();
+  });
+}
+
+function updateSyncBadge() {
+  var el = document.getElementById('spa-sync-badge');
+  if (!el) return;
+  var labels = { synced: 'Synced', syncing: 'Saving...', error: 'Offline', local: 'Local only' };
+  var colors = { synced: 'var(--teal)', syncing: 'var(--gold)', error: '#e53e3e', local: 'var(--muted)' };
+  el.textContent = labels[spaSyncStatus] || '';
+  el.style.color = colors[spaSyncStatus] || 'var(--muted)';
 }
 
 function toggleSpa(cb) {
@@ -1604,6 +1737,8 @@ function restoreSpa() {
 
 loadSpa();
 restoreSpa();
+syncFromServer();
+setInterval(syncFromServer, 30000);
 </script>
 </body>
 </html>
