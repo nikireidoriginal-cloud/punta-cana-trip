@@ -111,7 +111,7 @@ Important rules:
         const now = new Date().toISOString();
         const logRaw = await env.SPA_DATA.get(CHANGELOG_KEY);
         const log = logRaw ? JSON.parse(logRaw) : { entries: [] };
-        log.entries.unshift({ what: instruction, who: 'Ferrell', time: now });
+        log.entries.unshift({ what: instruction, time: now });
         // Keep last 50 entries
         if (log.entries.length > 50) log.entries = log.entries.slice(0, 50);
         await env.SPA_DATA.put(CHANGELOG_KEY, JSON.stringify(log));

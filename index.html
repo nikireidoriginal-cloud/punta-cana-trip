@@ -2023,7 +2023,6 @@ function loadChangelog() {
         var timeStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
         html += '<div class="changelog-entry">'
           + '<span class="changelog-time">' + timeStr + '</span>'
-          + '<span class="changelog-who">' + (entry.who || 'Someone') + '</span>'
           + '<span class="changelog-what">' + entry.what + '</span>'
           + '</div>';
       });
