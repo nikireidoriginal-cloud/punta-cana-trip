@@ -922,6 +922,86 @@ h1, h2, h3, h4 {
   background: rgba(78,205,196,0.1);
 }
 
+/* ── FERRELL COMMENTS ── */
+.ferrell-comments {
+  padding: 0 1rem;
+  max-width: 680px;
+  margin: 0 auto 0.5rem;
+}
+.ferrell-comments-card {
+  background: var(--cream);
+  border: 1px solid rgba(78,205,196,0.25);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+.ferrell-comments-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--slate);
+  margin-bottom: 0.5rem;
+}
+.ferrell-comments-sub {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.ferrell-comments-box {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--slate);
+  background: #fff;
+  resize: vertical;
+  box-sizing: border-box;
+}
+.ferrell-comments-box:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+.ferrell-comments-status {
+  font-size: 0.6rem;
+  margin-top: 0.3rem;
+  text-align: right;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+
+/* ── FERRELL BANNER ── */
+.ferrell-banner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0.6rem 1rem;
+}
+.ferrell-banner-inner {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.ferrell-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(78,205,196,0.1);
+  border: 1px solid rgba(78,205,196,0.3);
+  border-radius: 20px;
+  color: var(--teal);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ferrell-banner-link:hover {
+  background: rgba(78,205,196,0.2);
+}
+
 /* ── FOOTER ── */
 .footer {
   text-align: center;
@@ -957,6 +1037,14 @@ h1, h2, h3, h4 {
     <p class="hero-sub">Feb 25 &ndash; Mar 1, 2026</p>
   </div>
 </section>
+
+<!-- ═══ FERRELL BANNER ═══ -->
+<div class="ferrell-banner">
+  <div class="ferrell-banner-inner">
+    <a class="ferrell-banner-link" onclick="document.getElementById('ferrell-comments').scrollIntoView({behavior:'smooth'})">&#9997;&#65039; Schedule Notes</a>
+    <a class="ferrell-banner-link" onclick="document.getElementById('card-spa').scrollIntoView({behavior:'smooth'})">&#128134; Spa Picks</a>
+  </div>
+</div>
 
 <!-- ═══ PHOTO CAROUSEL ═══ -->
 <div class="carousel-section">
@@ -1110,15 +1198,15 @@ h1, h2, h3, h4 {
           </div>
           <div class="ov-row">
             <span class="ov-day">Thu 26</span>
-            <span class="ov-events">Pajama Jam <span class="tl-star">&#9733;</span> &rarr; Dinner <span class="tl-diamond">&#9671;</span> (pick one)</span>
+            <span class="ov-events">Pajama Jam <span class="tl-star">&#9733;</span> &rarr; Dinner <span class="tl-diamond">&#9671;</span> (restaurant TBD)</span>
           </div>
           <div class="ov-row">
             <span class="ov-day">Fri 27</span>
-            <span class="ov-events">Beach day &rarr; Fresco lunch &rarr; Turtle Power Dinner <span class="tl-star">&#9733;</span></span>
+            <span class="ov-events">Slime 2pm <span class="tl-star">&#9733;</span> &rarr; Beach &rarr; Fresco &rarr; Turtle Power Dinner <span class="tl-star">&#9733;</span></span>
           </div>
           <div class="ov-row">
             <span class="ov-day">Sat 28</span>
-            <span class="ov-events">Slime <span class="tl-star">&#9733;</span> &rarr; White Beach Party &rarr; Spacewalker <span class="tl-diamond">&#9671;</span></span>
+            <span class="ov-events">White Beach Party &rarr; Spacewalker <span class="tl-diamond">&#9671;</span></span>
           </div>
           <div class="ov-row">
             <span class="ov-day">Sun 1</span>
@@ -1174,7 +1262,7 @@ h1, h2, h3, h4 {
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">Evening</span>
-          <span class="tl-event">Dinner <span class="tl-diamond">&#9671;</span> <span class="tl-aside">&middot; pick one &mdash; Fri is already Italian</span> <span class="night-tag ferrell-night">Ferrell&rsquo;s night</span></span>
+          <span class="tl-event">Dinner <span class="tl-diamond">&#9671;</span> <span class="tl-aside">&middot; restaurant TBD &mdash; Fri is already Italian</span> <span class="night-tag ferrell-night">Ferrell&rsquo;s night</span></span>
         </div>
       </div>
 
@@ -1188,6 +1276,10 @@ h1, h2, h3, h4 {
         <div class="tl-row tl-niki">
           <span class="tl-time">Midday</span>
           <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
+        </div>
+        <div class="tl-row tl-family">
+          <span class="tl-time">2 PM</span>
+          <span class="tl-event">Private Slime Session <span class="tl-star">&#9733;</span></span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">Afternoon</span>
@@ -1207,12 +1299,8 @@ h1, h2, h3, h4 {
           <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
         </div>
         <div class="tl-row tl-family">
-          <span class="tl-time">2 PM</span>
-          <span class="tl-event">Private Slime Session <span class="tl-star">&#9733;</span></span>
-        </div>
-        <div class="tl-row tl-ferrell">
-          <span class="tl-time">Late PM</span>
-          <span class="tl-event">White Beach Party <span class="tl-aside">&middot; wear white! &middot; Niki Reset Time</span></span>
+          <span class="tl-time">Afternoon</span>
+          <span class="tl-event">White Beach Party <span class="tl-aside">&middot; wear white!</span></span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">Evening</span>
@@ -1242,6 +1330,16 @@ h1, h2, h3, h4 {
       </div>
 
     </div>
+  </div>
+</div>
+
+<!-- ═══ FERRELL COMMENTS ═══ -->
+<div class="ferrell-comments" id="ferrell-comments">
+  <div class="ferrell-comments-card">
+    <div class="ferrell-comments-title">Ferrell &mdash; Comments &amp; Changes</div>
+    <div class="ferrell-comments-sub">Thoughts on the schedule? Drop them here. Saves automatically.</div>
+    <textarea class="ferrell-comments-box" id="comments-box" placeholder="Type your notes here&hellip;" oninput="saveComments()"></textarea>
+    <div class="ferrell-comments-status" id="comments-status"></div>
   </div>
 </div>
 
@@ -1600,6 +1698,8 @@ function showDay(dayId) {
   document.querySelectorAll('.day-tab').forEach(function(t) { t.classList.remove('active'); });
   document.getElementById('day-' + dayId).classList.add('active');
   document.querySelector('[data-day="' + dayId + '"]').classList.add('active');
+  var roster = document.querySelector('.duty-roster');
+  if (roster) roster.style.display = dayId === 'overview' ? '' : 'none';
 }
 
 // ── SPA STATE ──
@@ -1739,6 +1839,65 @@ loadSpa();
 restoreSpa();
 syncFromServer();
 setInterval(syncFromServer, 30000);
+
+// ── COMMENTS STATE ──
+var COMMENTS_KEY = 'punta-cana-comments-v1';
+var COMMENTS_API = 'https://punta-cana-spa.nikireidoriginal.workers.dev/api/comments';
+var commentsSaveTimer = null;
+
+function loadComments() {
+  try {
+    var saved = localStorage.getItem(COMMENTS_KEY);
+    if (saved) {
+      var parsed = JSON.parse(saved);
+      document.getElementById('comments-box').value = parsed.text || '';
+    }
+  } catch(e) {}
+}
+
+function saveComments() {
+  var text = document.getElementById('comments-box').value;
+  try { localStorage.setItem(COMMENTS_KEY, JSON.stringify({ text: text })); } catch(e) {}
+  clearTimeout(commentsSaveTimer);
+  commentsSaveTimer = setTimeout(function() { syncCommentsToServer(text); }, 1000);
+}
+
+function syncCommentsToServer(text) {
+  var statusEl = document.getElementById('comments-status');
+  statusEl.textContent = 'Saving...';
+  statusEl.style.color = 'var(--gold)';
+  fetch(COMMENTS_API, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: text })
+  }).then(function(res) {
+    statusEl.textContent = res.ok ? 'Saved' : 'Error saving';
+    statusEl.style.color = res.ok ? 'var(--teal)' : '#e53e3e';
+    setTimeout(function() { statusEl.textContent = ''; }, 2000);
+  }).catch(function() {
+    statusEl.textContent = 'Offline — saved locally';
+    statusEl.style.color = '#e53e3e';
+    setTimeout(function() { statusEl.textContent = ''; }, 3000);
+  });
+}
+
+function syncCommentsFromServer() {
+  fetch(COMMENTS_API).then(function(res) {
+    return res.ok ? res.json() : null;
+  }).then(function(data) {
+    if (!data || !data.text) return;
+    var box = document.getElementById('comments-box');
+    var local = box.value;
+    if (data.text.length > local.length) {
+      box.value = data.text;
+      try { localStorage.setItem(COMMENTS_KEY, JSON.stringify({ text: data.text })); } catch(e) {}
+    }
+  }).catch(function() {});
+}
+
+loadComments();
+syncCommentsFromServer();
+setInterval(syncCommentsFromServer, 30000);
 </script>
 </body>
 </html>
