@@ -531,6 +531,171 @@ h1, h2, h3, h4 {
   line-height: 1.6;
 }
 
+.info-badge.pending {
+  background: var(--gold);
+}
+
+/* ── PROPOSED ITINERARY ── */
+.proposed-banner {
+  display: inline-block;
+  background: #fffbf0;
+  border: 1px solid #ffe599;
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b8860b;
+  margin-bottom: 1.2rem;
+}
+
+.itin-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+  padding: 10px 14px;
+  background: var(--cream);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.itin-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: var(--slate-light);
+}
+
+.itin-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.itin-day {
+  background: var(--card);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.itin-day:last-of-type {
+  margin-bottom: 0;
+}
+
+.itin-day-header {
+  padding: 10px 16px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itin-day-header h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.itin-day-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  opacity: 0.85;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.itin-day-body {
+  padding: 12px 16px;
+}
+
+.itin-block {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  border-left: 3px solid;
+}
+
+.itin-block:last-child {
+  margin-bottom: 0;
+}
+
+.itin-block.b-family { background: #FFF3EE; border-color: #FF6B35; }
+.itin-block.b-niki { background: #F0EEFF; border-color: #7B68EE; }
+.itin-block.b-ferrell { background: #E8FAFA; border-color: #4ECDC4; }
+.itin-block.b-logistics { background: #F5F5F5; border-color: #ccc; }
+
+.itin-time {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: var(--muted);
+  width: 60px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.itin-content {
+  flex: 1;
+}
+
+.itin-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--slate);
+  line-height: 1.3;
+}
+
+.itin-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.itin-who {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.itin-who.w-family { background: #FF6B35; }
+.itin-who.w-niki { background: #7B68EE; }
+.itin-who.w-ferrell { background: #4ECDC4; }
+
+.itin-badge {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 10px;
+  color: white;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.itin-badge-paid { background: #FF6B35; }
+.itin-badge-book { background: #7B68EE; }
+
 /* ── HEART SECTION ── */
 .heart-section {
   background: var(--sand);
@@ -1746,9 +1911,234 @@ h1, h2, h3, h4 {
         <p>Bring hand sanitizer and wipes. Wipe down high chairs.</p>
       </div>
 
-      <div class="heart-section">
-        <h4>Let&rsquo;s Make a Plan</h4>
-        <p>Now that everything&rsquo;s booked, let&rsquo;s map out the days &mdash; waterpark mornings, pool time, a couple of nice dinners, spa, and plenty of relaxing time built in.</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- ═══ PROPOSED ITINERARY ═══ -->
+<div class="section" style="padding-top:0;">
+  <div class="info-card" id="card-itinerary">
+    <div class="info-card-header" onclick="toggleCard('itinerary')">
+      <span class="info-badge pending">Proposed</span>
+      <h2>Proposed Itinerary</h2>
+      <span class="info-chevron">&#9662;</span>
+    </div>
+    <div class="info-card-body"><div class="info-card-body-inner">
+
+      <div class="proposed-banner">Draft &mdash; Subject to Change</div>
+
+      <div class="itin-legend">
+        <div class="itin-legend-item"><div class="itin-dot" style="background:#FF6B35;"></div> Family</div>
+        <div class="itin-legend-item"><div class="itin-dot" style="background:#7B68EE;"></div> Niki + Oliver</div>
+        <div class="itin-legend-item"><div class="itin-dot" style="background:#4ECDC4;"></div> Ferrell + Oliver</div>
+        <div class="itin-legend-item"><div class="itin-dot" style="background:#ccc;"></div> Logistics</div>
+      </div>
+
+      <!-- DAY 1 · Wed Feb 25 -->
+      <div class="itin-day">
+        <div class="itin-day-header" style="background:#999;">
+          <div>
+            <div class="itin-day-label">Day 1 &middot; Arrival</div>
+            <h3>Wednesday, Feb 25</h3>
+          </div>
+        </div>
+        <div class="itin-day-body">
+          <div class="itin-block b-logistics">
+            <div class="itin-time">3:11 PM</div>
+            <div class="itin-content">
+              <div class="itin-title">Land at PUJ &rarr; customs &rarr; transfer to resort</div>
+              <div class="itin-note">Realistically arriving ~5&ndash;5:30pm after customs and transfer. Check in, get wristbands, drop bags.</div>
+            </div>
+          </div>
+          <div class="itin-block b-logistics">
+            <div class="itin-time">ASAP</div>
+            <div class="itin-content">
+              <div class="itin-title">Scan QR code &rarr; book all &agrave; la carte restaurants</div>
+              <div class="itin-note">Spacewalker, Verdello, Wok Wok, BRGRS.PH &mdash; do this before they fill up</div>
+            </div>
+          </div>
+          <div class="itin-block b-family">
+            <div class="itin-time">~5 PM</div>
+            <div class="itin-content">
+              <span class="itin-who w-family">Family</span>
+              <div class="itin-title">First look at Aqua Nick</div>
+              <div class="itin-note">Arrive together, explore the waterpark, get settled. Easy first evening as a trio.</div>
+            </div>
+          </div>
+          <div class="itin-block b-family">
+            <div class="itin-time">7 PM</div>
+            <div class="itin-content">
+              <span class="itin-who w-family">Family</span>
+              <div class="itin-title">Explorer&rsquo;s Table buffet dinner</div>
+              <div class="itin-note">No reservation needed. Good vegetarian variety. Low-key first night.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 2 · Thu Feb 26 -->
+      <div class="itin-day">
+        <div class="itin-day-header" style="background:#7B68EE;">
+          <div>
+            <div class="itin-day-label">Day 2 &middot; Character Breakfast Day</div>
+            <h3>Thursday, Feb 26</h3>
+          </div>
+        </div>
+        <div class="itin-day-body">
+          <div class="itin-block b-family">
+            <div class="itin-time">8:30 AM</div>
+            <div class="itin-content">
+              <span class="itin-who w-family">Family</span>
+              <div class="itin-title">Pajama Jam Character Breakfast <span class="itin-badge itin-badge-paid">Paid</span></div>
+              <div class="itin-note">Oliver in PJs with SpongeBob, PAW Patrol, Dora + more. Bring autograph book + Sharpie!</div>
+            </div>
+          </div>
+          <div class="itin-block b-niki">
+            <div class="itin-time">Morning</div>
+            <div class="itin-content">
+              <span class="itin-who w-niki">Niki + Oliver</span>
+              <div class="itin-title">Beach + waterpark</div>
+              <div class="itin-note">Ferrell heads to Aqua Live &mdash; full morning reset, spa, pool.</div>
+            </div>
+          </div>
+          <div class="itin-block b-family">
+            <div class="itin-time">2:00 PM</div>
+            <div class="itin-content">
+              <span class="itin-who w-family">Family</span>
+              <div class="itin-title">Private Slime Session <span class="itin-badge itin-badge-paid">Paid</span></div>
+              <div class="itin-note">Just your family. Oliver will talk about this for months.</div>
+            </div>
+          </div>
+          <div class="itin-block b-ferrell">
+            <div class="itin-time">Afternoon</div>
+            <div class="itin-content">
+              <span class="itin-who w-ferrell">Ferrell + Oliver</span>
+              <div class="itin-title">Waterslides + character meet &amp; greets</div>
+              <div class="itin-note">Niki gets afternoon at Aqua Live &mdash; spa, yoga, full recharge.</div>
+            </div>
+          </div>
+          <div class="itin-block b-family">
+            <div class="itin-time">Evening</div>
+            <div class="itin-content">
+              <span class="itin-who w-family">Family</span>
+              <div class="itin-title">Spacewalker Dinner <span class="itin-badge itin-badge-book">Book via QR</span></div>
+              <div class="itin-note">Space theme, VR headsets, astronaut servers. Oliver is going to lose his mind.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 3 · Fri Feb 27 -->
+      <div class="itin-day">
+        <div class="itin-day-header" style="background:#FF6B35;">
+          <div>
+            <div class="itin-day-label">Day 3 &middot; Turtle Night</div>
+            <h3>Friday, Feb 27</h3>
+          </div>
+        </div>
+        <div class="itin-day-body">
+          <div class="itin-block b-ferrell">
+            <div class="itin-time">Morning</div>
+            <div class="itin-content">
+              <span class="itin-who w-ferrell">Ferrell + Oliver</span>
+              <div class="itin-title">Lazy river + splash pads</div>
+              <div class="itin-note">Easy, relaxed morning &mdash; save energy for tonight. Niki at Aqua Live for yoga/spa.</div>
+            </div>
+          </div>
+          <div class="itin-block b-niki">
+            <div class="itin-time">Midday</div>
+            <div class="itin-content">
+              <span class="itin-who w-niki">Niki + Oliver</span>
+              <div class="itin-title">Lunch at Fresco + beach time</div>
+              <div class="itin-note">Grill + ceviche, swim-up bar, great vegetarian options. Ferrell gets Aqua Live time.</div>
+            </div>
+          </div>
+          <div class="itin-block b-ferrell">
+            <div class="itin-time">Afternoon</div>
+            <div class="itin-content">
+              <span class="itin-who w-ferrell">Ferrell + Oliver</span>
+              <div class="itin-title">Waterslides + character meet &amp; greets</div>
+              <div class="itin-note">Burn off energy before dinner. Niki gets a quiet solo hour.</div>
+            </div>
+          </div>
+          <div class="itin-block b-family">
+            <div class="itin-time">7:30 PM</div>
+            <div class="itin-content">
+              <span class="itin-who w-family">Family</span>
+              <div class="itin-title">Turtle Power Dinner <span class="itin-badge itin-badge-paid">Paid</span></div>
+              <div class="itin-note">TMNT performances, Italian buffet, all 4 turtles. Only Tue/Fri/Sun &mdash; Friday is your night.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 4 · Sat Feb 28 -->
+      <div class="itin-day">
+        <div class="itin-day-header" style="background:#4ECDC4;">
+          <div>
+            <div class="itin-day-label">Day 4 &middot; Beach Party Day</div>
+            <h3>Saturday, Feb 28</h3>
+          </div>
+        </div>
+        <div class="itin-day-body">
+          <div class="itin-block b-niki">
+            <div class="itin-time">Morning</div>
+            <div class="itin-content">
+              <span class="itin-who w-niki">Niki + Oliver</span>
+              <div class="itin-title">Waterslides + waterpark</div>
+              <div class="itin-note">Ferrell gets a long morning at Aqua Live &mdash; final real reset before travel day.</div>
+            </div>
+          </div>
+          <div class="itin-block b-ferrell">
+            <div class="itin-time">Late PM</div>
+            <div class="itin-content">
+              <span class="itin-who w-ferrell">Ferrell + Oliver</span>
+              <div class="itin-title">White Beach Party <span style="font-size:0.65rem;color:var(--muted);font-style:italic;">&mdash; wear white!</span></div>
+              <div class="itin-note">Live music, Caribbean drum show, face painting, canap&eacute;s. Niki gets one last solo hour at Aqua Live.</div>
+            </div>
+          </div>
+          <div class="itin-block b-niki">
+            <div class="itin-time">Evening</div>
+            <div class="itin-content">
+              <span class="itin-who w-niki">Niki + Oliver</span>
+              <div class="itin-title">Verdello Italian Dinner <span class="itin-badge itin-badge-book">Book via QR</span></div>
+              <div class="itin-note">Best-reviewed food on property. Ferrell gets a solo Aqua Live dinner to close out the trip.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 5 · Sun Mar 1 -->
+      <div class="itin-day">
+        <div class="itin-day-header" style="background:#C9B1FF;">
+          <div>
+            <div class="itin-day-label">Day 5 &middot; Checkout</div>
+            <h3>Sunday, Mar 1</h3>
+          </div>
+        </div>
+        <div class="itin-day-body">
+          <div class="itin-block b-family">
+            <div class="itin-time">Morning</div>
+            <div class="itin-content">
+              <span class="itin-who w-family">Family</span>
+              <div class="itin-title">Last run at Aqua Nick</div>
+              <div class="itin-note">One final waterpark session. Oliver needs to say goodbye to every single slide.</div>
+            </div>
+          </div>
+          <div class="itin-block b-logistics">
+            <div class="itin-time">10 AM</div>
+            <div class="itin-content">
+              <div class="itin-title">Pack up + audit your bill before checkout</div>
+              <div class="itin-note">Reviews flag billing errors &mdash; check every line item before you sign off.</div>
+            </div>
+          </div>
+          <div class="itin-block b-logistics">
+            <div class="itin-time">12 PM</div>
+            <div class="itin-content">
+              <div class="itin-title">Checkout &rarr; transfer to PUJ</div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div></div>
