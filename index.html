@@ -922,6 +922,25 @@ h1, h2, h3, h4 {
   background: rgba(78,205,196,0.1);
 }
 
+.morning-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+.morning-tag.niki-morning {
+  color: #7B68EE;
+  background: rgba(123,104,238,0.1);
+}
+.morning-tag.ferrell-morning {
+  color: #4ECDC4;
+  background: rgba(78,205,196,0.1);
+}
+
 /* ── FERRELL COMMENTS ── */
 .ferrell-comments {
   padding: 0 1rem;
@@ -1046,15 +1065,6 @@ h1, h2, h3, h4 {
   </div>
 </section>
 
-<!-- ═══ FERRELL BANNER ═══ -->
-<div class="ferrell-banner">
-  <div class="ferrell-banner-label">Ferrell &mdash; 2 things for you to fill out:</div>
-  <div class="ferrell-banner-inner">
-    <a class="ferrell-banner-link" onclick="document.getElementById('ferrell-comments').scrollIntoView({behavior:'smooth'})">&#9997;&#65039; Schedule Notes &amp; Changes</a>
-    <a class="ferrell-banner-link" onclick="document.getElementById('card-spa').scrollIntoView({behavior:'smooth'})">&#128134; Spa Picks</a>
-  </div>
-</div>
-
 <!-- ═══ PHOTO CAROUSEL ═══ -->
 <div class="carousel-section">
   <div class="carousel-wrap" id="carousel">
@@ -1079,6 +1089,15 @@ h1, h2, h3, h4 {
     </div>
     <button class="carousel-arrow prev" id="prevBtn">&lsaquo;</button>
     <button class="carousel-arrow next" id="nextBtn">&rsaquo;</button>
+  </div>
+</div>
+
+<!-- ═══ FERRELL BANNER ═══ -->
+<div class="ferrell-banner">
+  <div class="ferrell-banner-label">Ferrell &mdash; 2 things for you to fill out:</div>
+  <div class="ferrell-banner-inner">
+    <a class="ferrell-banner-link" onclick="document.getElementById('ferrell-comments').scrollIntoView({behavior:'smooth'})">&#9997;&#65039; Schedule Notes &amp; Changes</a>
+    <a class="ferrell-banner-link" onclick="document.getElementById('card-spa').scrollIntoView({behavior:'smooth'})">&#128134; Spa Picks</a>
   </div>
 </div>
 
@@ -1263,7 +1282,7 @@ h1, h2, h3, h4 {
         </div>
         <div class="tl-row tl-niki">
           <span class="tl-time">Morning</span>
-          <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
+          <span class="tl-event">Niki + Oliver Time <span class="morning-tag niki-morning">Niki&rsquo;s morning</span> <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
         </div>
         <div class="tl-row tl-ferrell">
           <span class="tl-time">Afternoon</span>
@@ -1280,7 +1299,7 @@ h1, h2, h3, h4 {
         <div class="day-panel-header">Friday, Feb 27 &mdash; Turtle Night</div>
         <div class="tl-row tl-ferrell">
           <span class="tl-time">Morning</span>
-          <span class="tl-event">Ferrell + Oliver Time <span class="tl-aside">&middot; Niki Reset Time</span></span>
+          <span class="tl-event">Ferrell + Oliver Time <span class="morning-tag ferrell-morning">Ferrell&rsquo;s morning</span> <span class="tl-aside">&middot; Niki Reset Time</span></span>
         </div>
         <div class="tl-row tl-niki">
           <span class="tl-time">Midday</span>
@@ -1305,7 +1324,7 @@ h1, h2, h3, h4 {
         <div class="day-panel-header">Saturday, Feb 28 &mdash; Beach Party Day</div>
         <div class="tl-row tl-niki">
           <span class="tl-time">Morning</span>
-          <span class="tl-event">Niki + Oliver Time <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
+          <span class="tl-event">Niki + Oliver Time <span class="morning-tag niki-morning">Niki&rsquo;s morning</span> <span class="tl-aside">&middot; Ferrell Reset Time</span></span>
         </div>
         <div class="tl-row tl-family">
           <span class="tl-time">Afternoon</span>
