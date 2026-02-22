@@ -531,6 +531,126 @@ h1, h2, h3, h4 {
   line-height: 1.6;
 }
 
+/* ── TRANSPORT CARDS ── */
+.transport-card {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+.transport-card:last-child {
+  margin-bottom: 0;
+}
+
+.transport-card-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.transport-card-route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.transport-endpoint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.transport-time {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--slate);
+}
+
+.transport-place {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--slate);
+  letter-spacing: 0.04em;
+}
+
+.transport-detail {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.transport-arrow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.transport-arrow .transport-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.transport-arrow .transport-icon {
+  font-size: 1rem;
+  color: var(--gold);
+  padding: 0 0.3rem;
+}
+
+.transport-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--border);
+}
+
+.transport-note {
+  background: rgba(196, 149, 106, 0.08);
+  border: 1px solid rgba(196, 149, 106, 0.2);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  color: var(--slate-light);
+  line-height: 1.6;
+}
+
+.transport-note strong {
+  color: var(--slate);
+}
+
+.info-badge.pending {
+  background: var(--gold);
+}
+
+.vip-pending-note {
+  background: linear-gradient(135deg, rgba(196,149,106,0.1) 0%, rgba(196,149,106,0.04) 100%);
+  border: 1px dashed var(--gold);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--slate-light);
+  line-height: 1.6;
+}
+
+.vip-pending-note strong {
+  color: var(--gold);
+}
+
 /* ── HEART SECTION ── */
 .heart-section {
   background: var(--sand);
@@ -1564,6 +1684,80 @@ h1, h2, h3, h4 {
 
 </div>
 
+  <!-- ═══ GROUND TRANSPORTATION ═══ -->
+  <div class="info-card open" id="card-transport">
+    <div class="info-card-header" onclick="toggleCard('transport')">
+      <span class="info-badge">Confirmed</span>
+      <h2>Ground Transportation</h2>
+      <span class="info-chevron">&#9662;</span>
+    </div>
+    <div class="info-card-body"><div class="info-card-body-inner">
+      <p style="font-size:0.92rem;color:var(--slate-light);line-height:1.6;margin-bottom:1.5rem;">Private luxury transfer (Chevrolet Suburban) &mdash; Booking #13761411. Paid in full, no further payment required (tip optional).</p>
+
+      <!-- ARRIVAL TRANSFER -->
+      <div class="transport-card">
+        <div class="transport-card-label" style="color:var(--teal);">Arrival &mdash; Wed Feb 25</div>
+        <div class="transport-card-route">
+          <div class="transport-endpoint">
+            <span class="transport-time">3:11 PM</span>
+            <span class="transport-place">PUJ</span>
+            <span class="transport-detail">Punta Cana Airport</span>
+          </div>
+          <div class="transport-arrow">
+            <span class="transport-line"></span>
+            <span class="transport-icon">&#9658;</span>
+            <span class="transport-line"></span>
+          </div>
+          <div class="transport-endpoint">
+            <span class="transport-time">~4:00 PM</span>
+            <span class="transport-place">Nickelodeon</span>
+            <span class="transport-detail">Punta Cana Resort</span>
+          </div>
+        </div>
+        <div class="transport-meta">
+          Luxury Suburban &middot; Party of 3 &middot; 6 bags &middot; 1 child seat reserved
+        </div>
+        <div class="transport-note">
+          <strong>Meeting point:</strong> After customs, walk to the EXIT, follow the PICK UP ZONE signs, and look for the <strong>DAT sign</strong>. All passengers must arrive on JetBlue 173. If you can&rsquo;t find DAT staff, WhatsApp <strong>+1 (829) 423-1428</strong> (text only).
+        </div>
+      </div>
+
+      <!-- DEPARTURE TRANSFER -->
+      <div class="transport-card">
+        <div class="transport-card-label" style="color:var(--gold);">Departure &mdash; Sun Mar 1</div>
+        <div class="transport-card-route">
+          <div class="transport-endpoint">
+            <span class="transport-time">8:05 AM</span>
+            <span class="transport-place">Nickelodeon</span>
+            <span class="transport-detail">Hotel Lobby Pickup</span>
+          </div>
+          <div class="transport-arrow">
+            <span class="transport-line"></span>
+            <span class="transport-icon">&#9658;</span>
+            <span class="transport-line"></span>
+          </div>
+          <div class="transport-endpoint">
+            <span class="transport-time">~8:45 AM</span>
+            <span class="transport-place">PUJ</span>
+            <span class="transport-detail">For JetBlue 1074 at 11:21 AM</span>
+          </div>
+        </div>
+        <div class="transport-meta">
+          Luxury Suburban &middot; Party of 3 &middot; 6 bags &middot; 1 child seat reserved
+        </div>
+        <div class="transport-note">
+          <strong>Important:</strong> Driver will be outside the lobby with a <strong>DAT sign</strong>. Driver waits up to 10 minutes only &mdash; no refunds for missed pickups. Changes to pickup time must be made 48+ hours in advance. WhatsApp <strong>+1 (829) 423-1428</strong> (text only) if needed.
+        </div>
+      </div>
+
+      <!-- VIP UPGRADE PENDING -->
+      <div class="vip-pending-note">
+        <strong>VIP Transfer Upgrade:</strong> Waiting on confirmation for the DAT VIP transfer service. Will update once confirmed.
+      </div>
+
+    </div></div>
+  </div>
+
 <!-- ═══ THINGS TO DO ═══ -->
 <div class="section" style="padding-top:0;">
   <div class="info-card open" id="card-activities">
@@ -1666,7 +1860,7 @@ h1, h2, h3, h4 {
 
       <div class="tip-card">
         <h4>Getting There</h4>
-        <p>40-min drive from PUJ airport. I&rsquo;ll book all private transport.</p>
+        <p>Private Suburban booked both ways. ~40 min from PUJ airport. Look for the DAT sign at pickup zone.</p>
       </div>
 
       <div class="tip-card">
