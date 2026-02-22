@@ -941,82 +941,35 @@ h1, h2, h3, h4 {
   background: rgba(78,205,196,0.1);
 }
 
-/* ── FERRELL COMMENTS ── */
-.ferrell-comments {
+/* ── PROPOSE CHANGES ── */
+.propose-changes {
   padding: 0 1rem;
   max-width: 680px;
   margin: 0 auto 0.5rem;
 }
-.ferrell-comments-card {
-  background: var(--cream);
-  border: 1px solid rgba(78,205,196,0.25);
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-}
-.ferrell-comments-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  color: var(--slate);
-  margin-bottom: 0.5rem;
-}
-.ferrell-comments-sub {
-  font-size: 0.7rem;
-  color: var(--muted);
-  margin-bottom: 0.6rem;
-}
-.ferrell-comments-box {
-  width: 100%;
-  min-height: 100px;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
-  color: var(--slate);
-  background: #fff;
-  resize: vertical;
-  box-sizing: border-box;
-}
-.ferrell-comments-box:focus {
-  outline: none;
-  border-color: var(--teal);
-}
-.ferrell-comments-status {
-  font-size: 0.6rem;
-  margin-top: 0.3rem;
-  text-align: right;
-  color: var(--muted);
-  transition: color 0.3s;
-}
-
-/* ── AI EDIT ── */
-.ai-edit {
-  max-width: 680px;
-  margin: 0 auto 0.5rem;
-}
-.ai-edit-card {
+.propose-card {
   background: linear-gradient(135deg, #f0f4ff 0%, var(--cream) 100%);
   border: 1px solid rgba(91,138,138,0.3);
   border-radius: 12px;
   padding: 1rem 1.2rem;
 }
-.ai-edit-title {
+.propose-title {
   font-family: 'Playfair Display', serif;
   font-size: 1rem;
   color: var(--slate);
   font-weight: 600;
   margin-bottom: 0.2rem;
 }
-.ai-edit-sub {
+.propose-sub {
   font-size: 0.65rem;
   color: var(--muted);
   margin-bottom: 0.6rem;
 }
-.ai-edit-row {
+.propose-row {
   display: flex;
   gap: 0.5rem;
 }
-.ai-edit-input {
+.propose-input {
   flex: 1;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem;
@@ -1027,14 +980,11 @@ h1, h2, h3, h4 {
   color: var(--slate);
   outline: none;
   transition: border-color 0.2s;
+  box-sizing: border-box;
 }
-.ai-edit-input:focus {
-  border-color: var(--teal);
-}
-.ai-edit-input::placeholder {
-  color: #b0b8c4;
-}
-.ai-edit-btn {
+.propose-input:focus { border-color: var(--teal); }
+.propose-input::placeholder { color: #b0b8c4; }
+.propose-btn {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
@@ -1047,19 +997,69 @@ h1, h2, h3, h4 {
   white-space: nowrap;
   transition: opacity 0.2s;
 }
-.ai-edit-btn:hover { opacity: 0.85; }
-.ai-edit-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.ai-edit-status {
+.propose-btn:hover { opacity: 0.85; }
+.propose-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.propose-status {
   font-size: 0.6rem;
   margin-top: 0.4rem;
   color: var(--muted);
   transition: color 0.3s;
 }
-.ai-edit-status.error { color: #e53e3e; }
-.ai-edit-status.success { color: var(--teal); }
+.propose-status.error { color: #e53e3e; }
+.propose-status.success { color: var(--teal); }
+
+/* ── CHANGE LOG ── */
+.changelog {
+  margin-top: 0.8rem;
+}
+.changelog-toggle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  color: var(--teal);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 600;
+}
+.changelog-toggle:hover { text-decoration: underline; }
+.changelog-list {
+  display: none;
+  margin-top: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 0.5rem;
+}
+.changelog-list.open { display: block; }
+.changelog-entry {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  font-size: 0.6rem;
+  color: var(--slate);
+}
+.changelog-time {
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.changelog-who {
+  font-weight: 600;
+  color: var(--teal);
+  flex-shrink: 0;
+}
+.changelog-what {
+  color: var(--slate);
+}
+.changelog-empty {
+  font-size: 0.6rem;
+  color: var(--muted);
+  font-style: italic;
+  padding: 0.3rem 0;
+}
 
 /* ── FERRELL BANNER ── */
 .ferrell-banner {
@@ -1433,26 +1433,20 @@ h1, h2, h3, h4 {
   </div>
 </div>
 
-<!-- ═══ FERRELL COMMENTS ═══ -->
-<div class="ferrell-comments" id="ferrell-comments">
-  <div class="ferrell-comments-card">
-    <div class="ferrell-comments-title">Ferrell &mdash; Comments &amp; Changes</div>
-    <div class="ferrell-comments-sub">Thoughts on the schedule? Drop them here. Saves automatically.</div>
-    <textarea class="ferrell-comments-box" id="comments-box" placeholder="Type your notes here&hellip;" oninput="saveComments()"></textarea>
-    <div class="ferrell-comments-status" id="comments-status"></div>
-  </div>
-</div>
-
-<!-- ═══ AI SCHEDULE EDITOR ═══ -->
-<div class="ai-edit">
-  <div class="ai-edit-card">
-    <div class="ai-edit-title">&#9998; Edit Schedule</div>
-    <div class="ai-edit-sub">Type a change in plain English and AI will update the schedule.</div>
-    <div class="ai-edit-row">
-      <input class="ai-edit-input" id="ai-edit-input" type="text" placeholder="e.g. Move Wednesday dinner to 6pm" onkeydown="if(event.key==='Enter')submitAiEdit()">
-      <button class="ai-edit-btn" id="ai-edit-btn" onclick="submitAiEdit()">Update</button>
+<!-- ═══ PROPOSE CHANGES ═══ -->
+<div class="propose-changes">
+  <div class="propose-card">
+    <div class="propose-title">Propose Changes</div>
+    <div class="propose-sub">Enter a change and it will update the schedule above.</div>
+    <div class="propose-row">
+      <input class="propose-input" id="propose-input" type="text" placeholder="e.g. Move Wednesday dinner to 6pm" onkeydown="if(event.key==='Enter')submitChange()">
+      <button class="propose-btn" id="propose-btn" onclick="submitChange()">Update</button>
     </div>
-    <div class="ai-edit-status" id="ai-edit-status"></div>
+    <div class="propose-status" id="propose-status"></div>
+    <div class="changelog">
+      <button class="changelog-toggle" onclick="toggleChangelog()">View change log</button>
+      <div class="changelog-list" id="changelog-list"></div>
+    </div>
   </div>
 </div>
 
@@ -1953,78 +1947,21 @@ restoreSpa();
 syncFromServer();
 setInterval(syncFromServer, 30000);
 
-// ── COMMENTS STATE ──
-var COMMENTS_KEY = 'punta-cana-comments-v1';
-var COMMENTS_API = 'https://punta-cana-spa.nikireidoriginal.workers.dev/api/comments';
-var commentsSaveTimer = null;
-
-function loadComments() {
-  try {
-    var saved = localStorage.getItem(COMMENTS_KEY);
-    if (saved) {
-      var parsed = JSON.parse(saved);
-      document.getElementById('comments-box').value = parsed.text || '';
-    }
-  } catch(e) {}
-}
-
-function saveComments() {
-  var text = document.getElementById('comments-box').value;
-  try { localStorage.setItem(COMMENTS_KEY, JSON.stringify({ text: text })); } catch(e) {}
-  clearTimeout(commentsSaveTimer);
-  commentsSaveTimer = setTimeout(function() { syncCommentsToServer(text); }, 1000);
-}
-
-function syncCommentsToServer(text) {
-  var statusEl = document.getElementById('comments-status');
-  statusEl.textContent = 'Saving...';
-  statusEl.style.color = 'var(--gold)';
-  fetch(COMMENTS_API, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text: text })
-  }).then(function(res) {
-    statusEl.textContent = res.ok ? 'Saved' : 'Error saving';
-    statusEl.style.color = res.ok ? 'var(--teal)' : '#e53e3e';
-    setTimeout(function() { statusEl.textContent = ''; }, 2000);
-  }).catch(function() {
-    statusEl.textContent = 'Offline — saved locally';
-    statusEl.style.color = '#e53e3e';
-    setTimeout(function() { statusEl.textContent = ''; }, 3000);
-  });
-}
-
-function syncCommentsFromServer() {
-  fetch(COMMENTS_API).then(function(res) {
-    return res.ok ? res.json() : null;
-  }).then(function(data) {
-    if (!data || !data.text) return;
-    var box = document.getElementById('comments-box');
-    var local = box.value;
-    if (data.text.length > local.length) {
-      box.value = data.text;
-      try { localStorage.setItem(COMMENTS_KEY, JSON.stringify({ text: data.text })); } catch(e) {}
-    }
-  }).catch(function() {});
-}
-
-loadComments();
-syncCommentsFromServer();
-setInterval(syncCommentsFromServer, 30000);
-
-// ── AI SCHEDULE EDITOR ──
-var AI_EDIT_API = 'https://punta-cana-spa.nikireidoriginal.workers.dev/api/ai-edit';
-var SCHEDULE_API = 'https://punta-cana-spa.nikireidoriginal.workers.dev/api/schedule';
+// ── PROPOSE CHANGES (AI SCHEDULE EDITOR) ──
+var WORKER_BASE = 'https://punta-cana-spa.nikireidoriginal.workers.dev';
+var AI_EDIT_API = WORKER_BASE + '/api/ai-edit';
+var SCHEDULE_API = WORKER_BASE + '/api/schedule';
+var CHANGELOG_API = WORKER_BASE + '/api/changelog';
 
 function getScheduleHtml() {
   var body = document.querySelector('.schedule-body');
   return body ? body.innerHTML : '';
 }
 
-function submitAiEdit() {
-  var input = document.getElementById('ai-edit-input');
-  var btn = document.getElementById('ai-edit-btn');
-  var status = document.getElementById('ai-edit-status');
+function submitChange() {
+  var input = document.getElementById('propose-input');
+  var btn = document.getElementById('propose-btn');
+  var status = document.getElementById('propose-status');
   var instruction = input.value.trim();
 
   if (!instruction) return;
@@ -2032,7 +1969,7 @@ function submitAiEdit() {
   btn.disabled = true;
   btn.textContent = 'Thinking...';
   status.textContent = 'Sending to AI...';
-  status.className = 'ai-edit-status';
+  status.className = 'propose-status';
 
   var currentHtml = getScheduleHtml();
 
@@ -2046,17 +1983,18 @@ function submitAiEdit() {
     if (data.ok && data.html) {
       var body = document.querySelector('.schedule-body');
       if (body) body.innerHTML = data.html;
-      status.textContent = 'Updated! "' + instruction + '"';
-      status.className = 'ai-edit-status success';
+      status.textContent = 'Done!';
+      status.className = 'propose-status success';
       input.value = '';
+      loadChangelog();
     } else {
       status.textContent = 'Error: ' + (data.error || 'Unknown error');
-      status.className = 'ai-edit-status error';
+      status.className = 'propose-status error';
     }
   })
   .catch(function(err) {
     status.textContent = 'Failed to connect: ' + err.message;
-    status.className = 'ai-edit-status error';
+    status.className = 'propose-status error';
   })
   .finally(function() {
     btn.disabled = false;
@@ -2064,7 +2002,37 @@ function submitAiEdit() {
   });
 }
 
-// Load any saved schedule override on page load
+// ── CHANGE LOG ──
+function toggleChangelog() {
+  var list = document.getElementById('changelog-list');
+  list.classList.toggle('open');
+}
+
+function loadChangelog() {
+  fetch(CHANGELOG_API)
+    .then(function(res) { return res.ok ? res.json() : null; })
+    .then(function(data) {
+      var list = document.getElementById('changelog-list');
+      if (!data || !data.entries || data.entries.length === 0) {
+        list.innerHTML = '<div class="changelog-empty">No changes yet.</div>';
+        return;
+      }
+      var html = '';
+      data.entries.forEach(function(entry) {
+        var d = new Date(entry.time);
+        var timeStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        html += '<div class="changelog-entry">'
+          + '<span class="changelog-time">' + timeStr + '</span>'
+          + '<span class="changelog-who">' + (entry.who || 'Someone') + '</span>'
+          + '<span class="changelog-what">' + entry.what + '</span>'
+          + '</div>';
+      });
+      list.innerHTML = html;
+    })
+    .catch(function() {});
+}
+
+// Load schedule override + changelog on page load
 function loadScheduleOverride() {
   fetch(SCHEDULE_API)
     .then(function(res) { return res.ok ? res.json() : null; })
@@ -2078,6 +2046,7 @@ function loadScheduleOverride() {
 }
 
 loadScheduleOverride();
+loadChangelog();
 </script>
 </body>
 </html>

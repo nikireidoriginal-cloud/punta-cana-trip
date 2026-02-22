@@ -6,8 +6,11 @@ const CORS_HEADERS = {
 };
 
 const KV_KEY = 'spa-selections';
-const COMMENTS_KEY = 'schedule-comments';
 const SCHEDULE_KEY = 'schedule-html';
+const CHANGELOG_KEY = 'schedule-changelog';
+
+// Email recipients for change notifications
+const NOTIFY_EMAILS = ['nikireid@gmail.com'];
 
 export default {
   async fetch(request, env) {
@@ -17,7 +20,7 @@ export default {
       return new Response(null, { headers: CORS_HEADERS });
     }
 
-    // ── Existing: spa selections ──
+    // ── Spa selections ──
     if (url.pathname === '/api/spa' && request.method === 'GET') {
       const data = await env.SPA_DATA.get(KV_KEY);
       return new Response(data || '{}', { headers: CORS_HEADERS });
@@ -29,25 +32,19 @@ export default {
       return new Response(JSON.stringify({ ok: true }), { headers: CORS_HEADERS });
     }
 
-    // ── Existing: comments ──
-    if (url.pathname === '/api/comments' && request.method === 'GET') {
-      const data = await env.SPA_DATA.get(COMMENTS_KEY);
-      return new Response(data || '{"text":""}', { headers: CORS_HEADERS });
-    }
-
-    if (url.pathname === '/api/comments' && request.method === 'PUT') {
-      const body = await request.text();
-      await env.SPA_DATA.put(COMMENTS_KEY, body);
-      return new Response(JSON.stringify({ ok: true }), { headers: CORS_HEADERS });
-    }
-
-    // ── New: get current schedule override ──
+    // ── Get current schedule override ──
     if (url.pathname === '/api/schedule' && request.method === 'GET') {
       const data = await env.SPA_DATA.get(SCHEDULE_KEY);
       return new Response(data || '{"html":""}', { headers: CORS_HEADERS });
     }
 
-    // ── New: AI-powered schedule edit ──
+    // ── Get change log ──
+    if (url.pathname === '/api/changelog' && request.method === 'GET') {
+      const data = await env.SPA_DATA.get(CHANGELOG_KEY);
+      return new Response(data || '{"entries":[]}', { headers: CORS_HEADERS });
+    }
+
+    // ── AI-powered schedule edit ──
     if (url.pathname === '/api/ai-edit' && request.method === 'POST') {
       try {
         const { instruction, currentHtml } = await request.json();
@@ -102,8 +99,22 @@ Important rules:
         const claudeData = await claudeResponse.json();
         const updatedHtml = claudeData.content[0].text;
 
-        // Store in KV
-        await env.SPA_DATA.put(SCHEDULE_KEY, JSON.stringify({ html: updatedHtml, lastEdit: instruction, updatedAt: new Date().toISOString() }));
+        // Store updated schedule in KV
+        await env.SPA_DATA.put(SCHEDULE_KEY, JSON.stringify({ html: updatedHtml }));
+
+        // Append to change log
+        const now = new Date().toISOString();
+        const logRaw = await env.SPA_DATA.get(CHANGELOG_KEY);
+        const log = logRaw ? JSON.parse(logRaw) : { entries: [] };
+        log.entries.unshift({ what: instruction, who: 'Ferrell', time: now });
+        // Keep last 50 entries
+        if (log.entries.length > 50) log.entries = log.entries.slice(0, 50);
+        await env.SPA_DATA.put(CHANGELOG_KEY, JSON.stringify(log));
+
+        // Send email notification (fire-and-forget)
+        if (env.RESEND_API_KEY) {
+          sendNotificationEmail(env, instruction, now).catch(() => {});
+        }
 
         return new Response(JSON.stringify({ ok: true, html: updatedHtml, instruction }), {
           headers: CORS_HEADERS
@@ -121,3 +132,27 @@ Important rules:
     });
   }
 };
+
+async function sendNotificationEmail(env, instruction, time) {
+  const d = new Date(time);
+  const timeStr = d.toLocaleString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+
+  await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + env.RESEND_API_KEY
+    },
+    body: JSON.stringify({
+      from: 'Punta Cana Trip <onboarding@resend.dev>',
+      to: NOTIFY_EMAILS,
+      subject: 'Schedule Change: ' + instruction,
+      html: '<div style="font-family:sans-serif;max-width:480px;">'
+        + '<h2 style="color:#5B8A8A;">Punta Cana Schedule Updated</h2>'
+        + '<p><strong>Change:</strong> ' + instruction + '</p>'
+        + '<p><strong>When:</strong> ' + timeStr + ' ET</p>'
+        + '<p><a href="https://nikireidoriginal-cloud.github.io/punta-cana-trip/" style="color:#5B8A8A;">View updated schedule &rarr;</a></p>'
+        + '</div>'
+    })
+  });
+}
