@@ -10,7 +10,7 @@ const SCHEDULE_KEY = 'schedule-html';
 const CHANGELOG_KEY = 'schedule-changelog';
 
 // Email recipients for change notifications
-const NOTIFY_EMAILS = ['nikireid@gmail.com'];
+const NOTIFY_EMAILS = ['nikireidoriginal@gmail.com' /*, 'ferrellshatto@gmail.com' */];
 
 export default {
   async fetch(request, env) {
