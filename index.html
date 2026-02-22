@@ -1061,6 +1061,59 @@ h1, h2, h3, h4 {
   padding: 0.3rem 0;
 }
 
+/* ── SPA SUMMARY ── */
+.spa-summary {
+  padding: 0 1rem;
+  max-width: 680px;
+  margin: 0.5rem auto;
+}
+.spa-summary-card {
+  background: linear-gradient(135deg, #FDF4FF, #FAF5FF);
+  border: 1px solid rgba(147,51,234,0.2);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+.spa-summary-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--slate);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.spa-summary-empty {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-style: italic;
+}
+.spa-summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(147,51,234,0.08);
+  font-size: 0.75rem;
+}
+.spa-summary-item:last-child { border-bottom: none; }
+.spa-summary-name { color: var(--slate); font-weight: 500; }
+.spa-summary-info { color: var(--muted); font-size: 0.65rem; }
+.spa-summary-note {
+  font-size: 0.6rem;
+  color: #7C3AED;
+  font-style: italic;
+  margin-top: 0.1rem;
+}
+.spa-summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 2px solid rgba(147,51,234,0.2);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--slate);
+}
+
 /* ── FERRELL BANNER ── */
 .ferrell-banner {
   max-width: 680px;
@@ -1594,6 +1647,16 @@ h1, h2, h3, h4 {
   </div>
 </div>
 
+<!-- ═══ SPA PICKS SUMMARY ═══ -->
+<div class="spa-summary">
+  <div class="spa-summary-card">
+    <div class="spa-summary-title">Ferrell&rsquo;s Spa Picks</div>
+    <div id="spa-summary-content">
+      <div class="spa-summary-empty">No services selected yet.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ FULL DETAILS ═══ -->
 <div class="section" style="padding-top:0;">
   <div class="info-card" id="card-details">
@@ -1843,6 +1906,7 @@ function saveSpa() {
   saveLocal();
   syncToServer();
   updateSpaCounts();
+  updateSpaSummary();
   flashSave();
 }
 
@@ -1879,6 +1943,7 @@ function syncFromServer() {
     }
     saveLocal();
     restoreSpa();
+    updateSpaSummary();
     spaSyncStatus = 'synced';
     updateSyncBadge();
   }).catch(function() {
@@ -1942,8 +2007,32 @@ function restoreSpa() {
   updateSpaCounts();
 }
 
+function updateSpaSummary() {
+  var container = document.getElementById('spa-summary-content');
+  var selected = document.querySelectorAll('.spa-service.selected');
+  if (selected.length === 0) {
+    container.innerHTML = '<div class="spa-summary-empty">No services selected yet.</div>';
+    return;
+  }
+  var html = '';
+  var total = 0;
+  selected.forEach(function(el) {
+    var name = el.querySelector('.spa-svc-name').textContent;
+    var info = el.querySelector('.spa-svc-info').textContent;
+    var note = el.querySelector('.spa-notes').value;
+    var priceMatch = info.match(/\$(\d+)/);
+    if (priceMatch) total += parseInt(priceMatch[1]);
+    html += '<div class="spa-summary-item"><div><span class="spa-summary-name">' + name + '</span>';
+    if (note) html += '<div class="spa-summary-note">' + note + '</div>';
+    html += '</div><span class="spa-summary-info">' + info + '</span></div>';
+  });
+  html += '<div class="spa-summary-total"><span>Total (' + selected.length + ' service' + (selected.length > 1 ? 's' : '') + ')</span><span>$' + total + '</span></div>';
+  container.innerHTML = html;
+}
+
 loadSpa();
 restoreSpa();
+updateSpaSummary();
 syncFromServer();
 setInterval(syncFromServer, 30000);
 

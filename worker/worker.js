@@ -13,7 +13,7 @@ const CHANGELOG_KEY = 'schedule-changelog';
 const NOTIFY_EMAILS = ['nikireidoriginal@gmail.com' /*, 'ferrellshatto@gmail.com' */];
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') {
@@ -112,13 +112,12 @@ Important rules:
         const logRaw = await env.SPA_DATA.get(CHANGELOG_KEY);
         const log = logRaw ? JSON.parse(logRaw) : { entries: [] };
         log.entries.unshift({ what: instruction, time: now });
-        // Keep last 50 entries
         if (log.entries.length > 50) log.entries = log.entries.slice(0, 50);
         await env.SPA_DATA.put(CHANGELOG_KEY, JSON.stringify(log));
 
-        // Send email notification (fire-and-forget)
+        // Send email notification — use waitUntil so it completes after response
         if (env.RESEND_API_KEY) {
-          sendNotificationEmail(env, instruction, now).catch(() => {});
+          ctx.waitUntil(sendNotificationEmail(env, instruction, now));
         }
 
         return new Response(JSON.stringify({ ok: true, html: updatedHtml, instruction }), {
@@ -142,7 +141,7 @@ async function sendNotificationEmail(env, instruction, time) {
   const d = new Date(time);
   const timeStr = d.toLocaleString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 
-  await fetch('https://api.resend.com/emails', {
+  const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -160,4 +159,8 @@ async function sendNotificationEmail(env, instruction, time) {
         + '</div>'
     })
   });
+
+  if (!res.ok) {
+    console.error('Email failed:', await res.text());
+  }
 }
