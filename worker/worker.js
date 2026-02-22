@@ -97,7 +97,12 @@ Important rules:
         }
 
         const claudeData = await claudeResponse.json();
-        const updatedHtml = claudeData.content[0].text;
+        let updatedHtml = claudeData.content[0].text;
+
+        // Strip code fences and <schedule> wrapper if Claude added them
+        updatedHtml = updatedHtml.replace(/^```html?\n?/i, '').replace(/\n?```$/g, '');
+        updatedHtml = updatedHtml.replace(/^<schedule>\n?/i, '').replace(/\n?<\/schedule>$/gi, '');
+        updatedHtml = updatedHtml.trim();
 
         // Store updated schedule in KV
         await env.SPA_DATA.put(SCHEDULE_KEY, JSON.stringify({ html: updatedHtml }));
