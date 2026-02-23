@@ -10,7 +10,7 @@ const SCHEDULE_KEY = 'schedule-html';
 const CHANGELOG_KEY = 'schedule-changelog';
 
 // Email recipients for change notifications
-const NOTIFY_EMAILS = ['nikireidoriginal@gmail.com' /*, 'ferrellshatto@gmail.com' */];
+const NOTIFY_EMAILS = ['nikireidoriginal@gmail.com', 'ferrellshatto@gmail.com'];
 
 export default {
   async fetch(request, env, ctx) {
@@ -148,7 +148,7 @@ async function sendNotificationEmail(env, instruction, time) {
       'Authorization': 'Bearer ' + env.RESEND_API_KEY
     },
     body: JSON.stringify({
-      from: 'Punta Cana Trip <onboarding@resend.dev>',
+      from: 'Punta Cana Trip <trips@reidshatto.com>',
       to: NOTIFY_EMAILS,
       subject: 'Schedule Change: ' + instruction,
       html: '<div style="font-family:sans-serif;max-width:480px;">'
