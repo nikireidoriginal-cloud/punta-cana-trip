@@ -275,6 +275,44 @@ export default function VacationPlanner() {
   const [activeTab, setActiveTab] = useState("compare");
   const selected = options.find((o) => o.id === selectedOption);
 
+  // Feedback state
+  const [proposals, setProposals] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("pc-proposals") || "[]"); } catch { return []; }
+  });
+  const [notes, setNotes] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("pc-notes") || "[]"); } catch { return []; }
+  });
+  const [proposalText, setProposalText] = useState("");
+  const [noteText, setNoteText] = useState("");
+
+  const saveProposal = () => {
+    if (!proposalText.trim()) return;
+    const updated = [{ text: proposalText.trim(), date: new Date().toLocaleString(), id: Date.now() }, ...proposals];
+    setProposals(updated);
+    localStorage.setItem("pc-proposals", JSON.stringify(updated));
+    setProposalText("");
+  };
+
+  const saveNote = () => {
+    if (!noteText.trim()) return;
+    const updated = [{ text: noteText.trim(), date: new Date().toLocaleString(), id: Date.now() }, ...notes];
+    setNotes(updated);
+    localStorage.setItem("pc-notes", JSON.stringify(updated));
+    setNoteText("");
+  };
+
+  const deleteProposal = (id) => {
+    const updated = proposals.filter(p => p.id !== id);
+    setProposals(updated);
+    localStorage.setItem("pc-proposals", JSON.stringify(updated));
+  };
+
+  const deleteNote = (id) => {
+    const updated = notes.filter(n => n.id !== id);
+    setNotes(updated);
+    localStorage.setItem("pc-notes", JSON.stringify(updated));
+  };
+
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: "linear-gradient(180deg, #FFFBEB 0%, #F0FDFA 30%, #FFF7ED 70%, #FFFBEB 100%)", minHeight: "100vh", paddingBottom: 60 }}>
       <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -288,9 +326,10 @@ export default function VacationPlanner() {
         {/* Tab Bar */}
         <div style={{ display: "flex", gap: 4, background: "white", padding: 4, borderRadius: 14, margin: "16px 0", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
           {[
-            { id: "compare", label: "🏨 Room Options" },
+            { id: "compare", label: "🏨 Rooms" },
             { id: "flights", label: "✈️ Flights" },
             { id: "tips", label: "💡 Tips" },
+            { id: "feedback", label: "💬 Feedback" },
           ].map((tab) => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{ flex: 1, padding: "10px 8px", borderRadius: 10, border: "none", cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "'DM Sans', sans-serif", background: activeTab === tab.id ? "#0F766E" : "transparent", color: activeTab === tab.id ? "white" : "#64748B", transition: "all 0.2s ease" }}>
               {tab.label}
@@ -506,6 +545,98 @@ export default function VacationPlanner() {
                 <p style={{ margin: "0 0 8px 0" }}><strong>→ Lower the bar.</strong> A good vacation isn’t a perfect one. Books by the pool counts.</p>
                 <p style={{ margin: 0 }}><strong>→ He’ll remember the waterpark.</strong> Everything else is gravy.</p>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* FEEDBACK TAB */}
+        {activeTab === "feedback" && (
+          <div style={{ marginTop: 8 }}>
+            {/* Intro */}
+            <div style={{ background: "linear-gradient(135deg, #ECFDF5, #F0FDFA)", border: "1px solid #A7F3D0", borderRadius: 16, padding: "16px 20px", marginBottom: 20, textAlign: "center" }}>
+              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 400, color: "#1E293B", margin: 0, lineHeight: 1.5, fontStyle: "italic" }}>
+                Two ways to share your thoughts — propose a change or drop a note.
+              </p>
+            </div>
+
+            {/* Section 1: Propose Changes */}
+            <div style={{ background: "white", borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(0,0,0,0.06)", marginBottom: 20, border: "1px solid #F1F5F9" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                <span style={{ fontSize: 22 }}>✏️</span>
+                <div>
+                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: "#1E293B", margin: 0 }}>Propose a Change</h3>
+                  <p style={{ fontSize: 12, color: "#64748B", margin: "2px 0 0 0" }}>Want to swap an activity, adjust timing, or suggest something different? Drop it here.</p>
+                </div>
+              </div>
+              <textarea
+                value={proposalText}
+                onChange={(e) => setProposalText(e.target.value)}
+                placeholder="e.g. 'Can we move the spa day to Thursday instead?' or 'I'd rather do snorkeling than the catamaran tour'"
+                style={{ width: "100%", minHeight: 80, padding: 14, borderRadius: 12, border: "2px solid #E2E8F0", fontSize: 14, fontFamily: "'DM Sans', sans-serif", resize: "vertical", boxSizing: "border-box", outline: "none", transition: "border-color 0.2s" }}
+                onFocus={(e) => e.target.style.borderColor = "#0F766E"}
+                onBlur={(e) => e.target.style.borderColor = "#E2E8F0"}
+              />
+              <button
+                onClick={saveProposal}
+                disabled={!proposalText.trim()}
+                style={{ marginTop: 10, padding: "10px 20px", borderRadius: 10, border: "none", background: proposalText.trim() ? "#0F766E" : "#CBD5E1", color: "white", fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif", cursor: proposalText.trim() ? "pointer" : "default", transition: "all 0.2s" }}
+              >
+                Submit Proposal
+              </button>
+
+              {/* Existing proposals */}
+              {proposals.length > 0 && (
+                <div style={{ marginTop: 20 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: "#0F766E", letterSpacing: "0.08em", marginBottom: 10 }}>PROPOSED CHANGES ({proposals.length})</div>
+                  {proposals.map((p) => (
+                    <div key={p.id} style={{ background: "#F0FDFA", borderRadius: 12, padding: "12px 14px", marginBottom: 8, border: "1px solid #CCFBF1", position: "relative" }}>
+                      <div style={{ fontSize: 14, color: "#1E293B", lineHeight: 1.5, paddingRight: 24 }}>{p.text}</div>
+                      <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 6 }}>{p.date}</div>
+                      <button onClick={() => deleteProposal(p.id)} style={{ position: "absolute", top: 10, right: 10, background: "none", border: "none", fontSize: 16, color: "#94A3B8", cursor: "pointer", padding: 0, lineHeight: 1 }} title="Remove">×</button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Section 2: Add Notes */}
+            <div style={{ background: "white", borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(0,0,0,0.06)", marginBottom: 20, border: "1px solid #F1F5F9" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                <span style={{ fontSize: 22 }}>📝</span>
+                <div>
+                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: "#1E293B", margin: 0 }}>Add a Note</h3>
+                  <p style={{ fontSize: 12, color: "#64748B", margin: "2px 0 0 0" }}>General thoughts, reminders, things to pack, questions — anything goes.</p>
+                </div>
+              </div>
+              <textarea
+                value={noteText}
+                onChange={(e) => setNoteText(e.target.value)}
+                placeholder="e.g. 'Don't forget reef-safe sunscreen' or 'I want to try the Dominican coffee tasting'"
+                style={{ width: "100%", minHeight: 80, padding: 14, borderRadius: 12, border: "2px solid #E2E8F0", fontSize: 14, fontFamily: "'DM Sans', sans-serif", resize: "vertical", boxSizing: "border-box", outline: "none", transition: "border-color 0.2s" }}
+                onFocus={(e) => e.target.style.borderColor = "#7C3AED"}
+                onBlur={(e) => e.target.style.borderColor = "#E2E8F0"}
+              />
+              <button
+                onClick={saveNote}
+                disabled={!noteText.trim()}
+                style={{ marginTop: 10, padding: "10px 20px", borderRadius: 10, border: "none", background: noteText.trim() ? "#7C3AED" : "#CBD5E1", color: "white", fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif", cursor: noteText.trim() ? "pointer" : "default", transition: "all 0.2s" }}
+              >
+                Save Note
+              </button>
+
+              {/* Existing notes */}
+              {notes.length > 0 && (
+                <div style={{ marginTop: 20 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: "#7C3AED", letterSpacing: "0.08em", marginBottom: 10 }}>NOTES ({notes.length})</div>
+                  {notes.map((n) => (
+                    <div key={n.id} style={{ background: "#FAF5FF", borderRadius: 12, padding: "12px 14px", marginBottom: 8, border: "1px solid #EDE9FE", position: "relative" }}>
+                      <div style={{ fontSize: 14, color: "#1E293B", lineHeight: 1.5, paddingRight: 24 }}>{n.text}</div>
+                      <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 6 }}>{n.date}</div>
+                      <button onClick={() => deleteNote(n.id)} style={{ position: "absolute", top: 10, right: 10, background: "none", border: "none", fontSize: 16, color: "#94A3B8", cursor: "pointer", padding: 0, lineHeight: 1 }} title="Remove">×</button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
