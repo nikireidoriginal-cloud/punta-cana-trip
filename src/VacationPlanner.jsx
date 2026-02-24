@@ -275,42 +275,51 @@ export default function VacationPlanner() {
   const [activeTab, setActiveTab] = useState("compare");
   const selected = options.find((o) => o.id === selectedOption);
 
-  // Feedback state
-  const [proposals, setProposals] = useState(() => {
-    try { return JSON.parse(localStorage.getItem("pc-proposals") || "[]"); } catch { return []; }
-  });
-  const [notes, setNotes] = useState(() => {
-    try { return JSON.parse(localStorage.getItem("pc-notes") || "[]"); } catch { return []; }
-  });
+  // Feedback state (server-backed)
+  const API = "https://punta-cana-spa.nikireidoriginal.workers.dev";
+  const [proposals, setProposals] = useState([]);
+  const [notes, setNotes] = useState([]);
   const [proposalText, setProposalText] = useState("");
   const [noteText, setNoteText] = useState("");
+  const [saving, setSaving] = useState(false);
 
-  const saveProposal = () => {
-    if (!proposalText.trim()) return;
-    const updated = [{ text: proposalText.trim(), date: new Date().toLocaleString(), id: Date.now() }, ...proposals];
-    setProposals(updated);
-    localStorage.setItem("pc-proposals", JSON.stringify(updated));
-    setProposalText("");
+  useEffect(() => {
+    fetch(API + "/api/proposals").then(r => r.json()).then(setProposals).catch(() => {});
+    fetch(API + "/api/notes").then(r => r.json()).then(setNotes).catch(() => {});
+  }, []);
+
+  const saveProposal = async () => {
+    if (!proposalText.trim() || saving) return;
+    setSaving(true);
+    try {
+      const res = await fetch(API + "/api/proposals", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: proposalText.trim() }) });
+      setProposals(await res.json());
+      setProposalText("");
+    } catch {} finally { setSaving(false); }
   };
 
-  const saveNote = () => {
-    if (!noteText.trim()) return;
-    const updated = [{ text: noteText.trim(), date: new Date().toLocaleString(), id: Date.now() }, ...notes];
-    setNotes(updated);
-    localStorage.setItem("pc-notes", JSON.stringify(updated));
-    setNoteText("");
+  const saveNote = async () => {
+    if (!noteText.trim() || saving) return;
+    setSaving(true);
+    try {
+      const res = await fetch(API + "/api/notes", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: noteText.trim() }) });
+      setNotes(await res.json());
+      setNoteText("");
+    } catch {} finally { setSaving(false); }
   };
 
-  const deleteProposal = (id) => {
-    const updated = proposals.filter(p => p.id !== id);
-    setProposals(updated);
-    localStorage.setItem("pc-proposals", JSON.stringify(updated));
+  const deleteProposal = async (id) => {
+    try {
+      const res = await fetch(API + "/api/proposals/" + id, { method: "DELETE" });
+      setProposals(await res.json());
+    } catch {}
   };
 
-  const deleteNote = (id) => {
-    const updated = notes.filter(n => n.id !== id);
-    setNotes(updated);
-    localStorage.setItem("pc-notes", JSON.stringify(updated));
+  const deleteNote = async (id) => {
+    try {
+      const res = await fetch(API + "/api/notes/" + id, { method: "DELETE" });
+      setNotes(await res.json());
+    } catch {}
   };
 
   return (
@@ -578,10 +587,10 @@ export default function VacationPlanner() {
               />
               <button
                 onClick={saveProposal}
-                disabled={!proposalText.trim()}
-                style={{ marginTop: 10, padding: "10px 20px", borderRadius: 10, border: "none", background: proposalText.trim() ? "#0F766E" : "#CBD5E1", color: "white", fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif", cursor: proposalText.trim() ? "pointer" : "default", transition: "all 0.2s" }}
+                disabled={!proposalText.trim() || saving}
+                style={{ marginTop: 10, padding: "10px 20px", borderRadius: 10, border: "none", background: proposalText.trim() && !saving ? "#0F766E" : "#CBD5E1", color: "white", fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif", cursor: proposalText.trim() && !saving ? "pointer" : "default", transition: "all 0.2s" }}
               >
-                Submit Proposal
+                {saving ? "Saving…" : "Submit Proposal"}
               </button>
 
               {/* Existing proposals */}
@@ -591,7 +600,7 @@ export default function VacationPlanner() {
                   {proposals.map((p) => (
                     <div key={p.id} style={{ background: "#F0FDFA", borderRadius: 12, padding: "12px 14px", marginBottom: 8, border: "1px solid #CCFBF1", position: "relative" }}>
                       <div style={{ fontSize: 14, color: "#1E293B", lineHeight: 1.5, paddingRight: 24 }}>{p.text}</div>
-                      <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 6 }}>{p.date}</div>
+                      <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 6 }}>{new Date(p.date).toLocaleString()}</div>
                       <button onClick={() => deleteProposal(p.id)} style={{ position: "absolute", top: 10, right: 10, background: "none", border: "none", fontSize: 16, color: "#94A3B8", cursor: "pointer", padding: 0, lineHeight: 1 }} title="Remove">×</button>
                     </div>
                   ))}
@@ -618,10 +627,10 @@ export default function VacationPlanner() {
               />
               <button
                 onClick={saveNote}
-                disabled={!noteText.trim()}
-                style={{ marginTop: 10, padding: "10px 20px", borderRadius: 10, border: "none", background: noteText.trim() ? "#7C3AED" : "#CBD5E1", color: "white", fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif", cursor: noteText.trim() ? "pointer" : "default", transition: "all 0.2s" }}
+                disabled={!noteText.trim() || saving}
+                style={{ marginTop: 10, padding: "10px 20px", borderRadius: 10, border: "none", background: noteText.trim() && !saving ? "#7C3AED" : "#CBD5E1", color: "white", fontSize: 14, fontWeight: 600, fontFamily: "'DM Sans', sans-serif", cursor: noteText.trim() && !saving ? "pointer" : "default", transition: "all 0.2s" }}
               >
-                Save Note
+                {saving ? "Saving…" : "Save Note"}
               </button>
 
               {/* Existing notes */}
@@ -631,7 +640,7 @@ export default function VacationPlanner() {
                   {notes.map((n) => (
                     <div key={n.id} style={{ background: "#FAF5FF", borderRadius: 12, padding: "12px 14px", marginBottom: 8, border: "1px solid #EDE9FE", position: "relative" }}>
                       <div style={{ fontSize: 14, color: "#1E293B", lineHeight: 1.5, paddingRight: 24 }}>{n.text}</div>
-                      <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 6 }}>{n.date}</div>
+                      <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 6 }}>{new Date(n.date).toLocaleString()}</div>
                       <button onClick={() => deleteNote(n.id)} style={{ position: "absolute", top: 10, right: 10, background: "none", border: "none", fontSize: 16, color: "#94A3B8", cursor: "pointer", padding: 0, lineHeight: 1 }} title="Remove">×</button>
                     </div>
                   ))}

@@ -1,6 +1,6 @@
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, PUT, POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Content-Type': 'application/json'
 };
@@ -8,9 +8,11 @@ const CORS_HEADERS = {
 const KV_KEY = 'spa-selections';
 const SCHEDULE_KEY = 'schedule-html';
 const CHANGELOG_KEY = 'schedule-changelog';
+const PROPOSALS_KEY = 'feedback-proposals';
+const NOTES_KEY = 'feedback-notes';
 
 // Email recipients for change notifications
-const NOTIFY_EMAILS = ['nikireidoriginal@gmail.com', 'ferrellshatto@gmail.com'];
+const NOTIFY_EMAILS = ['nikireidoriginal@gmail.com' /*, 'ferrellshatto@gmail.com' */];
 
 export default {
   async fetch(request, env, ctx) {
@@ -130,6 +132,64 @@ Important rules:
       }
     }
 
+    // ── Feedback: Proposals ──
+    if (url.pathname === '/api/proposals' && request.method === 'GET') {
+      const data = await env.SPA_DATA.get(PROPOSALS_KEY);
+      return new Response(data || '[]', { headers: CORS_HEADERS });
+    }
+
+    if (url.pathname === '/api/proposals' && request.method === 'POST') {
+      const { text } = await request.json();
+      if (!text || !text.trim()) {
+        return new Response(JSON.stringify({ error: 'Empty text' }), { status: 400, headers: CORS_HEADERS });
+      }
+      const raw = await env.SPA_DATA.get(PROPOSALS_KEY);
+      const list = raw ? JSON.parse(raw) : [];
+      const entry = { text: text.trim(), date: new Date().toISOString(), id: Date.now() };
+      list.unshift(entry);
+      if (list.length > 100) list.length = 100;
+      await env.SPA_DATA.put(PROPOSALS_KEY, JSON.stringify(list));
+      return new Response(JSON.stringify(list), { headers: CORS_HEADERS });
+    }
+
+    if (url.pathname.startsWith('/api/proposals/') && request.method === 'DELETE') {
+      const id = Number(url.pathname.split('/').pop());
+      const raw = await env.SPA_DATA.get(PROPOSALS_KEY);
+      const list = raw ? JSON.parse(raw) : [];
+      const updated = list.filter(p => p.id !== id);
+      await env.SPA_DATA.put(PROPOSALS_KEY, JSON.stringify(updated));
+      return new Response(JSON.stringify(updated), { headers: CORS_HEADERS });
+    }
+
+    // ── Feedback: Notes ──
+    if (url.pathname === '/api/notes' && request.method === 'GET') {
+      const data = await env.SPA_DATA.get(NOTES_KEY);
+      return new Response(data || '[]', { headers: CORS_HEADERS });
+    }
+
+    if (url.pathname === '/api/notes' && request.method === 'POST') {
+      const { text } = await request.json();
+      if (!text || !text.trim()) {
+        return new Response(JSON.stringify({ error: 'Empty text' }), { status: 400, headers: CORS_HEADERS });
+      }
+      const raw = await env.SPA_DATA.get(NOTES_KEY);
+      const list = raw ? JSON.parse(raw) : [];
+      const entry = { text: text.trim(), date: new Date().toISOString(), id: Date.now() };
+      list.unshift(entry);
+      if (list.length > 100) list.length = 100;
+      await env.SPA_DATA.put(NOTES_KEY, JSON.stringify(list));
+      return new Response(JSON.stringify(list), { headers: CORS_HEADERS });
+    }
+
+    if (url.pathname.startsWith('/api/notes/') && request.method === 'DELETE') {
+      const id = Number(url.pathname.split('/').pop());
+      const raw = await env.SPA_DATA.get(NOTES_KEY);
+      const list = raw ? JSON.parse(raw) : [];
+      const updated = list.filter(n => n.id !== id);
+      await env.SPA_DATA.put(NOTES_KEY, JSON.stringify(updated));
+      return new Response(JSON.stringify(updated), { headers: CORS_HEADERS });
+    }
+
     return new Response(JSON.stringify({ error: 'Not found' }), {
       status: 404,
       headers: CORS_HEADERS
@@ -150,7 +210,7 @@ async function sendNotificationEmail(env, instruction, time) {
     body: JSON.stringify({
       from: 'Punta Cana Trip <trips@reidshatto.com>',
       to: NOTIFY_EMAILS,
-      subject: 'Schedule Change: ' + instruction,
+      subject: 'Changes made to Punta Cana schedule',
       html: '<div style="font-family:sans-serif;max-width:480px;">'
         + '<h2 style="color:#5B8A8A;">Punta Cana Schedule Updated</h2>'
         + '<p><strong>Change:</strong> ' + instruction + '</p>'
